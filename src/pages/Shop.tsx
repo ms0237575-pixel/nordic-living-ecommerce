@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import Sheet, { SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/product/ProductCard";
 import { products as allProducts } from "@/data/products";
@@ -10,7 +11,16 @@ const categories = ["Furniture", "Lighting", "Accessories"] as const;
 
 export default function Shop() {
   const [open, setOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get("search") ?? "";
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+
+  useEffect(() => {
+    const q = searchParams.get("search");
+    if (q !== null) setSearchQuery(q);
+    // only synchronize initial param -> state; user typing remains local
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<PriceFilterValue>("all");
 

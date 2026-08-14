@@ -6,6 +6,7 @@ import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
+import Orders from "@/pages/Orders";
 import Shop from "@/pages/Shop";
 import ProductDetails from "@/pages/ProductDetails";
 
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<Orders />} />
             <Route path="/product/:slug" element={<ProductDetails />} />
           </Routes>
         </main>
