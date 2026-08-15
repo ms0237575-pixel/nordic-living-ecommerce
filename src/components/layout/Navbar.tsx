@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router";
 import { useState } from "react";
-import { ShoppingCart, Search, Menu, X } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Heart } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 import SearchOverlay from "@/components/layout/SearchOverlay";
+import { useWishlistStore } from "@/store/useWishlistStore";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,6 +12,7 @@ export function Navbar() {
   const cartCount = useCartStore((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0),
   );
+  const wishlistCount = useWishlistStore((state) => state.wishlist.length);
 
   const makeNavHandler =
     (path: string, closeDrawer = false) =>
@@ -99,6 +101,18 @@ export function Navbar() {
                 {cartCount > 0 && (
                   <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white group-hover:bg-nordic-charcoal transition-colors">
                     {cartCount}
+                  </span>
+                )}
+              </Link>
+              <Link
+                to="/wishlist"
+                onClick={makeNavHandler("/wishlist", false)}
+                className="relative group text-nordic-charcoal hover:text-nordic-terracotta transition-colors p-2 h-11 w-11 inline-flex items-center justify-center"
+              >
+                <Heart className="h-5 w-5 stroke-[1.5]" />
+                {wishlistCount > 0 && (
+                  <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white group-hover:bg-nordic-charcoal transition-colors">
+                    {wishlistCount}
                   </span>
                 )}
               </Link>

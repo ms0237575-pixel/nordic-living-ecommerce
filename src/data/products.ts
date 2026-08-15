@@ -11,9 +11,9 @@ export const products: Product[] = [
     description:
       "A sculptural lounge chair with soft upholstery and warm walnut legs for relaxed everyday comfort.",
     image:
-      "https://images.unsplash.com/photo-1549187774-b4e9f0456aab?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1200&auto=format&fit=crop",
     images: [
-      "https://images.unsplash.com/photo-1549187774-b4e9f0456aab?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1524758631624-3b8b2f6f9c17?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&auto=format&fit=crop",
@@ -70,10 +70,10 @@ export const products: Product[] = [
     description:
       "A warm glass pendant that creates a calm glow for dining spaces and entryways.",
     image:
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop",
     images: [
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&auto=format&fit=crop",
     ],
     featured: true,
     newArrival: true,
@@ -88,10 +88,10 @@ export const products: Product[] = [
     description:
       "A slim floor lamp with a brushed brass finish and soft diffused light for evening rituals.",
     image:
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1543168255-cc5a2c2c9b68?q=80&w=1200&auto=format&fit=crop",
     images: [
+      "https://images.unsplash.com/photo-1543168255-cc5a2c2c9b68?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1481277542470-605612bd2d61?q=80&w=1200&auto=format&fit=crop",
     ],
     featured: true,
     newArrival: false,
@@ -106,10 +106,10 @@ export const products: Product[] = [
     description:
       "A compact wall light with a softly brushed metal profile and ambient glow.",
     image:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1505692794408-ec08610dfe6b?q=80&w=1200&auto=format&fit=crop",
     images: [
+      "https://images.unsplash.com/photo-1505692794408-ec08610dfe6b?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&auto=format&fit=crop",
     ],
     featured: false,
     newArrival: true,

@@ -8,6 +8,7 @@ import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
 import Orders from "@/pages/Orders";
 import { Shop } from "@/pages/Shop";
+import { Wishlist } from "@/pages/Wishlist";
 import ProductDetails from "@/pages/ProductDetails";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/product/:slug" element={<ProductDetails />} />
+            <Route path="/wishlist" element={<Wishlist />} />
           </Routes>
         </main>
 
