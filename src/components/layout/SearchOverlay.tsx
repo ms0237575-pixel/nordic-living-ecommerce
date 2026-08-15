@@ -58,7 +58,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
   return (
     <div
       aria-hidden={!isOpen}
-      className={`fixed inset-0 z-[100] bg-nordic-bg transition-opacity duration-300 ${
+      className={`fixed inset-0 z-100 bg-nordic-bg transition-opacity duration-300 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       } overflow-y-auto overflow-x-hidden`}
     >
