@@ -84,6 +84,14 @@ export function Navbar() {
 
             {/* Right controls */}
             <div className="flex flex-1 items-center justify-end gap-2 lg:gap-6 lg:flex-none">
+              <Link
+                to="/login"
+                onClick={makeNavHandler("/login", false)}
+                className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-nordic-charcoal transition-colors hover:text-nordic-terracotta sm:inline-flex"
+              >
+                Login
+              </Link>
+
               <button
                 onClick={() => setSearchOverlayOpen(true)}
                 className="p-2 h-11 w-11 inline-flex items-center justify-center text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
@@ -175,6 +183,13 @@ export function Navbar() {
                   className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   Orders
+                </Link>
+                <Link
+                  to="/login"
+                  onClick={makeNavHandler("/login", true)}
+                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                >
+                  Login
                 </Link>
               </nav>
             </div>

@@ -11,7 +11,8 @@ import Checkout from "@/pages/Checkout";
 import Orders from "@/pages/Orders";
 import { Shop } from "@/pages/Shop";
 import { Wishlist } from "@/pages/Wishlist";
-import ProductDetails from "@/pages/ProductDetails";
+import { ProductDetails } from "@/pages/ProductDetails";
+import { Login } from "@/pages/Login";
 import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
 
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/product/:slug" element={<ProductDetails />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

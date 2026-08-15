@@ -3,14 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
 import Sheet, { SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/product/ProductCard";
-import { products as allProducts } from "@/data/products";
+import type { Product } from "@/types/product";
+import { products as localProducts } from "@/data/products";
+import { getAllProducts } from "@/services/productService";
 
 type PriceFilterValue = "all" | "under500" | "500to1000" | "over1000";
 
-const categories = ["Furniture", "Lighting", "Accessories"] as const;
+const categories = ["Living Room", "Dining", "Workspace", "Bedroom"] as const;
 
 export function Shop() {
   const [open, setOpen] = useState(false);
+  const [allProducts, setAllProducts] = useState<Product[]>(localProducts);
+  const [loading, setLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") ?? "";
   const initialSort = searchParams.get("sort") ?? "default";
@@ -32,6 +36,24 @@ export function Shop() {
     useState<PriceFilterValue>(initialPrice);
   const [sortBy, setSortBy] = useState(initialSort);
   const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    getAllProducts()
+      .then((res) => {
+        if (mounted) setAllProducts(res);
+      })
+      .catch(() => {
+        /* keep localProducts as fallback */
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((current) =>

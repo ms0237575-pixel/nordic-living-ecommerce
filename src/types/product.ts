@@ -8,6 +8,7 @@ export interface Product {
   description: string;
   image: string;
   images?: string[];
+  gallery?: string[];
   featured: boolean;
   newArrival: boolean;
 }
