@@ -3,6 +3,7 @@ import { ArrowLeft, Minus, Plus } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { getProductBySlug, getAllProducts } from "@/services/products";
 import { useCartStore } from "@/store/useCartStore";
+import { toast } from "sonner";
 import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/product/ProductCard";
 
@@ -89,6 +90,7 @@ export function ProductDetails() {
     }
 
     setAdded(true);
+    toast.success(`${product.name} added to cart`);
   }
 
   if (loading) {

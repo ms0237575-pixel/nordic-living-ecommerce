@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { CartItem } from "@/components/cart/CartItem";
 import { useCartStore } from "@/store/useCartStore";
+import { toast } from "sonner";
 
 export default function Cart() {
   const cart = useCartStore((state) => state.cart);
@@ -52,7 +53,13 @@ export default function Cart() {
             <CartItem
               key={item.product.id}
               item={item}
-              onRemove={removeFromCart}
+              onRemove={(productId) => {
+                const found = cart.find((c) => c.product.id === productId);
+                removeFromCart(productId);
+                if (found) {
+                  toast(`${found.product.name} removed from cart`);
+                }
+              }}
               onUpdateQuantity={updateQuantity}
             />
           ))}

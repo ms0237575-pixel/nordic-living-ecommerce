@@ -4,6 +4,7 @@ import type { MouseEvent } from "react";
 import { useCartStore } from "@/store/useCartStore";
 import { Heart } from "lucide-react";
 import { useWishlistStore } from "@/store/useWishlistStore";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
@@ -18,12 +19,19 @@ export function ProductCard({ product }: ProductCardProps) {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product);
+    toast.success(`${product.name} added to cart`);
   };
 
   const handleToggleWishlist = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    const wasWished = isInWishlist;
     toggleWishlist(product);
+    if (wasWished) {
+      toast(`${product.name} removed from wishlist`);
+    } else {
+      toast.success(`${product.name} added to wishlist`);
+    }
   };
 
   return (
