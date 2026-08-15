@@ -1,11 +1,21 @@
 import { Link } from "react-router";
 import type { Product } from "@/types/product";
+import type { MouseEvent } from "react";
+import { useCartStore } from "@/store/useCartStore";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const addToCart = useCartStore((s) => s.addToCart);
+
+  const handleAddToCart = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product);
+  };
+
   return (
     <div className="group">
       <Link to={`/product/${product.slug}`} className="block">
@@ -24,6 +34,13 @@ export function ProductCard({ product }: ProductCardProps) {
           <p className="font-sans text-body font-medium text-nordic-terracotta">
             ${product.price}
           </p>
+
+          <button
+            onClick={handleAddToCart}
+            className="mt-4 w-full border border-nordic-gray/20 py-3 text-center font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal transition-colors hover:bg-nordic-charcoal hover:text-white"
+          >
+            + Add to Cart
+          </button>
         </div>
       </Link>
     </div>

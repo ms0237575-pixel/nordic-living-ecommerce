@@ -7,7 +7,7 @@ import { About } from "@/pages/About";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
 import Orders from "@/pages/Orders";
-import Shop from "@/pages/Shop";
+import { Shop } from "@/pages/Shop";
 import ProductDetails from "@/pages/ProductDetails";
 
 export default function App() {

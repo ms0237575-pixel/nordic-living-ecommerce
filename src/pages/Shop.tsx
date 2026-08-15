@@ -9,7 +9,7 @@ type PriceFilterValue = "all" | "under500" | "500to1000" | "over1000";
 
 const categories = ["Furniture", "Lighting", "Accessories"] as const;
 
-export default function Shop() {
+export function Shop() {
   const [open, setOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") ?? "";
@@ -18,9 +18,8 @@ export default function Shop() {
   useEffect(() => {
     const q = searchParams.get("search");
     if (q !== null) setSearchQuery(q);
-    // only synchronize initial param -> state; user typing remains local
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // synchronize when the URL param changes (do not fight local typing)
+  }, [searchParams]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<PriceFilterValue>("all");
 
@@ -52,7 +51,7 @@ export default function Shop() {
   });
 
   const filterSidebar = (
-    <div className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/[0.03] p-4">
+    <div className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/3 p-4">
       <div className="relative mb-6">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-nordic-sage stroke-[1.5]" />
         <input
@@ -144,7 +143,7 @@ export default function Shop() {
           </div>
 
           {filteredProducts.length === 0 ? (
-            <div className="flex min-h-[180px] items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
+            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
               No products found matching your criteria.
             </div>
           ) : (

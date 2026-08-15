@@ -3,6 +3,13 @@ import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const location = useLocation();
+
+  const handleNavClick = (path: string) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="mt-16 border-t border-nordic-gray/20 bg-nordic-bg">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -10,11 +17,8 @@ export default function Footer() {
           <div>
             <Link
               to="/"
-              onClick={() => {
-                if (location.pathname === "/")
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="flex items-center gap-2 font-serif text-[32px] text-nordic-charcoal"
+              onClick={() => handleNavClick("/")}
+              className="flex items-center gap-2 font-serif text-[32px] font-semibold text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
             >
               Nordic Living
             </Link>
@@ -30,7 +34,6 @@ export default function Footer() {
               >
                 <FaInstagram className="h-5 w-5" aria-hidden />
               </a>
-
               <a
                 href="#"
                 aria-label="Twitter"
@@ -38,7 +41,6 @@ export default function Footer() {
               >
                 <FaXTwitter className="h-5 w-5" aria-hidden />
               </a>
-
               <a
                 href="#"
                 aria-label="Facebook"
@@ -50,9 +52,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 font-sans text-body font-normal text-nordic-charcoal">
+            <h3 className="mb-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal">
               <Link
                 to="/shop"
+                onClick={() => handleNavClick("/shop")}
                 className="transition-colors hover:text-nordic-terracotta"
               >
                 Shop
@@ -62,11 +65,8 @@ export default function Footer() {
               <li>
                 <Link
                   to="/"
-                  onClick={() => {
-                    if (location.pathname === "/")
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  onClick={() => handleNavClick("/")}
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   Home
                 </Link>
@@ -74,7 +74,8 @@ export default function Footer() {
               <li>
                 <Link
                   to="/about"
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  onClick={() => handleNavClick("/about")}
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   About
                 </Link>
@@ -83,13 +84,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 font-sans text-body font-normal text-nordic-charcoal">
+            <h3 className="mb-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal">
               Customer Service
             </h3>
             <ul className="space-y-3">
               <li>
                 <a
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                   href="#"
                 >
                   FAQ
@@ -97,7 +98,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                   href="#"
                 >
                   Shipping
@@ -105,7 +106,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                   href="#"
                 >
                   Returns
@@ -113,7 +114,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  className="font-sans text-body font-normal text-nordic-charcoal hover:text-nordic-terracotta"
+                  className="font-sans text-[14px] font-normal text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                   href="#"
                 >
                   Contact
@@ -123,10 +124,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-serif text-subtitle text-nordic-charcoal">
+            <h3 className="mb-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal">
               Stay Updated
             </h3>
-            <p className="mt-2 font-sans text-body font-normal text-nordic-sage">
+            <p className="mt-2 font-sans text-[14px] font-normal text-nordic-sage">
               Get new product drops and exclusive offers.
             </p>
 
@@ -137,11 +138,11 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 border border-nordic-gray/20 rounded-none px-3 py-2 font-sans text-body font-normal text-nordic-charcoal"
+                className="flex-1 border border-nordic-gray/20 bg-transparent px-3 py-2 font-sans text-[14px] font-normal text-nordic-charcoal focus:border-nordic-charcoal focus:outline-none"
                 aria-label="Email address"
               />
               <button
-                className="ml-2 rounded-none border border-nordic-gray/20 bg-nordic-charcoal px-4 py-2 font-sans text-button font-medium text-white"
+                className="ml-2 border border-nordic-charcoal bg-nordic-charcoal px-4 py-2 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-nordic-charcoal"
                 type="submit"
               >
                 Subscribe
@@ -153,7 +154,7 @@ export default function Footer() {
 
       <div className="border-t border-nordic-gray/20 bg-nordic-bg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="text-left font-sans text-caption font-normal text-nordic-sage">
+          <div className="text-left font-sans text-[12px] font-normal text-nordic-sage">
             © 2026 Nordic Living. All rights reserved.
           </div>
         </div>
