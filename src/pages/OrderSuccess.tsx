@@ -47,7 +47,7 @@ export function OrderSuccess() {
               <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage">
                 Order reference
               </p>
-              <p className="mt-2 font-sans text-[18px] font-medium text-nordic-charcoal">
+              <p className="mt-2 font-sans text-subtitle font-medium text-nordic-charcoal">
                 {orderId}
               </p>
             </div>
@@ -56,7 +56,7 @@ export function OrderSuccess() {
               <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage">
                 Estimated delivery
               </p>
-              <p className="mt-2 font-sans text-[18px] font-medium text-nordic-charcoal">
+              <p className="mt-2 font-sans text-subtitle font-medium text-nordic-charcoal">
                 {estimatedDelivery}
               </p>
             </div>
