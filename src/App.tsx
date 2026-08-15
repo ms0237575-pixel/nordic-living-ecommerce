@@ -12,6 +12,7 @@ import Orders from "@/pages/Orders";
 import { Shop } from "@/pages/Shop";
 import { Wishlist } from "@/pages/Wishlist";
 import ProductDetails from "@/pages/ProductDetails";
+import { OrderSuccess } from "@/pages/OrderSuccess";
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/product/:slug" element={<ProductDetails />} />
             <Route path="/wishlist" element={<Wishlist />} />
           </Routes>

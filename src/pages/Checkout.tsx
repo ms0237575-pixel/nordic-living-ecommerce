@@ -76,7 +76,9 @@ export default function Checkout() {
     clearCart();
     setOrderId(generatedOrderId);
     setSuccess(true);
-    navigate("/checkout", { replace: true });
+    navigate(`/order-success?orderId=${encodeURIComponent(generatedOrderId)}`, {
+      replace: true,
+    });
   };
 
   if (cart.length === 0 && !success) {
