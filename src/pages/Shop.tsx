@@ -1,5 +1,5 @@
-import { Search } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Search, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
 import Sheet, { SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -11,8 +11,14 @@ const categories = ["Furniture", "Lighting", "Accessories"] as const;
 
 export function Shop() {
   const [open, setOpen] = useState(false);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") ?? "";
+  const initialSort = searchParams.get("sort") ?? "default";
+  const initialPrice = (searchParams.get("price") as PriceFilterValue) ?? "all";
+  const initialCategories = searchParams.get("categories")
+    ? searchParams.get("categories")!.split(",").filter(Boolean)
+    : [];
+
   const [searchQuery, setSearchQuery] = useState(initialSearch);
 
   useEffect(() => {
@@ -20,8 +26,12 @@ export function Shop() {
     if (q !== null) setSearchQuery(q);
     // synchronize when the URL param changes (do not fight local typing)
   }, [searchParams]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedPrice, setSelectedPrice] = useState<PriceFilterValue>("all");
+  const [selectedCategories, setSelectedCategories] =
+    useState<string[]>(initialCategories);
+  const [selectedPrice, setSelectedPrice] =
+    useState<PriceFilterValue>(initialPrice);
+  const [sortBy, setSortBy] = useState(initialSort);
+  const selectRef = useRef<HTMLSelectElement | null>(null);
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((current) =>
@@ -49,6 +59,92 @@ export function Shop() {
 
     return matchesSearch && matchesCategory && matchesPrice;
   });
+
+  const sortedProducts = (() => {
+    const copy = [...filteredProducts];
+    switch (sortBy) {
+      case "price-asc":
+        return copy.sort((a, b) => a.price - b.price);
+      case "price-desc":
+        return copy.sort((a, b) => b.price - a.price);
+      case "name-asc":
+        return copy.sort((a, b) => a.name.localeCompare(b.name));
+      case "newest":
+        return copy
+          .map((p, i) => ({ p, i }))
+          .sort((x, y) => {
+            if (x.p.newArrival === y.p.newArrival) return x.i - y.i;
+            return x.p.newArrival ? -1 : 1;
+          })
+          .map((x) => x.p);
+      default:
+        return copy;
+    }
+  })();
+
+  const activeSortLabel =
+    sortBy === "default"
+      ? "Default"
+      : sortBy === "price-asc"
+        ? "Price: Low to High"
+        : sortBy === "price-desc"
+          ? "Price: High to Low"
+          : sortBy === "name-asc"
+            ? "Name: A to Z"
+            : "Newest Arrivals";
+
+  const activeFilterChips = [
+    ...selectedCategories.map((category) => ({
+      key: `category:${category}`,
+      label: `Category: ${category}`,
+      onRemove: () =>
+        setSelectedCategories((current) =>
+          current.filter((item) => item !== category),
+        ),
+    })),
+    ...(selectedPrice !== "all"
+      ? [
+          {
+            key: `price:${selectedPrice}`,
+            label:
+              selectedPrice === "under500"
+                ? "Price: Under $500"
+                : selectedPrice === "500to1000"
+                  ? "Price: $500 - $1000"
+                  : "Price: $1000+",
+            onRemove: () => setSelectedPrice("all"),
+          },
+        ]
+      : []),
+    ...(searchQuery.trim()
+      ? [
+          {
+            key: `search:${searchQuery.trim()}`,
+            label: `Search: '${searchQuery.trim()}'`,
+            onRemove: () => setSearchQuery(""),
+          },
+        ]
+      : []),
+  ];
+
+  const clearAllFilters = () => {
+    setSelectedCategories([]);
+    setSelectedPrice("all");
+    setSearchQuery("");
+  };
+
+  useEffect(() => {
+    // persist filters and sort in URL (remove defaults)
+    const params = new URLSearchParams();
+    if (searchQuery.trim() !== "") params.set("search", searchQuery);
+    if (selectedCategories.length > 0)
+      params.set("categories", selectedCategories.join(","));
+    if (selectedPrice !== "all") params.set("price", selectedPrice);
+    if (sortBy && sortBy !== "default") params.set("sort", sortBy);
+
+    setSearchParams(params, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, selectedCategories, selectedPrice, sortBy]);
 
   const filterSidebar = (
     <div className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/3 p-4">
@@ -134,13 +230,94 @@ export function Shop() {
         </div>
       </div>
 
+      <style>{`
+        @keyframes chipFadeIn {
+          from {
+            opacity: 0;
+            transform: translateX(-8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+
       <div className="grid lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
         <aside className="hidden lg:block">{filterSidebar}</aside>
 
         <div>
-          <div className="mb-4 font-sans text-body font-normal text-nordic-sage">
-            Showing {filteredProducts.length} products
+          <div className="mb-4 flex items-center justify-between">
+            <div className="font-sans text-body font-normal text-nordic-sage">
+              Showing {filteredProducts.length} products
+            </div>
+
+            <div className="relative">
+              <select
+                ref={selectRef}
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-transparent border-b border-nordic-gray/30 pb-1 pr-6 font-sans text-[12px] uppercase tracking-widest text-nordic-charcoal focus:outline-none focus:border-nordic-charcoal cursor-pointer appearance-none"
+                aria-label="Sort products"
+              >
+                <option value="default">Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="newest">Newest Arrivals</option>
+              </select>
+
+              <button
+                type="button"
+                aria-label="Open sort options"
+                onClick={() => {
+                  if (selectRef.current) {
+                    selectRef.current.focus();
+                    (selectRef.current as HTMLElement).click?.();
+                  }
+                }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-nordic-charcoal"
+              >
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </div>
           </div>
+
+          <div aria-live="polite" className="sr-only">
+            Active sort: {activeSortLabel}
+          </div>
+
+          {activeFilterChips.length > 0 && (
+            <div
+              className="mb-6 flex flex-wrap items-center gap-3"
+              style={{ animation: "chipFadeIn 260ms ease-out" }}
+            >
+              {activeFilterChips.map((chip) => (
+                <div
+                  key={chip.key}
+                  className="inline-flex items-center gap-2 border border-nordic-gray/30 bg-nordic-gray/5 px-3 py-1 font-sans text-[12px] text-nordic-charcoal rounded-full"
+                >
+                  <span>{chip.label}</span>
+                  <button
+                    type="button"
+                    aria-label={`Remove ${chip.label}`}
+                    onClick={chip.onRemove}
+                    className="text-nordic-charcoal transition-colors hover:text-nordic-terracotta"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={clearAllFilters}
+                className="font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal transition-colors hover:text-nordic-terracotta"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
 
           {filteredProducts.length === 0 ? (
             <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
@@ -148,7 +325,7 @@ export function Shop() {
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredProducts.map((product) => (
+              {sortedProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
