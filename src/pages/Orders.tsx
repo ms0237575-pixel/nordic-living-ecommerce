@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import type { CartItem } from "@/types/product";
 
 interface Order {
   id: string;
   date: string;
+  status?: string;
   items: CartItem[];
   subtotal: number;
   shipping: number;
@@ -18,24 +19,41 @@ interface Order {
   };
 }
 
-export default function Orders() {
-  const [orders, setOrders] = useState<Order[]>([]);
+function deriveOrderStatus(now: number, date: string): string {
+  const ageDays = (now - new Date(date).getTime()) / 86400000;
+  if (ageDays >= 14) return "Delivered";
+  if (ageDays >= 3) return "Shipped";
+  return "Processing";
+}
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("nordic-living-orders");
-      const parsed = raw ? JSON.parse(raw) : [];
-      const list = Array.isArray(parsed) ? parsed : [];
-      list.sort((a: Order, b: Order) => {
-        const da = new Date(a.date).getTime();
-        const db = new Date(b.date).getTime();
-        return db - da;
-      });
-      setOrders(list);
-    } catch (e) {
-      setOrders([]);
-    }
-  }, []);
+function loadOrders(): Order[] {
+  try {
+    const raw = localStorage.getItem("nordic-living-orders");
+    const parsed = raw ? JSON.parse(raw) : [];
+    const list = Array.isArray(parsed) ? parsed : [];
+    list.sort((a: Order, b: Order) => {
+      const da = new Date(a.date).getTime();
+      const db = new Date(b.date).getTime();
+      return db - da;
+    });
+    const now = Date.now();
+    return list.map((order: Order) => ({
+      ...order,
+      status: order.status ?? deriveOrderStatus(now, order.date),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default function Orders() {
+  const [orders] = useState<Order[]>(loadOrders);
+
+  const statusStyles: Record<string, string> = {
+    Processing: "border-nordic-terracotta/40 text-nordic-terracotta",
+    Shipped: "border-nordic-charcoal/30 text-nordic-charcoal",
+    Delivered: "border-nordic-gray/40 text-nordic-sage",
+  };
 
   if (orders.length === 0) {
     return (
@@ -88,7 +106,15 @@ export default function Orders() {
               </div>
 
               <div className="text-right">
-                <div className="font-sans text-body font-normal text-nordic-charcoal">
+                <span
+                  className={`inline-block border px-3 py-1 font-sans text-[11px] font-medium uppercase tracking-widest ${
+                    statusStyles[order.status ?? "Delivered"] ??
+                    "border-nordic-gray/40 text-nordic-sage"
+                  }`}
+                >
+                  {order.status ?? "Delivered"}
+                </span>
+                <div className="mt-3 font-sans text-body font-normal text-nordic-charcoal">
                   Subtotal: ${order.subtotal.toFixed(2)}
                 </div>
                 <div className="font-sans text-body font-normal text-nordic-charcoal">

@@ -13,6 +13,7 @@ import { Shop } from "@/pages/Shop";
 import { Wishlist } from "@/pages/Wishlist";
 import { ProductDetails } from "@/pages/ProductDetails";
 import { Login } from "@/pages/Login";
+import { Register } from "@/pages/Register";
 import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
 
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/product/:slug" element={<ProductDetails />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

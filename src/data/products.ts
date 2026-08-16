@@ -6,8 +6,8 @@ export const products: Product[] = [
     name: "Fjord Sofa",
     slug: "fjord-sofa",
     price: 1299,
-    category: "Living Room",
-    collection: "Seating",
+    category: "Furniture",
+    collection: "Living Room",
     description:
       "A low, modular sofa designed for cozy gatherings and effortless Scandinavian living, upholstered in a soft oatmeal bouclé.",
     image:
@@ -31,8 +31,8 @@ export const products: Product[] = [
     name: "Rico Lounge Chair",
     slug: "rico-lounge-chair",
     price: 799,
-    category: "Living Room",
-    collection: "Seating",
+    category: "Furniture",
+    collection: "Living Room",
     description:
       "A sculptural lounge chair with soft upholstery and warm walnut legs, crafted for relaxed everyday reading and conversation.",
     image:
@@ -56,8 +56,8 @@ export const products: Product[] = [
     name: "Eira Coffee Table",
     slug: "eira-coffee-table",
     price: 490,
-    category: "Living Room",
-    collection: "Tables",
+    category: "Furniture",
+    collection: "Living Room",
     description:
       "A slim travertine coffee table with rounded corners and a quiet, monolithic presence for layered living room styling.",
     image:
@@ -81,8 +81,8 @@ export const products: Product[] = [
     name: "Ingrid Bookcase",
     slug: "ingrid-bookcase",
     price: 780,
-    category: "Workspace",
-    collection: "Storage",
+    category: "Furniture",
+    collection: "Workspace",
     description:
       "An open oak shelving unit with a clean vertical profile, perfect for curating books, ceramics, and quiet desk-side storage.",
     image:
@@ -106,8 +106,8 @@ export const products: Product[] = [
     name: "Maja Desk",
     slug: "maja-desk",
     price: 890,
-    category: "Workspace",
-    collection: "Desks",
+    category: "Furniture",
+    collection: "Workspace",
     description:
       "A spacious light-oak desk with a clean silhouette and hidden cable routing, designed to keep the working day calm and ordered.",
     image:
@@ -131,8 +131,8 @@ export const products: Product[] = [
     name: "Luma Floor Lamp",
     slug: "luma-floor-lamp",
     price: 380,
-    category: "Workspace",
-    collection: "Lighting",
+    category: "Lighting",
+    collection: "Workspace",
     description:
       "A slim floor lamp with a brushed brass finish and soft diffused light, adding a warm glow to desks and reading corners.",
     image:
@@ -156,8 +156,8 @@ export const products: Product[] = [
     name: "Vega Dining Table",
     slug: "vega-dining-table",
     price: 1490,
-    category: "Dining",
-    collection: "Dining Tables",
+    category: "Furniture",
+    collection: "Dining Room",
     description:
       "Solid oak dining table with soft edges and a clean silhouette, made for long, slow dinners with family and friends.",
     image:
@@ -181,8 +181,8 @@ export const products: Product[] = [
     name: "Aurora Pendant",
     slug: "aurora-pendant",
     price: 420,
-    category: "Dining",
-    collection: "Lighting",
+    category: "Lighting",
+    collection: "Dining Room",
     description:
       "A hand-blown glass pendant that casts a warm, calm glow over dining tables, entryways, and morning coffee corners.",
     image:
@@ -206,8 +206,8 @@ export const products: Product[] = [
     name: "Kora Tray",
     slug: "kora-tray",
     price: 120,
-    category: "Dining",
-    collection: "Tabletop",
+    category: "Accessories",
+    collection: "Dining Room",
     description:
       "A tactile woven tray for coffee rituals, bread service, and everyday tabletop styling in a quiet neutral weave.",
     image:
@@ -231,8 +231,8 @@ export const products: Product[] = [
     name: "Svan Bed",
     slug: "svan-bed",
     price: 1690,
-    category: "Bedroom",
-    collection: "Beds",
+    category: "Furniture",
+    collection: "Bedroom",
     description:
       "A low-profile oak bed with a gently curved headboard, inviting slow mornings and quiet evenings in soft linen.",
     image:
@@ -256,8 +256,8 @@ export const products: Product[] = [
     name: "Lino Throw",
     slug: "lino-throw",
     price: 180,
-    category: "Bedroom",
-    collection: "Textiles",
+    category: "Accessories",
+    collection: "Bedroom",
     description:
       "A wool-blend throw in a quiet neutral palette for layered comfort, tactile warmth, and effortless bed and sofa styling.",
     image:
@@ -281,8 +281,8 @@ export const products: Product[] = [
     name: "Nia Bedside",
     slug: "nia-bedside",
     price: 260,
-    category: "Bedroom",
-    collection: "Bedside",
+    category: "Furniture",
+    collection: "Bedroom",
     description:
       "A compact oak bedside table with a recessed drawer and soft rounded edges, keeping the essentials within easy reach.",
     image:

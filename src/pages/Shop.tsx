@@ -4,17 +4,16 @@ import { useSearchParams } from "react-router";
 import Sheet, { SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/product/ProductCard";
 import type { Product } from "@/types/product";
-import { products as localProducts } from "@/data/products";
-import { getAllProducts } from "@/services/productService";
+import { getAllProducts } from "@/services/products";
 
 type PriceFilterValue = "all" | "under500" | "500to1000" | "over1000";
 
-const categories = ["Living Room", "Dining", "Workspace", "Bedroom"] as const;
+const categories = ["Furniture", "Lighting", "Accessories"] as const;
 
 export function Shop() {
   const [open, setOpen] = useState(false);
-  const [allProducts, setAllProducts] = useState<Product[]>(localProducts);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") ?? "";
   const initialSort = searchParams.get("sort") ?? "default";
@@ -341,7 +340,11 @@ export function Shop() {
             </div>
           )}
 
-          {filteredProducts.length === 0 ? (
+          {loading ? (
+            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
+              Loading products...
+            </div>
+          ) : filteredProducts.length === 0 ? (
             <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
               No products found matching your criteria.
             </div>

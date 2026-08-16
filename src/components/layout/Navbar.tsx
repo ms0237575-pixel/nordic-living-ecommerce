@@ -185,6 +185,13 @@ export function Navbar() {
                   Orders
                 </Link>
                 <Link
+                  to="/wishlist"
+                  onClick={makeNavHandler("/wishlist", true)}
+                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                >
+                  Wishlist
+                </Link>
+                <Link
                   to="/login"
                   onClick={makeNavHandler("/login", true)}
                   className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"

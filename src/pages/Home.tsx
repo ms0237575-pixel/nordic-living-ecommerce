@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProductCard } from "@/components/product/ProductCard";
-import { getFeaturedProducts } from "@/services/productService";
+import { getFeaturedProducts } from "@/services/products";
 import type { Product } from "@/types/product";
 import { Leaf, Truck, MapPin } from "lucide-react";
 
