@@ -89,7 +89,7 @@ export default function Checkout() {
         </h1>
         <Link
           to="/shop"
-          className="mt-8 border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-colors duration-300 hover:text-nordic-terracotta"
+          className="mt-8 border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
         >
           Continue Shopping
         </Link>
@@ -112,7 +112,7 @@ export default function Checkout() {
           </p>
           <Link
             to="/shop"
-            className="mt-8 inline-block border border-nordic-charcoal bg-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+            className="mt-8 inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
           >
             Continue Shopping
           </Link>
@@ -210,7 +210,7 @@ export default function Checkout() {
 
             <button
               type="submit"
-              className="mt-4 w-full border border-nordic-charcoal bg-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+              className="mt-4 w-full border border-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
             >
               Place Order
             </button>

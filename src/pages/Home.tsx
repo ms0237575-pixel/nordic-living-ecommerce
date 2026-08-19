@@ -23,6 +23,161 @@ export function Home() {
     <div className="w-full">
       <HeroSection />
 
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
+        <div className="mb-12 flex items-end justify-between">
+          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
+            Featured Collection
+          </h2>
+
+          <Link
+            to="/shop"
+            className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+          >
+            View All
+          </Link>
+        </div>
+
+        {featured === null ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Brand Story / Philosophy */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="relative w-full h-[400px] md:h-[600px] overflow-hidden bg-nordic-light">
+            <img
+              src="/images/products/story-crafted-chairs.jpg"
+              alt="Crafted chairs"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="px-2 lg:px-12">
+            <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
+              Crafted with nature in mind.
+            </h2>
+            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+              Our designs embrace Scandinavian simplicity — quiet forms, honest
+              materials, and pieces built to last. We focus on sustainable
+              sourcing and timeless craftsmanship so every piece becomes part of
+              your everyday rituals.
+            </p>
+            <Link
+              to="/about"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            >
+              Read our story
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Section 1 — Timeless Comfort */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+            <img
+              src="/images/products/home-striped-sofa.jpg"
+              alt="Striped sofa in a living room"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="px-2 lg:px-12">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+              Timeless Comfort
+            </p>
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+              Redefining the Living Space
+            </h2>
+            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+              Embrace the art of slow living. Our seating collections combine
+              striking organic curves with unmatched comfort, featuring tactile
+              fabrics that invite you to sink in and stay a while.
+            </p>
+            <Link
+              to="/shop?category=Furniture"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            >
+              Shop Seating
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Section 2 — Gather Around */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="order-2 lg:order-1 px-2 lg:px-12">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+              Gather Around
+            </p>
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+              Spaces for Connection
+            </h2>
+            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+              Whether it's a quiet morning coffee or a bustling dinner party,
+              our dining pieces are crafted from raw, honest materials to ground
+              your most meaningful moments.
+            </p>
+            <Link
+              to="/shop?category=Furniture"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            >
+              Shop Dining
+            </Link>
+          </div>
+
+          <div className="order-1 lg:order-2 relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+            <img
+              src="/images/products/home-dining-cafe.webp"
+              alt="Dining area in a café setting"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Section 3 — Everyday Rituals */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+            <img
+              src="/images/products/home-coffee-ritual.webp"
+              alt="Coffee ritual with Nordic ceramics"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="px-2 lg:px-12">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+              Everyday Rituals
+            </p>
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+              The Beauty in Details
+            </h2>
+            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+              Scandinavian design is more than an aesthetic; it's a lifestyle.
+              We celebrate the small, intentional choices — from the cup you
+              hold to the light that fills your room.
+            </p>
+            <Link
+              to="/shop?category=Accessories"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            >
+              Shop Accessories
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Trust badges */}
       <section className="w-full bg-nordic-gray/10 py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -49,120 +204,6 @@ export function Home() {
                 </span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Shop by Category */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="font-serif text-h3 mb-6 text-nordic-charcoal">
-          Shop by Category
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link
-            to="/shop?category=Furniture"
-            className="group relative block overflow-hidden rounded-md"
-          >
-            <div className="aspect-4/5 w-full overflow-hidden bg-black">
-              <img
-                src="/images/products/oak-dining-table-2.webp"
-                alt="Furniture"
-                className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
-              <div className="font-serif text-[28px] text-white">
-                Furniture
-              </div>
-            </div>
-          </Link>
-
-          <Link
-            to="/shop?category=Lighting"
-            className="group relative block overflow-hidden rounded-md"
-          >
-            <div className="aspect-4/5 w-full overflow-hidden bg-black">
-              <img
-                src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1200&auto=format&fit=crop"
-                alt="Lighting"
-                className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
-              <div className="font-serif text-[28px] text-white">Lighting</div>
-            </div>
-          </Link>
-
-          <Link
-            to="/shop?category=Accessories"
-            className="group relative block overflow-hidden rounded-md"
-          >
-            <div className="aspect-4/5 w-full overflow-hidden bg-black">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop"
-                alt="Accessories"
-                className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
-              <div className="font-serif text-[28px] text-white">Accessories</div>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
-        <div className="mb-12 flex items-end justify-between">
-          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
-            Featured Collection
-          </h2>
-
-          <Link
-            to="/shop"
-            className="font-sans text-button font-medium uppercase tracking-widest text-nordic-terracotta transition-colors duration-300 hover:text-nordic-terracotta"
-          >
-            View All
-          </Link>
-        </div>
-
-        {featured === null ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Brand Story / Philosophy */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="w-full h-96 overflow-hidden rounded-md">
-            <img
-              src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1400&auto=format&fit=crop"
-              alt="Interior"
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-
-          <div className="px-2 lg:px-12">
-            <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
-              Crafted with nature in mind.
-            </h2>
-            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
-              Our designs embrace Scandinavian simplicity — quiet forms, honest
-              materials, and pieces built to last. We focus on sustainable
-              sourcing and timeless craftsmanship so every piece becomes part of
-              your everyday rituals.
-            </p>
-            <Link
-              to="/about"
-              className="border border-nordic-charcoal px-6 py-3 uppercase tracking-widest font-sans hover:bg-nordic-charcoal hover:text-white transition-colors"
-            >
-              Read our story
-            </Link>
           </div>
         </div>
       </section>

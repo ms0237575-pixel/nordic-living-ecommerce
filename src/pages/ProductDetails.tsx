@@ -307,7 +307,7 @@ export function ProductDetails() {
           <button
             type="button"
             onClick={handleAddToCart}
-            className="mt-8 w-full border border-nordic-charcoal bg-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+            className="mt-8 w-full border border-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
           >
             {added ? "Added to Cart" : "Add to Cart"}
           </button>
@@ -476,7 +476,7 @@ export function ProductDetails() {
 
               <button
                 type="submit"
-                className="w-full border border-nordic-charcoal bg-nordic-charcoal px-6 py-3 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+                className="w-full border border-nordic-charcoal px-6 py-3 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
               >
                 Submit Review
               </button>
