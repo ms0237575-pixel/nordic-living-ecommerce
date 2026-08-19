@@ -51,7 +51,7 @@ export function Home() {
       {/* Brand Story / Philosophy */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-[400px] md:h-[600px] overflow-hidden bg-nordic-light">
+          <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light">
             <img
               src="/images/products/story-crafted-chairs.jpg"
               alt="Crafted chairs"
@@ -82,7 +82,7 @@ export function Home() {
       {/* Feature Section 1 — Timeless Comfort */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+          <div className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light">
             <img
               src="/images/products/home-striped-sofa.jpg"
               alt="Striped sofa in a living room"
@@ -135,11 +135,11 @@ export function Home() {
             </Link>
           </div>
 
-          <div className="order-1 lg:order-2 relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+          <div className="order-1 lg:order-2 relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light">
             <img
               src="/images/products/home-dining-cafe.webp"
               alt="Dining area in a café setting"
-              className="w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
         </div>
@@ -148,11 +148,11 @@ export function Home() {
       {/* Feature Section 3 — Everyday Rituals */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light">
+          <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light">
             <img
               src="/images/products/home-coffee-ritual.webp"
               alt="Coffee ritual with Nordic ceramics"
-              className="w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
 

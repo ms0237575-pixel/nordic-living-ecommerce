@@ -2,30 +2,27 @@ import { Link } from "react-router";
 
 const sections = [
   {
-    eyebrow: "Simplicity",
-    title: "Scandinavian Minimalism",
-    body: "We design with restraint — quiet forms, honest materials, and nothing extraneous. Each piece earns its place in the home by being useful, beautiful, and calm. Our minimalism is warm, never cold: soft proportions, natural textures, and light that moves through every room.",
-    image:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1400&auto=format&fit=crop",
-    alt: "Minimalist Scandinavian living room",
+    eyebrow: "Sustainability",
+    title: "Rooted in Nature",
+    body: "Our journey begins in the forest. We source our materials responsibly, ensuring that every piece of wood we use respects the natural ecosystem. By prioritizing sustainability, we create furniture that doesn't just sit in your home, but carries the quiet strength of the outdoors.",
+    image: "/images/products/about-nature-chair.jpg",
+    alt: "Natural wooden chair in a forest setting",
     reversed: false,
   },
   {
-    eyebrow: "Materiality",
-    title: "Sustainability First",
-    body: "Every material is chosen with its next life in mind. We source FSC-certified oak and responsibly grown wool, use low-impact finishes, and design for repair rather than replacement. A Nordic Living piece is meant to be passed on — not thrown away.",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop",
-    alt: "Natural oak furniture in a light interior",
+    eyebrow: "Philosophy",
+    title: "Designing for Warmth",
+    body: "We believe that a home should be a sanctuary. Our designs are crafted to capture natural light and create inviting, tranquil corners. Through soft textures and timeless silhouettes, we bring the warmth of Scandinavian minimalism into your everyday life.",
+    image: "/images/products/about-cozy-corner.jpg",
+    alt: "Cozy Scandinavian interior corner",
     reversed: true,
   },
   {
-    eyebrow: "Process",
-    title: "Craftsmanship",
-    body: "Our makers have spent decades perfecting joinery, upholstery, and finishing by hand. We favor small workshops over assembly lines, and slow production over speed. The result is furniture with soul — pieces that reveal their care in every detail, year after year.",
-    image:
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1400&auto=format&fit=crop",
-    alt: "Handcrafted wooden furniture detail",
+    eyebrow: "Inspiration",
+    title: "Coastal Serenity",
+    body: "Inspired by the calming rhythm of the coast, we pay attention to the smallest details. Our accessories and shelving solutions are designed to help you curate a space that feels personal, breathable, and infinitely peaceful.",
+    image: "/images/products/about-coastal-details.jpg",
+    alt: "Coastal-inspired home details",
     reversed: false,
   },
 ];
@@ -59,14 +56,14 @@ export function About() {
             <div
               className={
                 section.reversed
-                  ? "lg:order-2 overflow-hidden bg-nordic-gray/10"
-                  : "overflow-hidden bg-nordic-gray/10"
+                  ? "lg:order-2 relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
+                  : "relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
               }
             >
               <img
                 src={section.image}
                 alt={section.alt}
-                className="aspect-4/5 w-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
 
