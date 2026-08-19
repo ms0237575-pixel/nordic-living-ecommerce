@@ -53,59 +53,59 @@ export function Home() {
         </div>
       </section>
 
-      {/* Shop by Category / Room */}
+      {/* Shop by Category */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <h2 className="font-serif text-h3 mb-6 text-nordic-charcoal">
-          Shop by Room
+          Shop by Category
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link
-            to="/shop"
+            to="/shop?category=Furniture"
             className="group relative block overflow-hidden rounded-md"
           >
             <div className="aspect-4/5 w-full overflow-hidden bg-black">
               <img
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop"
-                alt="Living Room"
+                src="/images/products/oak-dining-table-2.webp"
+                alt="Furniture"
                 className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
               <div className="font-serif text-[28px] text-white">
-                Living Room
+                Furniture
               </div>
             </div>
           </Link>
 
           <Link
-            to="/shop"
+            to="/shop?category=Lighting"
             className="group relative block overflow-hidden rounded-md"
           >
             <div className="aspect-4/5 w-full overflow-hidden bg-black">
               <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
-                alt="Dining"
+                src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1200&auto=format&fit=crop"
+                alt="Lighting"
                 className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
-              <div className="font-serif text-[28px] text-white">Dining</div>
+              <div className="font-serif text-[28px] text-white">Lighting</div>
             </div>
           </Link>
 
           <Link
-            to="/shop"
+            to="/shop?category=Accessories"
             className="group relative block overflow-hidden rounded-md"
           >
             <div className="aspect-4/5 w-full overflow-hidden bg-black">
               <img
-                src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop"
-                alt="Workspace"
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop"
+                alt="Accessories"
                 className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
             </div>
             <div className="absolute left-0 right-0 bottom-0 p-6 bg-linear-to-t from-black/60 to-transparent">
-              <div className="font-serif text-[28px] text-white">Workspace</div>
+              <div className="font-serif text-[28px] text-white">Accessories</div>
             </div>
           </Link>
         </div>

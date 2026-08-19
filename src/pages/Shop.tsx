@@ -8,7 +8,13 @@ import { getAllProducts } from "@/services/products";
 
 type PriceFilterValue = "all" | "under500" | "500to1000" | "over1000";
 
-const categories = ["Furniture", "Lighting", "Accessories"] as const;
+const categories = [
+  "Furniture",
+  "Lighting",
+  "Accessories",
+  "Textiles",
+  "Kitchen",
+] as const;
 
 export function Shop() {
   const [open, setOpen] = useState(false);
@@ -20,21 +26,30 @@ export function Shop() {
   const initialPrice = (searchParams.get("price") as PriceFilterValue) ?? "all";
   const initialCategories = searchParams.get("categories")
     ? searchParams.get("categories")!.split(",").filter(Boolean)
-    : [];
+    : searchParams.get("category")
+      ? [searchParams.get("category")!]
+      : [];
 
   const [searchQuery, setSearchQuery] = useState(initialSearch);
-
-  useEffect(() => {
-    const q = searchParams.get("search");
-    if (q !== null) setSearchQuery(q);
-    // synchronize when the URL param changes (do not fight local typing)
-  }, [searchParams]);
   const [selectedCategories, setSelectedCategories] =
     useState<string[]>(initialCategories);
   const [selectedPrice, setSelectedPrice] =
     useState<PriceFilterValue>(initialPrice);
   const [sortBy, setSortBy] = useState(initialSort);
   const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  useEffect(() => {
+    const q = searchParams.get("search");
+    if (q !== null) setSearchQuery(q);
+
+    const cats = searchParams.get("categories")
+      ? searchParams.get("categories")!.split(",").filter(Boolean)
+      : searchParams.get("category")
+        ? [searchParams.get("category")!]
+        : [];
+    setSelectedCategories(cats);
+    // synchronize when the URL param changes (do not fight local typing)
+  }, [searchParams]);
 
   useEffect(() => {
     let mounted = true;

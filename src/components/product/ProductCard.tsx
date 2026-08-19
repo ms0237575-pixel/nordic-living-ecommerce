@@ -34,6 +34,10 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   };
 
+  const hoverImage = product.images && product.images.length > 1
+    ? product.images[1]
+    : null;
+
   return (
     <div className="group relative">
       <button
@@ -51,12 +55,23 @@ export function ProductCard({ product }: ProductCardProps) {
       </button>
 
       <Link to={`/product/${product.slug}`} className="block">
-        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10">
+        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative">
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            className={`h-full w-full object-cover object-center ${
+              hoverImage
+                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+                : "transition-transform duration-500 group-hover:scale-105"
+            }`}
           />
+          {hoverImage && (
+            <img
+              src={hoverImage}
+              alt={product.name}
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            />
+          )}
         </div>
 
         <div className="mt-4 space-y-1">
