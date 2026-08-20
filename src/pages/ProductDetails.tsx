@@ -196,7 +196,7 @@ export function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center px-4 font-sans text-body font-normal text-nordic-sage">
+      <div className="flex min-h-[50vh] items-center justify-center px-4 font-sans text-body font-normal text-nordic-sage-dark">
         Loading product...
       </div>
     );
@@ -204,7 +204,7 @@ export function ProductDetails() {
 
   if (!product) {
     return (
-      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-4 font-sans text-body font-normal text-nordic-sage">
+      <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-4 font-sans text-body font-normal text-nordic-sage-dark">
         <p>Product not found.</p>
         <Link
           to="/shop"
@@ -220,7 +220,7 @@ export function ProductDetails() {
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
       <Link
         to="/shop"
-        className="inline-flex items-center gap-2 font-sans text-body font-normal text-nordic-sage transition-colors duration-300 hover:text-nordic-terracotta"
+        className="inline-flex items-center gap-2 font-sans text-body font-normal text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
       >
         <ArrowLeft className="size-4 stroke-[1.5]" />
         Back to shop
@@ -261,7 +261,7 @@ export function ProductDetails() {
         </div>
 
         <div className="lg:pt-4">
-          <p className="font-sans text-caption font-normal uppercase tracking-[0.14em] text-nordic-sage">
+          <p className="font-sans text-caption font-normal uppercase tracking-[0.14em] text-nordic-sage-dark">
             {product.category} / {product.collection}
           </p>
           <h1 className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal">
@@ -270,7 +270,7 @@ export function ProductDetails() {
           <p className="mt-5 font-sans text-subtitle font-semibold text-nordic-terracotta">
             ${product.price}
           </p>
-          <p className="mt-8 max-w-xl font-sans text-body font-normal text-nordic-sage">
+          <p className="mt-8 max-w-xl font-sans text-body font-normal text-nordic-sage-dark">
             {product.description}
           </p>
 
@@ -329,7 +329,7 @@ export function ProductDetails() {
               </span>
               <div>
                 <StarRating value={averageRating} />
-                <p className="mt-2 font-sans text-[14px] text-nordic-sage">
+                <p className="mt-2 font-sans text-[14px] text-nordic-sage-dark">
                   / 5.0 · {totalReviews} review{totalReviews !== 1 ? "s" : ""}
                 </p>
               </div>
@@ -350,7 +350,7 @@ export function ProductDetails() {
                         <p className="font-sans text-body font-medium text-nordic-charcoal">
                           {review.name}
                         </p>
-                        <p className="font-sans text-[13px] text-nordic-sage">
+                        <p className="font-sans text-[13px] text-nordic-sage-dark">
                           {new Date(review.date).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",
@@ -361,7 +361,7 @@ export function ProductDetails() {
                     </div>
                     <StarRating value={review.rating} />
                   </div>
-                  <p className="mt-4 font-sans text-body font-normal leading-relaxed text-nordic-sage">
+                  <p className="mt-4 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
                     {review.comment}
                   </p>
                 </article>
@@ -376,7 +376,7 @@ export function ProductDetails() {
             <h3 className="font-serif text-[24px] font-medium text-nordic-charcoal">
               Write a Review
             </h3>
-            <p className="mt-2 font-sans text-[14px] text-nordic-sage">
+            <p className="mt-2 font-sans text-[14px] text-nordic-sage-dark">
               Share your experience with this piece.
             </p>
 

@@ -12,7 +12,7 @@ export function NotFound() {
           Page not found
         </h1>
 
-        <p className="mx-auto mb-10 max-w-md font-sans text-[15px] leading-relaxed text-nordic-sage">
+        <p className="mx-auto mb-10 max-w-md font-sans text-[15px] leading-relaxed text-nordic-sage-dark">
           The page you are looking for doesn't exist or has been moved.
         </p>
 

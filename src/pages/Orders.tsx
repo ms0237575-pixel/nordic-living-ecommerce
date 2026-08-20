@@ -52,7 +52,7 @@ export default function Orders() {
   const statusStyles: Record<string, string> = {
     Processing: "border-nordic-terracotta/40 text-nordic-terracotta",
     Shipped: "border-nordic-charcoal/30 text-nordic-charcoal",
-    Delivered: "border-nordic-gray/40 text-nordic-sage",
+    Delivered: "border-nordic-gray/40 text-nordic-sage-dark",
   };
 
   if (orders.length === 0) {
@@ -85,7 +85,7 @@ export default function Orders() {
           >
             <div className="flex items-start justify-between">
               <div>
-                <div className="font-sans text-[14px] text-nordic-sage uppercase">
+                <div className="font-sans text-[14px] text-nordic-sage-dark uppercase">
                   Order ID: {order.id}
                 </div>
                 <div className="mt-1 font-sans text-body font-normal text-nordic-charcoal">
@@ -96,10 +96,10 @@ export default function Orders() {
                   <div className="font-sans text-body font-medium text-nordic-charcoal">
                     {order.customer.firstName} {order.customer.lastName}
                   </div>
-                  <div className="font-sans text-[14px] text-nordic-sage">
+                  <div className="font-sans text-[14px] text-nordic-sage-dark">
                     {order.customer.address}
                   </div>
-                  <div className="font-sans text-[14px] text-nordic-sage">
+                  <div className="font-sans text-[14px] text-nordic-sage-dark">
                     {order.customer.city}
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export default function Orders() {
                 <span
                   className={`inline-block border px-3 py-1 font-sans text-[11px] font-medium uppercase tracking-widest ${
                     statusStyles[order.status ?? "Delivered"] ??
-                    "border-nordic-gray/40 text-nordic-sage"
+                    "border-nordic-gray/40 text-nordic-sage-dark"
                   }`}
                 >
                   {order.status ?? "Delivered"}

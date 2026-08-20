@@ -25,7 +25,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
             Something went wrong
           </h2>
-          <p className="max-w-md font-sans text-body font-normal text-nordic-sage">
+          <p className="max-w-md font-sans text-body font-normal text-nordic-sage-dark">
             An unexpected error occurred. Please try reloading the page.
           </p>
           <button

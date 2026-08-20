@@ -54,7 +54,7 @@ export default function Cart() {
         <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
           Your Cart is Empty
         </h1>
-        <p className="mt-3 font-sans text-body font-normal text-nordic-sage">
+        <p className="mt-3 font-sans text-body font-normal text-nordic-sage-dark">
           Discover thoughtful pieces for your home.
         </p>
         <Link
@@ -76,7 +76,7 @@ export default function Cart() {
         <button
           type="button"
           onClick={clearCart}
-          className="font-sans text-button font-medium uppercase tracking-widest text-nordic-sage transition-colors duration-300 hover:text-nordic-terracotta"
+          className="font-sans text-button font-medium uppercase tracking-widest text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
         >
           Clear Cart
         </button>
@@ -114,7 +114,7 @@ export default function Cart() {
           >
             <label
               htmlFor="promo-code"
-              className="mb-2 block font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-sage"
+              className="mb-2 block font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-sage-dark"
             >
               Promo code
             </label>
@@ -128,7 +128,7 @@ export default function Cart() {
                   if (errorMsg) setErrorMsg(null);
                 }}
                 placeholder="Enter code"
-                className="w-full border border-nordic-gray/30 bg-white px-3 py-3 font-sans text-body text-nordic-charcoal outline-none transition-colors duration-300 placeholder:text-nordic-sage focus:border-nordic-charcoal"
+                className="w-full border border-nordic-gray/30 bg-white px-3 py-3 font-sans text-body text-nordic-charcoal outline-none transition-colors duration-300 placeholder:text-nordic-sage-dark focus:border-nordic-charcoal"
               />
               <button
                 type="submit"
@@ -146,7 +146,7 @@ export default function Cart() {
               <button
                 type="button"
                 onClick={handleRemovePromo}
-                className="mt-3 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-sage transition-colors duration-300 hover:text-nordic-terracotta"
+                className="mt-3 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
               >
                 Remove code
               </button>
@@ -178,7 +178,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <p className="mt-4 font-sans text-body font-normal text-nordic-sage">
+          <p className="mt-4 font-sans text-body font-normal text-nordic-sage-dark">
             Shipping and taxes are calculated at checkout.
           </p>
           <Link

@@ -185,14 +185,14 @@ export function Shop() {
   const filterSidebar = (
     <div className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/3 p-4">
       <div className="relative mb-6">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-nordic-sage stroke-[1.5]" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-nordic-sage-dark stroke-[1.5]" />
         <input
           type="search"
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
           placeholder="Search products"
           aria-label="Search products"
-          className="w-full border border-nordic-gray/20 bg-white/60 py-2 pl-9 pr-3 font-sans text-body font-normal text-nordic-charcoal placeholder:text-nordic-sage focus:outline-none focus:ring-1 focus:ring-nordic-terracotta"
+          className="w-full border border-nordic-gray/20 bg-white/60 py-2 pl-9 pr-3 font-sans text-body font-normal text-nordic-charcoal placeholder:text-nordic-sage-dark focus:outline-none focus:ring-1 focus:ring-nordic-terracotta"
         />
       </div>
 
@@ -284,7 +284,7 @@ export function Shop() {
 
         <div>
           <div className="mb-4 flex items-center justify-between">
-            <div className="font-sans text-body font-normal text-nordic-sage">
+            <div className="font-sans text-body font-normal text-nordic-sage-dark">
               Showing {filteredProducts.length} products
             </div>
 
@@ -356,11 +356,11 @@ export function Shop() {
           )}
 
           {loading ? (
-            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
+            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage-dark">
               Loading products...
             </div>
           ) : filteredProducts.length === 0 ? (
-            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage">
+            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage-dark">
               No products found matching your criteria.
             </div>
           ) : (

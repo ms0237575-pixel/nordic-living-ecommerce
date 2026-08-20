@@ -68,7 +68,7 @@ export function Login() {
         <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
           Welcome Back
         </h1>
-        <p className="mt-4 font-sans text-body font-normal text-nordic-sage">
+        <p className="mt-4 font-sans text-body font-normal text-nordic-sage-dark">
           Enter your email to access your account and orders.
         </p>
 
@@ -108,7 +108,7 @@ export function Login() {
               <button
                 type="button"
                 onClick={handleForgotPassword}
-                className="font-sans text-[13px] font-normal text-nordic-sage transition-colors duration-300 hover:text-nordic-terracotta"
+                className="font-sans text-[13px] font-normal text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
               >
                 Forgot Password?
               </button>
@@ -138,7 +138,7 @@ export function Login() {
           </button>
         </form>
 
-        <p className="mt-8 text-center font-sans text-[14px] font-normal text-nordic-sage">
+        <p className="mt-8 text-center font-sans text-[14px] font-normal text-nordic-sage-dark">
           New to Nordic Living?{" "}
           <Link
             to="/register"

@@ -9,7 +9,7 @@ export function HeroSection() {
             Quiet comfort for modern living.
           </h1>
 
-          <p className="max-w-md font-sans text-body font-normal text-nordic-sage">
+          <p className="max-w-md font-sans text-body font-normal text-nordic-sage-dark">
             Discover our new collection of Scandinavian-inspired furniture.
             Designed with purpose, crafted with nature, and built to last.
           </p>

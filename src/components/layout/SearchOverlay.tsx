@@ -89,7 +89,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
 
         {query.trim().length > 0 && (
           <div className="mt-8">
-            <div className="mb-6 font-sans text-[14px] uppercase tracking-widest text-nordic-sage flex justify-between items-center">
+            <div className="mb-6 font-sans text-[14px] uppercase tracking-widest text-nordic-sage-dark flex justify-between items-center">
               <span>
                 {matches.length === 0
                   ? "No results found"

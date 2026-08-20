@@ -66,7 +66,7 @@ export function Home() {
             <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
               Crafted with nature in mind.
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Our designs embrace Scandinavian simplicity — quiet forms, honest
               materials, and pieces built to last. We focus on sustainable
               sourcing and timeless craftsmanship so every piece becomes part of
@@ -95,13 +95,13 @@ export function Home() {
           </div>
 
           <div className="px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Timeless Comfort
             </p>
             <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               Redefining the Living Space
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Embrace the art of slow living. Our seating collections combine
               striking organic curves with unmatched comfort, featuring tactile
               fabrics that invite you to sink in and stay a while.
@@ -120,13 +120,13 @@ export function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" data-aos="fade-up">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="order-2 lg:order-1 px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Gather Around
             </p>
             <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               Spaces for Connection
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Whether it's a quiet morning coffee or a bustling dinner party,
               our dining pieces are crafted from raw, honest materials to ground
               your most meaningful moments.
@@ -163,13 +163,13 @@ export function Home() {
           </div>
 
           <div className="px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage mb-4">
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Everyday Rituals
             </p>
             <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               The Beauty in Details
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage leading-relaxed mb-6">
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Scandinavian design is more than an aesthetic; it's a lifestyle.
               We celebrate the small, intentional choices — from the cup you
               hold to the light that fills your room.

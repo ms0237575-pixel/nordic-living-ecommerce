@@ -58,7 +58,7 @@ export function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
         type="button"
         aria-label={`Remove ${product.name} from cart`}
         onClick={() => onRemove(product.id)}
-        className="col-start-2 row-start-1 justify-self-end p-2 text-nordic-sage transition-colors duration-300 hover:text-nordic-terracotta sm:col-start-3"
+        className="col-start-2 row-start-1 justify-self-end p-2 text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta sm:col-start-3"
       >
         <Trash2 className="size-5 stroke-[1.5]" />
       </button>

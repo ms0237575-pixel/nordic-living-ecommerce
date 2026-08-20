@@ -101,13 +101,13 @@ export default function Checkout() {
     return (
       <div className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
         <div className="w-full border border-nordic-gray/20 bg-nordic-charcoal/3 p-8 text-center">
-          <p className="font-sans text-button font-medium uppercase tracking-widest text-nordic-sage">
+          <p className="font-sans text-button font-medium uppercase tracking-widest text-nordic-sage-dark">
             Order placed
           </p>
           <h1 className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal">
             Thank You
           </h1>
-          <p className="mt-4 font-sans text-body font-normal text-nordic-sage">
+          <p className="mt-4 font-sans text-body font-normal text-nordic-sage-dark">
             Your order has been confirmed. Order ID: {orderId}
           </p>
           <Link
@@ -232,7 +232,7 @@ export default function Checkout() {
                   <p className="font-sans text-body font-normal text-nordic-charcoal">
                     {item.product.name}
                   </p>
-                  <p className="font-sans text-[14px] text-nordic-sage">
+                  <p className="font-sans text-[14px] text-nordic-sage-dark">
                     Qty: {item.quantity}
                   </p>
                 </div>

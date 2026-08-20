@@ -30,13 +30,13 @@ export function OrderSuccess() {
           <Check className="h-7 w-7" />
         </div>
 
-        <p className="font-sans text-button font-medium uppercase tracking-[0.18em] text-nordic-sage">
+        <p className="font-sans text-button font-medium uppercase tracking-[0.18em] text-nordic-sage-dark">
           Order confirmed
         </p>
         <h1 className="mt-4 font-serif text-[36px] text-nordic-charcoal md:text-[44px]">
           Thank you for your order.
         </h1>
-        <p className="mt-4 font-sans text-[15px] text-nordic-sage">
+        <p className="mt-4 font-sans text-[15px] text-nordic-sage-dark">
           Your order has been placed successfully and is now being prepared with
           care.
         </p>
@@ -44,7 +44,7 @@ export function OrderSuccess() {
         <div className="mt-8 border border-nordic-gray/20 bg-nordic-bg p-5 text-left sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage">
+              <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage-dark">
                 Order reference
               </p>
               <p className="mt-2 font-sans text-subtitle font-medium text-nordic-charcoal">
@@ -53,7 +53,7 @@ export function OrderSuccess() {
             </div>
 
             <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage">
+              <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-nordic-sage-dark">
                 Estimated delivery
               </p>
               <p className="mt-2 font-sans text-subtitle font-medium text-nordic-charcoal">

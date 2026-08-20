@@ -22,7 +22,7 @@ export default function Footer() {
             >
               Nordic Living
             </Link>
-            <div className="mt-2 font-sans text-body font-normal text-nordic-sage">
+            <div className="mt-2 font-sans text-body font-normal text-nordic-sage-dark">
               Thoughtful design, made to last.
             </div>
 
@@ -127,7 +127,7 @@ export default function Footer() {
             <h3 className="mb-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal">
               Stay Updated
             </h3>
-            <p className="mt-2 font-sans text-[14px] font-normal text-nordic-sage">
+            <p className="mt-2 font-sans text-[14px] font-normal text-nordic-sage-dark">
               Get new product drops and exclusive offers.
             </p>
 
@@ -154,7 +154,7 @@ export default function Footer() {
 
       <div className="border-t border-nordic-gray/20 bg-nordic-bg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="text-left font-sans text-[12px] font-normal text-nordic-sage">
+          <div className="text-left font-sans text-[12px] font-normal text-nordic-sage-dark">
             © 2026 Nordic Living. All rights reserved.
           </div>
         </div>

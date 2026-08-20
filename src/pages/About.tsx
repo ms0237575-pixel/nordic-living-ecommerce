@@ -38,7 +38,7 @@ export function About() {
         <h1 className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal">
           Our Philosophy
         </h1>
-        <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage">
+        <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
           We believe a home should feel like a deep breath. For over a decade we
           have crafted furniture that celebrates the Scandinavian ideals of
           simplicity, sustainability, and craftsmanship — pieces designed for
@@ -80,7 +80,7 @@ export function About() {
               <h2 className="mt-4 font-serif text-h2 font-medium text-nordic-charcoal">
                 {section.title}
               </h2>
-              <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage">
+              <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
                 {section.body}
               </p>
             </div>
@@ -93,7 +93,7 @@ export function About() {
         <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
           Designed in Copenhagen. Made to be lived with.
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl font-sans text-body font-normal leading-relaxed text-nordic-sage">
+        <p className="mx-auto mt-6 max-w-2xl font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
           Explore our collection and bring a little of the Nordic calm into your
           own home.
         </p>
