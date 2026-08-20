@@ -27,15 +27,15 @@ export function HeroSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-4 lg:col-span-7">
           <div className="col-span-1 h-100 w-full overflow-hidden bg-nordic-gray/10 sm:h-150">
             <img
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop"
-              alt="Nordic living room warm sunlight"
+              src="/images/products/cozy-reading-nook.jpg"
+              alt="Cozy reading nook with warm sunlight"
               className="h-full w-full object-cover"
             />
           </div>
           <div className="h-100 w-full overflow-hidden bg-nordic-gray/10 sm:mt-24">
             <img
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1000&auto=format&fit=crop"
-              alt="Minimalist chair detail"
+              src="/images/products/warm-vinyl-setup.jpg"
+              alt="Warm vinyl record player setup"
               className="h-full w-full object-cover"
             />
           </div>
