@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Toaster } from "sonner";
 import { Check } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
 import Cart from "@/pages/Cart";
@@ -18,6 +22,10 @@ import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
 
 export default function App() {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true, easing: "ease-out" });
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
@@ -47,20 +55,22 @@ export default function App() {
         <Navbar />
 
         <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/order-success" element={<OrderSuccess />} />
-            <Route path="/product/:slug" element={<ProductDetails />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/product/:slug" element={<ProductDetails />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ErrorBoundary>
         </main>
 
         <Footer />

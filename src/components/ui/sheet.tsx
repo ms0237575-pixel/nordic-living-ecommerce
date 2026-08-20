@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useId } from "react";
+import React, { createContext, useContext, useEffect, useId } from "react";
 import { X } from "lucide-react";
 
 type SheetContextValue = {
@@ -43,6 +43,16 @@ export function SheetContent({
   className?: string;
 }) {
   const ctx = useContext(SheetContext);
+
+  useEffect(() => {
+    if (!ctx?.open) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") ctx.setOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [ctx?.open, ctx]);
+
   if (!ctx) return null;
 
   return (

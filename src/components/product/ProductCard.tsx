@@ -43,6 +43,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <button
         type="button"
         onClick={handleToggleWishlist}
+        aria-label="Toggle wishlist"
         className="absolute top-3 right-3 z-10 bg-white/80 p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white"
       >
         <Heart
@@ -55,21 +56,23 @@ export function ProductCard({ product }: ProductCardProps) {
       </button>
 
       <Link to={`/product/${product.slug}`} className="block">
-        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative">
+        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative group">
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
             className={`h-full w-full object-cover object-center ${
               hoverImage
-                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
-                : "transition-transform duration-500 group-hover:scale-105"
+                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0 transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+                : "transition-transform duration-[1500ms] ease-out group-hover:scale-110"
             }`}
           />
           {hoverImage && (
             <img
               src={hoverImage}
               alt={product.name}
-              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100 transition-transform duration-[1500ms] ease-out group-hover:scale-110"
             />
           )}
         </div>

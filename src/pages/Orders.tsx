@@ -81,7 +81,7 @@ export default function Orders() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/[0.03] p-6"
+            className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/3 p-6"
           >
             <div className="flex items-start justify-between">
               <div>

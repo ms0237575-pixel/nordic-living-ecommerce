@@ -36,6 +36,7 @@ export function HeroSection() {
             <img
               src="/images/products/warm-vinyl-setup.jpg"
               alt="Warm vinyl record player setup"
+              loading="lazy"
               className="h-full w-full object-cover"
             />
           </div>

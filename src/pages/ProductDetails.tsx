@@ -232,6 +232,7 @@ export function ProductDetails() {
             <img
               src={selectedImage ?? product.image}
               alt={product.name}
+              loading="lazy"
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -251,6 +252,7 @@ export function ProductDetails() {
                 <img
                   src={img}
                   alt={product.name}
+                  loading="lazy"
                   className="h-full w-full object-cover object-center"
                 />
               </button>

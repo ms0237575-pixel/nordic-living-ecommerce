@@ -31,7 +31,7 @@ export function About() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       {/* Hero */}
-      <header className="mx-auto max-w-3xl text-center">
+      <header className="mx-auto max-w-3xl text-center" data-aos="fade-up">
         <p className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta">
           Nordic Living
         </p>
@@ -52,6 +52,7 @@ export function About() {
           <section
             key={section.title}
             className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20"
+            data-aos="fade-up"
           >
             <div
               className={
@@ -63,6 +64,7 @@ export function About() {
               <img
                 src={section.image}
                 alt={section.alt}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
@@ -87,7 +89,7 @@ export function About() {
       </div>
 
       {/* Closing statement */}
-      <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32">
+      <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32" data-aos="fade-up">
         <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
           Designed in Copenhagen. Made to be lived with.
         </h2>

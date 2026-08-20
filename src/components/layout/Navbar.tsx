@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingCart, Search, Menu, X, Heart } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 import SearchOverlay from "@/components/layout/SearchOverlay";
@@ -9,10 +9,27 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const cartCount = useCartStore((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0),
   );
   const wishlistCount = useWishlistStore((state) => state.wishlist.length);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [open]);
 
   const makeNavHandler =
     (path: string, closeDrawer = false) =>
@@ -25,7 +42,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 w-full border-b border-nordic-gray/20 bg-nordic-bg/90 backdrop-blur-md">
+      <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#f7f5f0]/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             {/* Mobile Menu Button */}
@@ -103,6 +120,7 @@ export function Navbar() {
               <Link
                 to="/cart"
                 onClick={makeNavHandler("/cart", false)}
+                aria-label="Shopping cart"
                 className="relative group text-nordic-charcoal hover:text-nordic-terracotta transition-colors p-2 h-11 w-11 inline-flex items-center justify-center"
               >
                 <ShoppingCart className="h-5 w-5 stroke-[1.5]" />
@@ -115,6 +133,7 @@ export function Navbar() {
               <Link
                 to="/wishlist"
                 onClick={makeNavHandler("/wishlist", false)}
+                aria-label="Wishlist"
                 className="relative group text-nordic-charcoal hover:text-nordic-terracotta transition-colors p-2 h-11 w-11 inline-flex items-center justify-center"
               >
                 <Heart className="h-5 w-5 stroke-[1.5]" />
