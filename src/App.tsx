@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
 import Cart from "@/pages/Cart";
@@ -61,8 +62,10 @@ export default function App() {
               <Route path="/shop" element={<Shop />} />
               <Route path="/about" element={<About />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/orders" element={<Orders />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/orders" element={<Orders />} />
+              </Route>
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/product/:slug" element={<ProductDetails />} />
               <Route path="/wishlist" element={<Wishlist />} />

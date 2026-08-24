@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import { ShoppingCart, Search, Menu, X, Heart } from "lucide-react";
+import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import SearchOverlay from "@/components/layout/SearchOverlay";
 import { useWishlistStore } from "@/store/useWishlistStore";
 
@@ -10,6 +12,14 @@ export function Navbar() {
   const location = useLocation();
   const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+    setOpen(false);
+    toast("Logged out");
+  };
   const cartCount = useCartStore((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0),
   );
@@ -101,13 +111,23 @@ export function Navbar() {
 
             {/* Right controls */}
             <div className="flex flex-1 items-center justify-end gap-2 lg:gap-6 lg:flex-none">
-              <Link
-                to="/login"
-                onClick={makeNavHandler("/login", false)}
-                className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-nordic-charcoal transition-colors hover:text-nordic-terracotta sm:inline-flex"
-              >
-                Login
-              </Link>
+              {isAuthenticated ? (
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-nordic-charcoal transition-colors hover:text-nordic-terracotta sm:inline-flex"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={makeNavHandler("/login", false)}
+                  className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-nordic-charcoal transition-colors hover:text-nordic-terracotta sm:inline-flex"
+                >
+                  Login
+                </Link>
+              )}
 
               <button
                 onClick={() => setSearchOverlayOpen(true)}
@@ -210,13 +230,23 @@ export function Navbar() {
                 >
                   Wishlist
                 </Link>
-                <Link
-                  to="/login"
-                  onClick={makeNavHandler("/login", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
-                >
-                  Login
-                </Link>
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="block w-full border-b border-nordic-gray/20 py-4 text-left font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={makeNavHandler("/login", true)}
+                    className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  >
+                    Login
+                  </Link>
+                )}
               </nav>
             </div>
           </aside>

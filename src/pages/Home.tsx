@@ -58,7 +58,7 @@ export function Home() {
               src="/images/products/story-crafted-chairs.jpg"
               alt="Crafted chairs"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
             />
           </div>
 
@@ -90,7 +90,7 @@ export function Home() {
               src="/images/products/home-striped-sofa.jpg"
               alt="Striped sofa in a living room"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
             />
           </div>
 
@@ -144,7 +144,7 @@ export function Home() {
               src="/images/products/home-dining-cafe.webp"
               alt="Dining area in a café setting"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
             />
           </div>
         </div>
@@ -158,7 +158,7 @@ export function Home() {
               src="/images/products/home-coffee-ritual.webp"
               alt="Coffee ritual with Nordic ceramics"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
             />
           </div>
 

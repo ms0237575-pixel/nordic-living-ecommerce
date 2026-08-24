@@ -1,7 +1,8 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type { Product } from "@/types/product";
 import type { MouseEvent } from "react";
 import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import { Heart } from "lucide-react";
 import { useWishlistStore } from "@/store/useWishlistStore";
 import { toast } from "sonner";
@@ -11,13 +12,22 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const navigate = useNavigate();
   const addToCart = useCartStore((s) => s.addToCart);
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const toggleWishlist = useWishlistStore((s) => s.toggleWishlist);
   const isInWishlist = useWishlistStore((s) => s.isInWishlist(product.id));
 
   const handleAddToCart = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to your cart.");
+      navigate("/login");
+      return;
+    }
+
     addToCart(product);
     toast.success(`${product.name} added to cart`);
   };
@@ -25,6 +35,13 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleToggleWishlist = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!isAuthenticated) {
+      toast.error("Please login to save items to your wishlist.");
+      navigate("/login");
+      return;
+    }
+
     const wasWished = isInWishlist;
     toggleWishlist(product);
     if (wasWished) {
@@ -63,8 +80,8 @@ export function ProductCard({ product }: ProductCardProps) {
             loading="lazy"
             className={`h-full w-full object-cover object-center ${
               hoverImage
-                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0 transition-transform duration-[1500ms] ease-out group-hover:scale-110"
-                : "transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+                : ""
             }`}
           />
           {hoverImage && (
@@ -72,7 +89,7 @@ export function ProductCard({ product }: ProductCardProps) {
               src={hoverImage}
               alt={product.name}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100 transition-transform duration-[1500ms] ease-out group-hover:scale-110"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             />
           )}
         </div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
+import { useAuthStore } from "@/store/useAuthStore";
 
 interface LoginFormState {
   email: string;
@@ -31,12 +32,17 @@ function validateForm(form: LoginFormState): LoginFormErrors {
 
   if (!form.password) {
     errors.password = "Password is required.";
+  } else if (form.password.length < 6) {
+    errors.password = "Password must be at least 6 characters.";
   }
 
   return errors;
 }
 
 export function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const login = useAuthStore((state) => state.login);
   const [formData, setFormData] = useState<LoginFormState>(initialFormState);
   const [errors, setErrors] = useState<LoginFormErrors>({});
 
@@ -55,7 +61,11 @@ export function Login() {
       return;
     }
 
-    toast.success("Signed in successfully");
+    login(formData.email.trim());
+    toast.success("Successfully logged in!");
+
+    const state = location.state as { from?: { pathname?: string } } | null;
+    navigate(state?.from?.pathname ?? "/");
   };
 
   const handleForgotPassword = () => {
@@ -82,7 +92,7 @@ export function Login() {
             </label>
             <input
               id="email"
-              type="email"
+              type="text"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
@@ -137,6 +147,11 @@ export function Login() {
             Sign In
           </button>
         </form>
+
+        <p className="mt-6 text-center font-sans text-[13px] font-normal text-nordic-sage">
+          This is a local demo login — any valid-format email and a 6+ character
+          password will work.
+        </p>
 
         <p className="mt-8 text-center font-sans text-[14px] font-normal text-nordic-sage-dark">
           New to Nordic Living?{" "}

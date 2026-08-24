@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { ArrowLeft, Minus, Plus, Star } from "lucide-react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { getProductBySlug, getAllProducts } from "@/services/products";
 import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import { toast } from "sonner";
 import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -65,7 +66,9 @@ function StarRating({ value }: { value: number }) {
 
 export function ProductDetails() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -152,6 +155,12 @@ export function ProductDetails() {
 
   function handleAddToCart() {
     if (!product) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to your cart.");
+      navigate("/login");
       return;
     }
 

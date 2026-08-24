@@ -57,15 +57,15 @@ export function About() {
             <div
               className={
                 section.reversed
-                  ? "lg:order-2 relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
-                  : "relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
+                ? "lg:order-2 group relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
+                : "group relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
               }
             >
               <img
                 src={section.image}
                 alt={section.alt}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
               />
             </div>
 
