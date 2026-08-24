@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import type { StateStorage } from "zustand/middleware";
 import type { CartItem, Product } from "@/types/product";
+import { getCurrentUserEmail } from "@/lib/authStorage";
 
 export interface CartStore {
   cart: CartItem[];
@@ -57,7 +59,23 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: "nordic-living-cart",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage<StateStorage>(() => {
+        const resolveKey = () => {
+          const email = getCurrentUserEmail();
+          return email
+            ? `nordic-living-cart-${email}`
+            : "nordic-living-cart-guest";
+        };
+
+        return {
+          getItem: () => localStorage.getItem(resolveKey()),
+          setItem: (name, value) => {
+            void name;
+            localStorage.setItem(resolveKey(), value);
+          },
+          removeItem: () => localStorage.removeItem(resolveKey()),
+        };
+      }),
     },
   ),
 );

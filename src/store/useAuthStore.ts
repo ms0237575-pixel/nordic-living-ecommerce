@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { useCartStore } from "@/store/useCartStore";
+import { useWishlistStore } from "@/store/useWishlistStore";
 
 interface AuthStore {
   isAuthenticated: boolean;
@@ -14,10 +16,19 @@ export const useAuthStore = create<AuthStore>()(
       isAuthenticated: false,
       userEmail: null,
 
-      login: (email: string) =>
-        set({ isAuthenticated: true, userEmail: email }),
+      login: (email: string) => {
+        set({ isAuthenticated: true, userEmail: email });
+        void useCartStore.persist.rehydrate();
+        void useWishlistStore.persist.rehydrate();
+      },
 
-      logout: () => set({ isAuthenticated: false, userEmail: null }),
+      logout: () => {
+        set({ isAuthenticated: false, userEmail: null });
+        useCartStore.getState().clearCart();
+        useWishlistStore.getState().clearWishlist();
+        void useCartStore.persist.rehydrate();
+        void useWishlistStore.persist.rehydrate();
+      },
     }),
     {
       name: "nordic-living-auth",

@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import type { StateStorage } from "zustand/middleware";
 import type { Product } from "@/types/product";
+import { getCurrentUserEmail } from "@/lib/authStorage";
 
 interface WishlistStore {
   wishlist: Product[];
@@ -43,7 +45,23 @@ export const useWishlistStore = create<WishlistStore>()(
     }),
     {
       name: "nordic-living-wishlist",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage<StateStorage>(() => {
+        const resolveKey = () => {
+          const email = getCurrentUserEmail();
+          return email
+            ? `nordic-living-wishlist-${email}`
+            : "nordic-living-wishlist-guest";
+        };
+
+        return {
+          getItem: () => localStorage.getItem(resolveKey()),
+          setItem: (name, value) => {
+            void name;
+            localStorage.setItem(resolveKey(), value);
+          },
+          removeItem: () => localStorage.removeItem(resolveKey()),
+        };
+      }),
     },
   ),
 );
