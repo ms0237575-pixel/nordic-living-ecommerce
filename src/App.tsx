@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { useEffect } from "react";
+import { ReactLenis } from "@studio-freight/react-lenis";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Toaster } from "sonner";
@@ -29,55 +30,60 @@ export default function App() {
 
   return (
     <Router>
-      <ScrollToTop />
+      <ReactLenis
+        root
+        options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}
+      >
+        <ScrollToTop />
 
-      <Toaster
-        position="bottom-right"
-        icons={{
-          success: <Check className="h-4 w-4" style={{ color: "#A56B57" }} />,
-        }}
-        toastOptions={{
-          style: {
-            background: "#1E1E1C",
-            color: "#F7F5F0",
-            border: "none",
-            borderRadius: "0px",
-            fontFamily: "inherit",
-            fontSize: "13px",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-            padding: "16px 24px",
-            boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
-          },
-        }}
-      />
+        <Toaster
+          position="bottom-right"
+          icons={{
+            success: <Check className="h-4 w-4" style={{ color: "#A56B57" }} />,
+          }}
+          toastOptions={{
+            style: {
+              background: "#1E1E1C",
+              color: "#F7F5F0",
+              border: "none",
+              borderRadius: "0px",
+              fontFamily: "inherit",
+              fontSize: "13px",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              padding: "16px 24px",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
+            },
+          }}
+        />
 
-      <div className="min-h-screen flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
-        <Navbar />
+        <div className="min-h-screen flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
+          <Navbar />
 
-        <main className="flex-1">
-          <ErrorBoundary>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/orders" element={<Orders />} />
-              </Route>
-              <Route path="/order-success" element={<OrderSuccess />} />
-              <Route path="/product/:slug" element={<ProductDetails />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </ErrorBoundary>
-        </main>
+          <main className="flex-1">
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/orders" element={<Orders />} />
+                </Route>
+                <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/product/:slug" element={<ProductDetails />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </ErrorBoundary>
+          </main>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </ReactLenis>
     </Router>
   );
 }

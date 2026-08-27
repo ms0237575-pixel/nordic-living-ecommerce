@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ProductCard } from "@/components/product/ProductCard";
+import { ProductCarousel } from "@/components/product/ProductCarousel";
 import { getFeaturedProducts } from "@/services/products";
 import type { Product } from "@/types/product";
 import { Leaf, Truck, MapPin } from "lucide-react";
@@ -23,7 +23,10 @@ export function Home() {
     <div className="w-full">
       <HeroSection />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24" data-aos="fade-up">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24"
+        data-aos="fade-up"
+      >
         <div className="mb-12 flex items-end justify-between">
           <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
             Featured Collection
@@ -40,25 +43,22 @@ export function Home() {
         {featured === null ? (
           <div>Loading...</div>
         ) : (
-          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((product, index) => (
-              <div key={product.id} data-aos="fade-up" data-aos-delay={String((index + 1) * 100)}>
-                <ProductCard product={product} />
-              </div>
-            ))}
-          </div>
+          <ProductCarousel products={featured} />
         )}
       </section>
 
       {/* Brand Story / Philosophy */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" data-aos="fade-up">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
+        data-aos="fade-up"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group">
             <img
               src="/images/products/story-crafted-chairs.jpg"
               alt="Crafted chairs"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
             />
           </div>
 
@@ -83,14 +83,17 @@ export function Home() {
       </section>
 
       {/* Feature Section 1 — Timeless Comfort */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" data-aos="fade-up">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
+        data-aos="fade-up"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group">
             <img
               src="/images/products/home-striped-sofa.jpg"
               alt="Striped sofa in a living room"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
             />
           </div>
 
@@ -117,7 +120,10 @@ export function Home() {
       </section>
 
       {/* Feature Section 2 — Gather Around */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" data-aos="fade-up">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
+        data-aos="fade-up"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="order-2 lg:order-1 px-2 lg:px-12">
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
@@ -144,21 +150,24 @@ export function Home() {
               src="/images/products/home-dining-cafe.webp"
               alt="Dining area in a café setting"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
             />
           </div>
         </div>
       </section>
 
       {/* Feature Section 3 — Everyday Rituals */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20" data-aos="fade-up">
+      <section
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
+        data-aos="fade-up"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group">
             <img
               src="/images/products/home-coffee-ritual.webp"
               alt="Coffee ritual with Nordic ceramics"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
             />
           </div>
 
