@@ -1,3 +1,4 @@
+// src/components/product/ProductCarousel.tsx
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";

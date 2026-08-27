@@ -1,7 +1,9 @@
+// src/pages/Home.tsx
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
+import { ProductCardSkeleton } from "@/components/product/ProductCardSkeleton";
 import { getFeaturedProducts } from "@/services/products";
 import type { Product } from "@/types/product";
 import { Leaf, Truck, MapPin } from "lucide-react";
@@ -53,7 +55,11 @@ export function Home() {
           data-aos-once="true"
         >
           {featured === null ? (
-            <div>Loading...</div>
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <ProductCardSkeleton key={i} />
+              ))}
+            </div>
           ) : (
             <ProductCarousel products={featured} />
           )}

@@ -1,3 +1,4 @@
+// src/pages/Product.tsx
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { ArrowLeft, Minus, Plus, Star } from "lucide-react";
@@ -205,8 +206,30 @@ export function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center px-4 font-sans text-body font-normal text-nordic-sage-dark">
-        Loading product...
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20 animate-pulse">
+        <div className="h-4 w-28 bg-nordic-gray/20" />
+        <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <div className="aspect-square w-full bg-nordic-gray/20" />
+            <div className="mt-4 flex gap-3">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="h-20 w-20 bg-nordic-gray/20" />
+              ))}
+            </div>
+          </div>
+          <div className="space-y-4 lg:pt-4">
+            <div className="h-4 w-32 bg-nordic-gray/20" />
+            <div className="h-10 w-3/4 bg-nordic-gray/20" />
+            <div className="h-6 w-20 bg-nordic-gray/20" />
+            <div className="space-y-2 pt-4">
+              <div className="h-4 w-full bg-nordic-gray/20" />
+              <div className="h-4 w-5/6 bg-nordic-gray/20" />
+              <div className="h-4 w-2/3 bg-nordic-gray/20" />
+            </div>
+            <div className="h-12 w-32 bg-nordic-gray/20 pt-6" />
+            <div className="h-14 w-full bg-nordic-gray/20 pt-4" />
+          </div>
+        </div>
       </div>
     );
   }
