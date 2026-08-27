@@ -294,7 +294,7 @@ export default function Checkout() {
             Order Review
           </h2>
 
-          <div className="mt-6 max-h-[320px] overflow-y-auto space-y-4 pr-1">
+          <div className="mt-6 max-h-80 overflow-y-auto space-y-4 pr-1">
             {cart.map((item) => (
               <div
                 key={item.product.id}
