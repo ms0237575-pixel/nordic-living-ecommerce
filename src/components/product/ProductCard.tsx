@@ -1,3 +1,4 @@
+// src/components/product/ProductCard.tsx
 import { Link, useNavigate } from "react-router";
 import type { Product } from "@/types/product";
 import type { MouseEvent } from "react";
@@ -29,7 +30,34 @@ export function ProductCard({ product }: ProductCardProps) {
     }
 
     addToCart(product);
-    toast.success(`${product.name} added to cart`);
+
+    toast.custom((t) => (
+      <div className="flex w-full min-w-[320px] max-w-95 items-center gap-4 bg-nordic-charcoal p-4 text-nordic-bg shadow-2xl border border-white/10">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-14 w-14 object-cover shrink-0 bg-white/5"
+        />
+        <div className="flex-1 min-w-0">
+          <p className="font-serif text-[14px] font-medium text-white truncate">
+            {product.name}
+          </p>
+          <p className="font-sans text-[12px] text-white/60">
+            Added to your cart · ${product.price}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            toast.dismiss(t);
+            navigate("/cart");
+          }}
+          className="shrink-0 border-b border-nordic-terracotta pb-0.5 font-sans text-[11px] font-medium uppercase tracking-widest text-nordic-terracotta transition-colors hover:text-white"
+        >
+          View Cart
+        </button>
+      </div>
+    ));
   };
 
   const handleToggleWishlist = (e: MouseEvent) => {
@@ -51,9 +79,8 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   };
 
-  const hoverImage = product.images && product.images.length > 1
-    ? product.images[1]
-    : null;
+  const hoverImage =
+    product.images && product.images.length > 1 ? product.images[1] : null;
 
   return (
     <div className="group relative">
