@@ -29,7 +29,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="mt-20 border-t border-nordic-charcoal/10 bg-[#f7f5f0]">
+    <footer className="mt-20 border-t border-nordic-charcoal/10 bg-nordic-bg">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 space-y-6">
