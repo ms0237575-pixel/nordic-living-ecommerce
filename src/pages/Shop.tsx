@@ -48,7 +48,6 @@ export function Shop() {
         ? [searchParams.get("category")!]
         : [];
     setSelectedCategories(cats);
-    // synchronize when the URL param changes (do not fight local typing)
   }, [searchParams]);
 
   useEffect(() => {
@@ -58,9 +57,7 @@ export function Shop() {
       .then((res) => {
         if (mounted) setAllProducts(res);
       })
-      .catch(() => {
-        /* keep localProducts as fallback */
-      })
+      .catch(() => {})
       .finally(() => {
         if (mounted) setLoading(false);
       });
@@ -170,7 +167,6 @@ export function Shop() {
   };
 
   useEffect(() => {
-    // persist filters and sort in URL (remove defaults)
     const params = new URLSearchParams();
     if (searchQuery.trim() !== "") params.set("search", searchQuery);
     if (selectedCategories.length > 0)
@@ -179,8 +175,7 @@ export function Shop() {
     if (sortBy && sortBy !== "default") params.set("sort", sortBy);
 
     setSearchParams(params, { replace: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, selectedCategories, selectedPrice, sortBy]);
+  }, [searchQuery, selectedCategories, selectedPrice, sortBy, setSearchParams]);
 
   const filterSidebar = (
     <div className="rounded-sm border border-nordic-gray/20 bg-nordic-charcoal/3 p-4">
@@ -248,11 +243,19 @@ export function Shop() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
+        <h1
+          className="font-serif text-h1 font-semibold text-nordic-charcoal"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
           All Products
         </h1>
 
-        <div className="lg:hidden">
+        <div
+          className="lg:hidden"
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
               <button className="inline-flex h-11 w-11 items-center justify-center p-2 font-sans text-button font-medium text-nordic-charcoal transition-colors duration-300 hover:text-nordic-terracotta">
@@ -280,10 +283,21 @@ export function Shop() {
       `}</style>
 
       <div className="grid lg:grid lg:grid-cols-[240px_1fr] lg:gap-12">
-        <aside className="hidden lg:block">{filterSidebar}</aside>
+        <aside
+          className="hidden lg:block"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+        >
+          {filterSidebar}
+        </aside>
 
         <div>
-          <div className="mb-4 flex items-center justify-between">
+          <div
+            className="mb-4 flex items-center justify-between"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             <div className="font-sans text-body font-normal text-nordic-sage-dark">
               Showing {filteredProducts.length} products
             </div>
@@ -360,13 +374,24 @@ export function Shop() {
               Loading products...
             </div>
           ) : filteredProducts.length === 0 ? (
-            <div className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage-dark">
+            <div
+              className="flex min-h-45 items-center justify-center text-center font-sans text-[14px] text-nordic-sage-dark"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               No products found matching your criteria.
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {sortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {sortedProducts.map((product, index) => (
+                <div
+                  key={product.id}
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  data-aos-delay={(index % 3) * 100}
+                >
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
           )}

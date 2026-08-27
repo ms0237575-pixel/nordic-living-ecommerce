@@ -1,3 +1,4 @@
+// src/pages/Home.tsx
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -14,6 +15,7 @@ export function Home() {
     getFeaturedProducts().then((res) => {
       if (mounted) setFeatured(res);
     });
+
     return () => {
       mounted = false;
     };
@@ -23,37 +25,42 @@ export function Home() {
     <div className="w-full">
       <HeroSection />
 
-      <section
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24"
-        data-aos="fade-up"
-      >
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
         <div className="mb-12 flex items-end justify-between">
-          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
+          <h2
+            className="font-serif text-h2 font-medium text-nordic-charcoal"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             Featured Collection
           </h2>
 
-          <Link
-            to="/shop"
-            className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-          >
-            View All
-          </Link>
+          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <Link
+              to="/shop"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            >
+              View All
+            </Link>
+          </div>
         </div>
 
-        {featured === null ? (
-          <div>Loading...</div>
-        ) : (
-          <ProductCarousel products={featured} />
-        )}
+        <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+          {featured === null ? (
+            <div>Loading...</div>
+          ) : (
+            <ProductCarousel products={featured} />
+          )}
+        </div>
       </section>
 
-      {/* Brand Story / Philosophy */}
-      <section
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
-        data-aos="fade-up"
-      >
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group">
+          <div
+            className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
+            data-aos="fade-right"
+            data-aos-duration="1200"
+          >
             <img
               src="/images/products/story-crafted-chairs.jpg"
               alt="Crafted chairs"
@@ -63,32 +70,47 @@ export function Home() {
           </div>
 
           <div className="px-2 lg:px-12">
-            <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
+            <h2
+              className="font-serif text-[40px] text-nordic-charcoal mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               Crafted with nature in mind.
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
+            <p
+              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            >
               Our designs embrace Scandinavian simplicity — quiet forms, honest
               materials, and pieces built to last. We focus on sustainable
               sourcing and timeless craftsmanship so every piece becomes part of
               your everyday rituals.
             </p>
-            <Link
-              to="/about"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
             >
-              Read our story
-            </Link>
+              <Link
+                to="/about"
+                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+              >
+                Read our story
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Section 1 — Timeless Comfort */}
-      <section
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
-        data-aos="fade-up"
-      >
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group">
+          <div
+            className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group"
+            data-aos="fade-right"
+            data-aos-duration="1200"
+          >
             <img
               src="/images/products/home-striped-sofa.jpg"
               alt="Striped sofa in a living room"
@@ -98,54 +120,94 @@ export function Home() {
           </div>
 
           <div className="px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
+            <p
+              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               Timeless Comfort
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2
+              className="font-serif text-[36px] text-nordic-charcoal mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            >
               Redefining the Living Space
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
+            <p
+              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
               Embrace the art of slow living. Our seating collections combine
               striking organic curves with unmatched comfort, featuring tactile
               fabrics that invite you to sink in and stay a while.
             </p>
-            <Link
-              to="/shop?category=Furniture"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
             >
-              Shop Seating
-            </Link>
+              <Link
+                to="/shop?category=Furniture"
+                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+              >
+                Shop Seating
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Section 2 — Gather Around */}
-      <section
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
-        data-aos="fade-up"
-      >
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="order-2 lg:order-1 px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
+            <p
+              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               Gather Around
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2
+              className="font-serif text-[36px] text-nordic-charcoal mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            >
               Spaces for Connection
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
+            <p
+              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
               Whether it's a quiet morning coffee or a bustling dinner party,
               our dining pieces are crafted from raw, honest materials to ground
               your most meaningful moments.
             </p>
-            <Link
-              to="/shop?category=Furniture"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
             >
-              Shop Dining
-            </Link>
+              <Link
+                to="/shop?category=Furniture"
+                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+              >
+                Shop Dining
+              </Link>
+            </div>
           </div>
 
-          <div className="order-1 lg:order-2 relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group">
+          <div
+            className="order-1 lg:order-2 relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
+            data-aos="fade-left"
+            data-aos-duration="1200"
+          >
             <img
               src="/images/products/home-dining-cafe.webp"
               alt="Dining area in a café setting"
@@ -156,13 +218,13 @@ export function Home() {
         </div>
       </section>
 
-      {/* Feature Section 3 — Everyday Rituals */}
-      <section
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20"
-        data-aos="fade-up"
-      >
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group">
+          <div
+            className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
+            data-aos="fade-right"
+            data-aos-duration="1200"
+          >
             <img
               src="/images/products/home-coffee-ritual.webp"
               alt="Coffee ritual with Nordic ceramics"
@@ -172,28 +234,47 @@ export function Home() {
           </div>
 
           <div className="px-2 lg:px-12">
-            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
+            <p
+              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               Everyday Rituals
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2
+              className="font-serif text-[36px] text-nordic-charcoal mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            >
               The Beauty in Details
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
+            <p
+              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
               Scandinavian design is more than an aesthetic; it's a lifestyle.
               We celebrate the small, intentional choices — from the cup you
               hold to the light that fills your room.
             </p>
-            <Link
-              to="/shop?category=Accessories"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
             >
-              Shop Accessories
-            </Link>
+              <Link
+                to="/shop?category=Accessories"
+                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+              >
+                Shop Accessories
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Trust badges */}
       <section className="w-full bg-nordic-gray/10 py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

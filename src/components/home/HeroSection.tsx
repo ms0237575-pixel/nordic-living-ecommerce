@@ -2,44 +2,51 @@ import { Link } from "react-router";
 
 export function HeroSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-      <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-16">
-        <div className="flex flex-col justify-center space-y-8 lg:col-span-5">
-          <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
-            Quiet comfort for modern living.
-          </h1>
+    <section className="relative -mt-30 h-screen w-full overflow-hidden">
+      <style>{`
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+          100% { transform: translateY(0px); }
+        }
+        .floating-content {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
 
-          <p className="max-w-md font-sans text-body font-normal text-nordic-sage-dark">
-            Discover our new collection of Scandinavian-inspired furniture.
-            Designed with purpose, crafted with nature, and built to last.
-          </p>
+      <img
+        src="/images/products/hero-background.jpg"
+        alt="Nordic Living Interior"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
 
-          <div>
-            <Link
-              to="/shop"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-            >
-              Explore Collection
-            </Link>
-          </div>
-        </div>
+      <div className="absolute inset-0 bg-black/30" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-4 lg:col-span-7">
-          <div className="col-span-1 h-100 w-full overflow-hidden bg-nordic-gray/10 sm:h-150">
-            <img
-              src="/images/products/cozy-reading-nook.jpg"
-              alt="Cozy reading nook with warm sunlight"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="h-100 w-full overflow-hidden bg-nordic-gray/10 sm:mt-24">
-            <img
-              src="/images/products/warm-vinyl-setup.jpg"
-              alt="Warm vinyl record player setup"
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-          </div>
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white floating-content">
+        <h1
+          className="mb-6 font-serif text-5xl font-normal leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
+          Quiet living.
+        </h1>
+
+        <p
+          className="mb-10 max-w-lg font-sans text-sm font-medium uppercase tracking-[0.2em] text-white/90 sm:text-base drop-shadow-md"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+        >
+          Curated furniture for the modern home.
+        </p>
+
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+          <Link
+            to="/shop"
+            className="inline-block border border-white px-10 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-nordic-charcoal backdrop-blur-sm bg-white/10"
+          >
+            Explore Collection
+          </Link>
         </div>
       </div>
     </section>

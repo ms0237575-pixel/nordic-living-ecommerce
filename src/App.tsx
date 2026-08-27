@@ -60,7 +60,8 @@ export default function App() {
         <div className="min-h-screen flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
           <Navbar />
 
-          <main className="flex-1">
+          <main className="flex-1 pt-30">
+            {" "}
             <ErrorBoundary>
               <Routes>
                 <Route path="/" element={<Home />} />

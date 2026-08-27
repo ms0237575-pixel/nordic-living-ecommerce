@@ -227,22 +227,24 @@ export function ProductDetails() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
-      <Link
-        to="/shop"
-        className="inline-flex items-center gap-2 font-sans text-body font-normal text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
-      >
-        <ArrowLeft className="size-4 stroke-[1.5]" />
-        Back to shop
-      </Link>
+      <div data-aos="fade-right" data-aos-duration="1000">
+        <Link
+          to="/shop"
+          className="inline-flex items-center gap-2 font-sans text-body font-normal text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
+        >
+          <ArrowLeft className="size-4 stroke-[1.5]" />
+          Back to shop
+        </Link>
+      </div>
 
       <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-16">
-        <div>
+        <div data-aos="fade-up" data-aos-duration="1200">
           <div className="aspect-square overflow-hidden bg-nordic-gray/10">
             <img
               src={selectedImage ?? product.image}
               alt={product.name}
               loading="lazy"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center transition-transform duration-2000 hover:scale-105"
             />
           </div>
 
@@ -252,10 +254,10 @@ export function ProductDetails() {
                 key={img}
                 type="button"
                 onClick={() => setSelectedImage(img)}
-                className={`h-20 w-20 overflow-hidden bg-nordic-gray/10 border ${
+                className={`h-20 w-20 overflow-hidden bg-nordic-gray/10 border transition-all duration-300 ${
                   selectedImage === img
-                    ? "border-nordic-charcoal"
-                    : "border-transparent"
+                    ? "border-nordic-charcoal opacity-100"
+                    : "border-transparent opacity-70 hover:opacity-100"
                 }`}
               >
                 <img
@@ -269,7 +271,12 @@ export function ProductDetails() {
           </div>
         </div>
 
-        <div className="lg:pt-4">
+        <div
+          className="lg:pt-4"
+          data-aos="fade-up"
+          data-aos-duration="1200"
+          data-aos-delay="200"
+        >
           <p className="font-sans text-caption font-normal uppercase tracking-[0.14em] text-nordic-sage-dark">
             {product.category} / {product.collection}
           </p>
@@ -279,11 +286,9 @@ export function ProductDetails() {
           <p className="mt-5 font-sans text-subtitle font-semibold text-nordic-terracotta">
             ${product.price}
           </p>
-          <p className="mt-8 max-w-xl font-sans text-body font-normal text-nordic-sage-dark">
+          <p className="mt-8 max-w-xl font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
             {product.description}
           </p>
-
-          {/* Color swatches removed */}
 
           <div className="mt-10">
             <p className="font-sans text-[13px] uppercase tracking-[0.12em] text-nordic-charcoal">
@@ -318,7 +323,7 @@ export function ProductDetails() {
           <button
             type="button"
             onClick={handleAddToCart}
-            className="mt-8 w-full border border-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+            className="mt-8 w-full border border-nordic-charcoal px-6 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
           >
             {added ? "Added to Cart" : "Add to Cart"}
           </button>
@@ -326,12 +331,20 @@ export function ProductDetails() {
       </div>
 
       <section className="mt-20 border-t border-nordic-gray/20 pt-16 lg:mt-24">
-        <h2 className="mb-10 font-serif text-h2 font-medium text-nordic-charcoal">
+        <h2
+          className="mb-10 font-serif text-h2 font-medium text-nordic-charcoal"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           Customer Reviews
         </h2>
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-16">
-          <div>
+          <div
+            data-aos="fade-right"
+            data-aos-duration="1200"
+            data-aos-delay="100"
+          >
             <div className="flex items-center gap-5">
               <span className="font-serif text-[64px] font-semibold leading-none text-nordic-charcoal">
                 {averageRating.toFixed(1)}
@@ -378,133 +391,150 @@ export function ProductDetails() {
             </div>
           </div>
 
-          <form
-            onSubmit={handleReviewSubmit}
-            className="h-fit border border-nordic-gray/20 bg-nordic-charcoal/[0.03] p-6 sm:p-8"
+          <div
+            data-aos="fade-left"
+            data-aos-duration="1200"
+            data-aos-delay="200"
           >
-            <h3 className="font-serif text-[24px] font-medium text-nordic-charcoal">
-              Write a Review
-            </h3>
-            <p className="mt-2 font-sans text-[14px] text-nordic-sage-dark">
-              Share your experience with this piece.
-            </p>
+            <form
+              onSubmit={handleReviewSubmit}
+              className="h-fit border border-nordic-gray/20 bg-nordic-charcoal/3 p-6 sm:p-8"
+            >
+              <h3 className="font-serif text-[24px] font-medium text-nordic-charcoal">
+                Write a Review
+              </h3>
+              <p className="mt-2 font-sans text-[14px] text-nordic-sage-dark">
+                Share your experience with this piece.
+              </p>
 
-            <div className="mt-8 space-y-6">
-              <div>
-                <label
-                  htmlFor="review-name"
-                  className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal"
-                >
-                  Name
-                </label>
-                <input
-                  id="review-name"
-                  type="text"
-                  value={reviewName}
-                  onChange={(event) => {
-                    setReviewName(event.target.value);
-                    setReviewErrors((current) => ({
-                      ...current,
-                      name: undefined,
-                    }));
-                  }}
-                  placeholder="Your name"
-                  className="w-full rounded-none border border-nordic-gray/30 bg-nordic-bg px-3 py-2 font-sans text-[14px] text-nordic-charcoal focus:border-nordic-charcoal focus:ring-0"
-                />
-                {reviewErrors.name && (
-                  <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
-                    {reviewErrors.name}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <span className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal">
-                  Rating
-                </span>
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, index) => {
-                    const value = index + 1;
-                    return (
-                      <button
-                        key={value}
-                        type="button"
-                        aria-label={`Rate ${value} star${value !== 1 ? "s" : ""}`}
-                        onClick={() => {
-                          setReviewRating(value);
-                          setReviewErrors((current) => ({
-                            ...current,
-                            rating: undefined,
-                          }));
-                        }}
-                        className="p-0.5 transition-opacity hover:opacity-75"
-                      >
-                        <Star
-                          className={`h-6 w-6 ${
-                            value <= reviewRating
-                              ? "fill-nordic-terracotta text-nordic-terracotta"
-                              : "text-nordic-gray"
-                          }`}
-                        />
-                      </button>
-                    );
-                  })}
+              <div className="mt-8 space-y-6">
+                <div>
+                  <label
+                    htmlFor="review-name"
+                    className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="review-name"
+                    type="text"
+                    value={reviewName}
+                    onChange={(event) => {
+                      setReviewName(event.target.value);
+                      setReviewErrors((current) => ({
+                        ...current,
+                        name: undefined,
+                      }));
+                    }}
+                    placeholder="Your name"
+                    className="w-full rounded-none border border-nordic-gray/30 bg-nordic-bg px-3 py-2 font-sans text-[14px] text-nordic-charcoal focus:border-nordic-charcoal focus:ring-0"
+                  />
+                  {reviewErrors.name && (
+                    <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
+                      {reviewErrors.name}
+                    </p>
+                  )}
                 </div>
-                {reviewErrors.rating && (
-                  <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
-                    {reviewErrors.rating}
-                  </p>
-                )}
-              </div>
 
-              <div>
-                <label
-                  htmlFor="review-comment"
-                  className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal"
+                <div>
+                  <span className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal">
+                    Rating
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, index) => {
+                      const value = index + 1;
+                      return (
+                        <button
+                          key={value}
+                          type="button"
+                          aria-label={`Rate ${value} star${value !== 1 ? "s" : ""}`}
+                          onClick={() => {
+                            setReviewRating(value);
+                            setReviewErrors((current) => ({
+                              ...current,
+                              rating: undefined,
+                            }));
+                          }}
+                          className="p-0.5 transition-opacity hover:opacity-75"
+                        >
+                          <Star
+                            className={`h-6 w-6 transition-colors duration-300 ${
+                              value <= reviewRating
+                                ? "fill-nordic-terracotta text-nordic-terracotta"
+                                : "text-nordic-gray"
+                            }`}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {reviewErrors.rating && (
+                    <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
+                      {reviewErrors.rating}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="review-comment"
+                    className="mb-2 block font-sans text-[14px] font-normal text-nordic-charcoal"
+                  >
+                    Comment
+                  </label>
+                  <textarea
+                    id="review-comment"
+                    value={reviewComment}
+                    onChange={(event) => {
+                      setReviewComment(event.target.value);
+                      setReviewErrors((current) => ({
+                        ...current,
+                        comment: undefined,
+                      }));
+                    }}
+                    placeholder="Tell us what you think..."
+                    rows={4}
+                    className="w-full resize-y rounded-none border border-nordic-gray/30 bg-nordic-bg px-3 py-2 font-sans text-[14px] text-nordic-charcoal focus:border-nordic-charcoal focus:ring-0"
+                  />
+                  {reviewErrors.comment && (
+                    <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
+                      {reviewErrors.comment}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full border border-nordic-charcoal px-6 py-3 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
                 >
-                  Comment
-                </label>
-                <textarea
-                  id="review-comment"
-                  value={reviewComment}
-                  onChange={(event) => {
-                    setReviewComment(event.target.value);
-                    setReviewErrors((current) => ({
-                      ...current,
-                      comment: undefined,
-                    }));
-                  }}
-                  placeholder="Tell us what you think..."
-                  rows={4}
-                  className="w-full resize-y rounded-none border border-nordic-gray/30 bg-nordic-bg px-3 py-2 font-sans text-[14px] text-nordic-charcoal focus:border-nordic-charcoal focus:ring-0"
-                />
-                {reviewErrors.comment && (
-                  <p className="mt-2 font-sans text-[13px] text-nordic-terracotta">
-                    {reviewErrors.comment}
-                  </p>
-                )}
+                  Submit Review
+                </button>
               </div>
-
-              <button
-                type="submit"
-                className="w-full border border-nordic-charcoal px-6 py-3 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-              >
-                Submit Review
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
 
       {related && related.length > 0 && (
         <section className="mt-20">
-          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal mb-8">
+          <h2
+            className="font-serif text-h2 font-medium text-nordic-charcoal mb-8"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             You Might Also Like
           </h2>
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {related.map((p, index) => (
+              <div
+                key={p.id}
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay={(index % 4) * 100}
+              >
+                <ProductCard product={p} />
+              </div>
             ))}
           </div>
         </section>

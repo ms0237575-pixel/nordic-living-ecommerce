@@ -30,15 +30,28 @@ const sections = [
 export function About() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      {/* Hero */}
-      <header className="mx-auto max-w-3xl text-center" data-aos="fade-up">
-        <p className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta">
+      <header className="mx-auto max-w-3xl text-center">
+        <p
+          className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           Nordic Living
         </p>
-        <h1 className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal">
+        <h1
+          className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+        >
           Our Philosophy
         </h1>
-        <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
+        <p
+          className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+        >
           We believe a home should feel like a deep breath. For over a decade we
           have crafted furniture that celebrates the Scandinavian ideals of
           simplicity, sustainability, and craftsmanship — pieces designed for
@@ -46,41 +59,51 @@ export function About() {
         </p>
       </header>
 
-      {/* 50/50 image-text sections */}
       <div className="mt-24 space-y-24 lg:mt-32 lg:space-y-32">
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <section
             key={section.title}
             className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20"
-            data-aos="fade-up"
           >
             <div
-              className={
-                section.reversed
-                ? "lg:order-2 group relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
-                : "group relative w-full h-[400px] md:h-[500px] overflow-hidden bg-nordic-light"
-              }
+              className={`group relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light ${
+                section.reversed ? "lg:order-2" : ""
+              }`}
+              data-aos={section.reversed ? "fade-left" : "fade-right"}
+              data-aos-duration="1200"
             >
               <img
                 src={section.image}
                 alt={section.alt}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
               />
             </div>
 
             <div
-              className={
-                section.reversed ? "lg:order-1 px-2 lg:px-6" : "px-2 lg:px-6"
-              }
+              className={`px-2 lg:px-6 ${section.reversed ? "lg:order-1" : ""}`}
             >
-              <p className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta">
+              <p
+                className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
                 {section.eyebrow}
               </p>
-              <h2 className="mt-4 font-serif text-h2 font-medium text-nordic-charcoal">
+              <h2
+                className="mt-4 font-serif text-h2 font-medium text-nordic-charcoal"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="100"
+              >
                 {section.title}
               </h2>
-              <p className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
+              <p
+                className="mt-6 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="200"
+              >
                 {section.body}
               </p>
             </div>
@@ -88,21 +111,31 @@ export function About() {
         ))}
       </div>
 
-      {/* Closing statement */}
-      <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32" data-aos="fade-up">
-        <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
+      <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32">
+        <h2
+          className="font-serif text-h2 font-medium text-nordic-charcoal"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           Designed in Copenhagen. Made to be lived with.
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
+        <p
+          className="mx-auto mt-6 max-w-2xl font-sans text-body font-normal leading-relaxed text-nordic-sage-dark"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="100"
+        >
           Explore our collection and bring a little of the Nordic calm into your
           own home.
         </p>
-        <Link
-          to="/shop"
-          className="mt-10 inline-block border border-nordic-charcoal bg-nordic-charcoal px-10 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
-        >
-          Shop the Collection
-        </Link>
+        <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          <Link
+            to="/shop"
+            className="mt-10 inline-block border border-nordic-charcoal bg-nordic-charcoal px-10 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+          >
+            Shop the Collection
+          </Link>
+        </div>
       </section>
     </div>
   );
