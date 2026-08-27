@@ -1,4 +1,16 @@
 import { Link } from "react-router";
+import { ArrowRight, Trees, Sparkles, Hammer, ShieldCheck } from "lucide-react";
+
+const stats = [
+  { value: "100%", label: "Sustainable FSC Certified Wood", icon: Trees },
+  { value: "10+", label: "Years of Design Heritage", icon: Sparkles },
+  { value: "100%", label: "Handcrafted by Master Artisans", icon: Hammer },
+  {
+    value: "Lifetime",
+    label: "Structural Integrity Promise",
+    icon: ShieldCheck,
+  },
+];
 
 const sections = [
   {
@@ -29,17 +41,18 @@ const sections = [
 
 export function About() {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      {/* Header Section */}
       <header className="mx-auto max-w-3xl text-center">
         <p
-          className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta"
+          className="font-sans text-caption font-medium uppercase tracking-[0.22em] text-nordic-terracotta"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          Nordic Living
+          Nordic Living Copenhagen
         </p>
         <h1
-          className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal"
+          className="mt-4 font-serif text-[42px] font-semibold text-nordic-charcoal sm:text-[54px]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="100"
@@ -59,14 +72,43 @@ export function About() {
         </p>
       </header>
 
+      {/* Brand Stats Grid */}
+      <section className="mt-20 border-y border-nordic-gray/20 py-12 lg:mt-24">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <div
+                key={stat.label}
+                className="flex flex-col items-center text-center px-4"
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-aos-delay={i * 100}
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nordic-gray/10 text-nordic-charcoal">
+                  <Icon className="h-5 w-5 stroke-[1.8]" />
+                </div>
+                <span className="font-serif text-[32px] font-semibold text-nordic-charcoal">
+                  {stat.value}
+                </span>
+                <span className="mt-2 font-sans text-[13px] text-nordic-sage-dark">
+                  {stat.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Story Narrative Sections */}
       <div className="mt-24 space-y-24 lg:mt-32 lg:space-y-32">
-        {sections.map((section, index) => (
+        {sections.map((section) => (
           <section
             key={section.title}
             className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20"
           >
             <div
-              className={`group relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light ${
+              className={`group relative h-100 md:h-125 w-full overflow-hidden bg-nordic-gray/10 shadow-sm ${
                 section.reversed ? "lg:order-2" : ""
               }`}
               data-aos={section.reversed ? "fade-left" : "fade-right"}
@@ -76,7 +118,7 @@ export function About() {
                 src={section.image}
                 alt={section.alt}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-2500 ease-out group-hover:scale-105"
               />
             </div>
 
@@ -84,14 +126,14 @@ export function About() {
               className={`px-2 lg:px-6 ${section.reversed ? "lg:order-1" : ""}`}
             >
               <p
-                className="font-sans text-caption font-normal uppercase tracking-[0.18em] text-nordic-terracotta"
+                className="font-sans text-caption font-medium uppercase tracking-[0.18em] text-nordic-terracotta"
                 data-aos="fade-up"
                 data-aos-duration="1000"
               >
                 {section.eyebrow}
               </p>
               <h2
-                className="mt-4 font-serif text-h2 font-medium text-nordic-charcoal"
+                className="mt-4 font-serif text-[34px] font-medium text-nordic-charcoal"
                 data-aos="fade-up"
                 data-aos-duration="1000"
                 data-aos-delay="100"
@@ -111,9 +153,10 @@ export function About() {
         ))}
       </div>
 
+      {/* Final Call to Action */}
       <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32">
         <h2
-          className="font-serif text-h2 font-medium text-nordic-charcoal"
+          className="font-serif text-[32px] font-semibold text-nordic-charcoal sm:text-[40px]"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -131,12 +174,15 @@ export function About() {
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
           <Link
             to="/shop"
-            className="mt-10 inline-block border border-nordic-charcoal bg-nordic-charcoal px-10 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-colors duration-300 hover:bg-nordic-charcoal/90"
+            className="group mt-10 inline-flex items-center gap-3 border border-nordic-charcoal bg-nordic-charcoal px-10 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-md"
           >
-            Shop the Collection
+            <span>Shop the Collection</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
     </div>
   );
 }
+
+export default About;
