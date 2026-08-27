@@ -96,10 +96,12 @@ export function Navbar() {
         )}
 
         <nav
-          className={`w-full border-b transition-all duration-500 ${
-            isHome && !isScrolled
-              ? "bg-transparent border-transparent text-white py-5"
-              : "bg-nordic-bg/95 backdrop-blur-md border-nordic-charcoal/10 text-nordic-charcoal shadow-sm py-3"
+          className={`w-full transition-all duration-500 ${
+            isScrolled
+              ? "bg-nordic-bg/95 backdrop-blur-md border-b border-nordic-charcoal/10 text-nordic-charcoal shadow-sm py-3"
+              : isHome
+                ? "bg-transparent border-b-0 text-white py-5"
+                : "bg-nordic-bg/95 backdrop-blur-md border-b-0 text-nordic-charcoal py-5"
           }`}
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
