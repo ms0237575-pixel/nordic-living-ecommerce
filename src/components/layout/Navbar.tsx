@@ -1,6 +1,14 @@
 import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import { ShoppingCart, Search, Menu, X, Heart } from "lucide-react";
+import {
+  ShoppingBag,
+  Search,
+  Menu,
+  X,
+  Heart,
+  User,
+  LogOut,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -23,7 +31,7 @@ export function Navbar() {
   const handleLogout = () => {
     logout();
     setOpen(false);
-    toast("Logged out");
+    toast.success("Successfully logged out");
   };
 
   const cartCount = useCartStore((state) =>
@@ -80,14 +88,8 @@ export function Navbar() {
                       key={i}
                       className="mx-8 text-[11px] font-medium tracking-widest uppercase"
                     >
-                      Welcome, Sign up{" "}
-                      <Link
-                        to="/login"
-                        className="underline underline-offset-4 hover:text-nordic-terracotta transition-colors"
-                      >
-                        here
-                      </Link>{" "}
-                      and get 10% off!
+                      Complimentary worldwide shipping on orders over $500 ·
+                      Handcrafted in Copenhagen
                     </span>
                   ))}
               </div>
@@ -105,7 +107,8 @@ export function Navbar() {
           }`}
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-20 items-center justify-between">
+            <div className="flex h-16 items-center justify-between">
+              {/* Mobile Menu Button */}
               <div className="flex items-center lg:hidden">
                 <button
                   onClick={() => setOpen(true)}
@@ -116,183 +119,195 @@ export function Navbar() {
                 </button>
               </div>
 
+              {/* Brand Logo */}
               <div className="flex-1 text-center lg:text-left lg:flex-none">
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="flex items-center justify-center gap-2 font-serif text-[28px] lg:text-[32px] font-semibold text-inherit lg:justify-start hover:text-nordic-terracotta transition-colors"
+                  className="inline-block font-serif text-[26px] lg:text-[30px] font-semibold text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Nordic Living
                 </Link>
               </div>
 
-              <div className="hidden lg:flex lg:gap-x-12">
+              {/* Desktop Nav Links */}
+              <div className="hidden lg:flex lg:gap-x-10">
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
                   onClick={makeNavHandler("/shop", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
                 >
-                  Shop
+                  Collection
                 </Link>
                 <Link
                   to="/about"
                   onClick={makeNavHandler("/about", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
                 >
-                  About
+                  Philosophy
                 </Link>
                 <Link
                   to="/orders"
                   onClick={makeNavHandler("/orders", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Orders
                 </Link>
               </div>
 
-              <div className="flex flex-1 items-center justify-end gap-2 lg:gap-6 lg:flex-none">
-                {isAuthenticated ? (
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta sm:inline-flex"
-                  >
-                    Logout
-                  </button>
-                ) : (
-                  <Link
-                    to="/login"
-                    onClick={makeNavHandler("/login", false)}
-                    className="hidden items-center font-sans text-[12px] font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta sm:inline-flex"
-                  >
-                    Login
-                  </Link>
-                )}
-
+              {/* Action Icons */}
+              <div className="flex items-center gap-1 sm:gap-2">
                 <button
                   onClick={() => setSearchOverlayOpen(true)}
                   className="p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
-                  aria-label="Open search"
+                  aria-label="Search"
                 >
                   <Search className="h-5 w-5 stroke-[1.5]" />
                 </button>
 
                 <Link
-                  to="/cart"
-                  onClick={makeNavHandler("/cart", false)}
-                  aria-label="Shopping cart"
-                  className="relative group text-inherit hover:text-nordic-terracotta transition-colors p-2 h-11 w-11 inline-flex items-center justify-center"
-                >
-                  <ShoppingCart className="h-5 w-5 stroke-[1.5]" />
-                  {cartCount > 0 && (
-                    <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white group-hover:bg-nordic-charcoal transition-colors">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-                <Link
                   to="/wishlist"
                   onClick={makeNavHandler("/wishlist", false)}
                   aria-label="Wishlist"
-                  className="relative group text-inherit hover:text-nordic-terracotta transition-colors p-2 h-11 w-11 inline-flex items-center justify-center"
+                  className="relative p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   <Heart className="h-5 w-5 stroke-[1.5]" />
                   {wishlistCount > 0 && (
-                    <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white group-hover:bg-nordic-charcoal transition-colors">
+                    <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
                       {wishlistCount}
                     </span>
                   )}
                 </Link>
+
+                <Link
+                  to="/cart"
+                  onClick={makeNavHandler("/cart", false)}
+                  aria-label="Shopping bag"
+                  className="relative p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                >
+                  <ShoppingBag className="h-5 w-5 stroke-[1.5]" />
+                  {cartCount > 0 && (
+                    <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    title="Sign Out"
+                    className="hidden lg:inline-flex p-2 h-11 w-11 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  >
+                    <LogOut className="h-5 w-5 stroke-[1.5]" />
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={makeNavHandler("/login", false)}
+                    title="Account Login"
+                    className="hidden lg:inline-flex p-2 h-11 w-11 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  >
+                    <User className="h-5 w-5 stroke-[1.5]" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
         </nav>
       </div>
 
+      {/* Mobile Drawer */}
       {open && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
           <div
-            className="fixed inset-0 bg-nordic-charcoal/40 transition-opacity"
+            className="fixed inset-0 bg-nordic-charcoal/40 backdrop-blur-sm transition-opacity"
             onClick={() => setOpen(false)}
           />
 
-          <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-nordic-bg shadow-xl animate-in slide-in-from-left duration-300 flex flex-col">
-            <div className="px-6 pt-6 pb-6 flex-1 overflow-y-auto">
-              <div className="flex items-center justify-between mb-12">
-                <div className="font-serif text-[24px] font-semibold text-nordic-charcoal">
+          <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-white shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6">
+            <div>
+              <div className="flex items-center justify-between border-b border-nordic-gray/20 pb-4">
+                <span className="font-serif text-[22px] font-semibold text-nordic-charcoal">
                   Nordic Living
-                </div>
+                </span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  className="h-11 w-11 flex items-center justify-center text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="h-10 w-10 flex items-center justify-center text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   <X className="h-6 w-6 stroke-[1.5]" />
                 </button>
               </div>
 
-              <nav className="flex flex-col">
+              <nav className="mt-6 flex flex-col space-y-1">
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
                   onClick={makeNavHandler("/shop", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
-                  Shop
+                  Collection
                 </Link>
                 <Link
                   to="/about"
                   onClick={makeNavHandler("/about", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
-                  About
+                  Philosophy
                 </Link>
                 <Link
                   to="/orders"
                   onClick={makeNavHandler("/orders", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
                   Orders
                 </Link>
                 <Link
                   to="/wishlist"
                   onClick={makeNavHandler("/wishlist", true)}
-                  className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
                 >
-                  Wishlist
+                  Wishlist ({wishlistCount})
                 </Link>
-                {isAuthenticated ? (
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="block w-full border-b border-nordic-gray/20 py-4 text-left font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
-                  >
-                    Logout
-                  </button>
-                ) : (
-                  <Link
-                    to="/login"
-                    onClick={makeNavHandler("/login", true)}
-                    className="border-b border-nordic-gray/20 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
-                  >
-                    Login
-                  </Link>
-                )}
               </nav>
+            </div>
+
+            <div className="border-t border-nordic-gray/20 pt-4">
+              {isAuthenticated ? (
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-2 py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-terracotta"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign Out
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={makeNavHandler("/login", true)}
+                  className="flex w-full items-center justify-center gap-2 border border-nordic-charcoal bg-nordic-charcoal py-3 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-colors hover:bg-nordic-terracotta hover:border-nordic-terracotta"
+                >
+                  <User className="h-4 w-4" />
+                  Sign In
+                </Link>
+              )}
             </div>
           </aside>
         </div>
@@ -305,3 +320,5 @@ export function Navbar() {
     </>
   );
 }
+
+export default Navbar;
