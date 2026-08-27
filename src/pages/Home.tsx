@@ -1,4 +1,3 @@
-// src/pages/Home.tsx
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -26,26 +25,33 @@ export function Home() {
       <HeroSection />
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
-        <div className="mb-12 flex items-end justify-between">
-          <h2
-            className="font-serif text-h2 font-medium text-nordic-charcoal"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-          >
+        <div
+          className="mb-12 flex items-end justify-between"
+          data-aos="fade-up"
+          data-aos-duration="700"
+          data-aos-offset="60"
+          data-aos-easing="ease-out-cubic"
+          data-aos-once="true"
+        >
+          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
             Featured Collection
           </h2>
 
-          <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-            <Link
-              to="/shop"
-              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-            >
-              View All
-            </Link>
-          </div>
+          <Link
+            to="/shop"
+            className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+          >
+            View All
+          </Link>
         </div>
 
-        <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
+        <div
+          data-aos="fade-up"
+          data-aos-duration="700"
+          data-aos-offset="60"
+          data-aos-easing="ease-out-cubic"
+          data-aos-once="true"
+        >
           {featured === null ? (
             <div>Loading...</div>
           ) : (
@@ -59,47 +65,42 @@ export function Home() {
           <div
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
-            data-aos-duration="1200"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
           >
             <img
               src="/images/products/story-crafted-chairs.jpg"
               alt="Crafted chairs"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             />
           </div>
 
-          <div className="px-2 lg:px-12">
-            <h2
-              className="font-serif text-[40px] text-nordic-charcoal mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-            >
+          <div
+            className="px-2 lg:px-12"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
+          >
+            <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
               Crafted with nature in mind.
             </h2>
-            <p
-              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="100"
-            >
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Our designs embrace Scandinavian simplicity — quiet forms, honest
               materials, and pieces built to last. We focus on sustainable
               sourcing and timeless craftsmanship so every piece becomes part of
               your everyday rituals.
             </p>
-            <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="200"
+            <Link
+              to="/about"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
             >
-              <Link
-                to="/about"
-                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-              >
-                Read our story
-              </Link>
-            </div>
+              Read our story
+            </Link>
           </div>
         </div>
       </section>
@@ -109,110 +110,90 @@ export function Home() {
           <div
             className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
-            data-aos-duration="1200"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
           >
             <img
               src="/images/products/home-striped-sofa.jpg"
               alt="Striped sofa in a living room"
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             />
           </div>
 
-          <div className="px-2 lg:px-12">
-            <p
-              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-            >
+          <div
+            className="px-2 lg:px-12"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
+          >
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Timeless Comfort
             </p>
-            <h2
-              className="font-serif text-[36px] text-nordic-charcoal mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="100"
-            >
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               Redefining the Living Space
             </h2>
-            <p
-              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="200"
-            >
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Embrace the art of slow living. Our seating collections combine
               striking organic curves with unmatched comfort, featuring tactile
               fabrics that invite you to sink in and stay a while.
             </p>
-            <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="300"
+            <Link
+              to="/shop?category=Furniture"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
             >
-              <Link
-                to="/shop?category=Furniture"
-                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-              >
-                Shop Seating
-              </Link>
-            </div>
+              Shop Seating
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="order-2 lg:order-1 px-2 lg:px-12">
-            <p
-              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-            >
+          <div
+            className="order-2 lg:order-1 px-2 lg:px-12"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
+          >
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Gather Around
             </p>
-            <h2
-              className="font-serif text-[36px] text-nordic-charcoal mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="100"
-            >
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               Spaces for Connection
             </h2>
-            <p
-              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="200"
-            >
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Whether it's a quiet morning coffee or a bustling dinner party,
               our dining pieces are crafted from raw, honest materials to ground
               your most meaningful moments.
             </p>
-            <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="300"
+            <Link
+              to="/shop?category=Furniture"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
             >
-              <Link
-                to="/shop?category=Furniture"
-                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-              >
-                Shop Dining
-              </Link>
-            </div>
+              Shop Dining
+            </Link>
           </div>
 
           <div
             className="order-1 lg:order-2 relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-left"
-            data-aos-duration="1200"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
           >
             <img
               src="/images/products/home-dining-cafe.webp"
               alt="Dining area in a café setting"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             />
           </div>
         </div>
@@ -223,54 +204,44 @@ export function Home() {
           <div
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
-            data-aos-duration="1200"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
           >
             <img
               src="/images/products/home-coffee-ritual.webp"
               alt="Coffee ritual with Nordic ceramics"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             />
           </div>
 
-          <div className="px-2 lg:px-12">
-            <p
-              className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-            >
+          <div
+            className="px-2 lg:px-12"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-offset="60"
+            data-aos-easing="ease-out-cubic"
+            data-aos-once="true"
+          >
+            <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Everyday Rituals
             </p>
-            <h2
-              className="font-serif text-[36px] text-nordic-charcoal mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="100"
-            >
+            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
               The Beauty in Details
             </h2>
-            <p
-              className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="200"
-            >
+            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-6">
               Scandinavian design is more than an aesthetic; it's a lifestyle.
               We celebrate the small, intentional choices — from the cup you
               hold to the light that fills your room.
             </p>
-            <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="300"
+            <Link
+              to="/shop?category=Accessories"
+              className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
             >
-              <Link
-                to="/shop?category=Accessories"
-                className="inline-block border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
-              >
-                Shop Accessories
-              </Link>
-            </div>
+              Shop Accessories
+            </Link>
           </div>
         </div>
       </section>
