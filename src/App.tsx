@@ -22,6 +22,7 @@ import { Login } from "@/pages/Login";
 import { Register } from "@/pages/Register";
 import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
+import { AdminProducts } from "@/pages/admin/AdminProducts";
 
 export default function App() {
   useEffect(() => {
@@ -77,6 +78,7 @@ export default function App() {
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/admin/products" element={<AdminProducts />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>

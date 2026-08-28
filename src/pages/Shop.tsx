@@ -2,8 +2,7 @@ import { Search, ChevronDown, X, Filter } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
 import { ProductCard } from "@/components/product/ProductCard";
-import type { Product } from "@/types/product";
-import { getAllProducts } from "@/services/products";
+import { useProductStore } from "@/store/useProductStore";
 
 type PriceFilterValue = "all" | "under500" | "500to1000" | "over1000";
 
@@ -17,9 +16,8 @@ const categories = [
 
 export function Shop() {
   const [open, setOpen] = useState(false);
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const allProducts = useProductStore((state) => state.products);
 
   const initialSearch = searchParams.get("search") ?? "";
   const initialSort = searchParams.get("sort") ?? "default";
@@ -49,22 +47,6 @@ export function Shop() {
         : [];
     setSelectedCategories(cats);
   }, [searchParams]);
-
-  useEffect(() => {
-    let mounted = true;
-    setLoading(true);
-    getAllProducts()
-      .then((res) => {
-        if (mounted) setAllProducts(res);
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (mounted) setLoading(false);
-      });
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((current) =>
@@ -431,11 +413,7 @@ export function Shop() {
             </div>
           )}
 
-          {loading ? (
-            <div className="flex min-h-[40vh] items-center justify-center text-center font-sans text-[14px] text-nordic-sage-dark">
-              Loading products...
-            </div>
-          ) : filteredProducts.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <div
               className="flex min-h-[40vh] items-center justify-center text-center font-sans text-[15px] text-nordic-charcoal bg-nordic-gray/5 border border-nordic-gray/10 py-12"
               data-aos="fade-up"
@@ -463,3 +441,5 @@ export function Shop() {
     </div>
   );
 }
+
+export default Shop;

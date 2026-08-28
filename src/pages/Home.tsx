@@ -1,26 +1,16 @@
-// src/pages/Home.tsx
+import { useMemo } from "react";
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
-import { ProductCardSkeleton } from "@/components/product/ProductCardSkeleton";
-import { getFeaturedProducts } from "@/services/products";
-import type { Product } from "@/types/product";
+import { useProductStore } from "@/store/useProductStore";
 import { Leaf, Truck, MapPin } from "lucide-react";
 
 export function Home() {
-  const [featured, setFeatured] = useState<Product[] | null>(null);
+  const products = useProductStore((state) => state.products);
 
-  useEffect(() => {
-    let mounted = true;
-    getFeaturedProducts().then((res) => {
-      if (mounted) setFeatured(res);
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const featured = useMemo(() => {
+    return products.filter((p) => Boolean(p.featured));
+  }, [products]);
 
   return (
     <div className="w-full">
@@ -31,9 +21,6 @@ export function Home() {
           className="mb-12 flex items-end justify-between"
           data-aos="fade-up"
           data-aos-duration="700"
-          data-aos-offset="60"
-          data-aos-easing="ease-out-cubic"
-          data-aos-once="true"
         >
           <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
             Featured Collection
@@ -47,23 +34,15 @@ export function Home() {
           </Link>
         </div>
 
-        <div
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-offset="60"
-          data-aos-easing="ease-out-cubic"
-          data-aos-once="true"
-        >
-          {featured === null ? (
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <ProductCardSkeleton key={i} />
-              ))}
-            </div>
-          ) : (
+        {featured.length > 0 ? (
+          <div data-aos="fade-up" data-aos-duration="700">
             <ProductCarousel products={featured} />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="py-12 text-center text-nordic-sage-dark font-sans text-[14px]">
+            No featured products available.
+          </div>
+        )}
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
@@ -72,9 +51,6 @@ export function Home() {
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <img
               src="/images/products/story-crafted-chairs.jpg"
@@ -88,9 +64,6 @@ export function Home() {
             className="px-2 lg:px-12"
             data-aos="fade-up"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
               Crafted with nature in mind.
@@ -117,9 +90,6 @@ export function Home() {
             className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <img
               src="/images/products/home-striped-sofa.jpg"
@@ -133,9 +103,6 @@ export function Home() {
             className="px-2 lg:px-12"
             data-aos="fade-up"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Timeless Comfort
@@ -164,9 +131,6 @@ export function Home() {
             className="order-2 lg:order-1 px-2 lg:px-12"
             data-aos="fade-up"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Gather Around
@@ -191,9 +155,6 @@ export function Home() {
             className="order-1 lg:order-2 relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-left"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <img
               src="/images/products/home-dining-cafe.webp"
@@ -211,9 +172,6 @@ export function Home() {
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
             data-aos="fade-right"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <img
               src="/images/products/home-coffee-ritual.webp"
@@ -227,9 +185,6 @@ export function Home() {
             className="px-2 lg:px-12"
             data-aos="fade-up"
             data-aos-duration="700"
-            data-aos-offset="60"
-            data-aos-easing="ease-out-cubic"
-            data-aos-once="true"
           >
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Everyday Rituals
@@ -283,3 +238,5 @@ export function Home() {
     </div>
   );
 }
+
+export default Home;

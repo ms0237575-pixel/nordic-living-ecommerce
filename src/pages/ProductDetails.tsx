@@ -1,13 +1,11 @@
-// src/pages/Product.tsx
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { ArrowLeft, Minus, Plus, Star } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
-import { getProductBySlug, getAllProducts } from "@/services/products";
 import { useCartStore } from "@/store/useCartStore";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useProductStore } from "@/store/useProductStore";
 import { toast } from "sonner";
-import type { Product } from "@/types/product";
 import { ProductCard } from "@/components/product/ProductCard";
 
 interface Review {
@@ -70,12 +68,13 @@ export function ProductDetails() {
   const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+
+  const allProducts = useProductStore((state) => state.products);
+  const product = allProducts.find((p) => p.slug === slug) ?? null;
+
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  const [related, setRelated] = useState<Product[] | null>(null);
   const [reviews, setReviews] = useState<Review[]>(sampleReviews);
   const [reviewName, setReviewName] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
@@ -87,77 +86,26 @@ export function ProductDetails() {
   }>({});
 
   useEffect(() => {
-    let isCurrent = true;
-
-    async function loadProduct() {
-      setLoading(true);
-      setProduct(null);
+    if (product) {
+      setSelectedImage((product.images && product.images[0]) ?? product.image);
       setQuantity(1);
       setAdded(false);
-      setSelectedImage(null);
       setReviews(sampleReviews);
       setReviewName("");
       setReviewRating(0);
       setReviewComment("");
       setReviewErrors({});
-
-      const nextProduct = slug ? await getProductBySlug(slug) : undefined;
-
-      if (isCurrent) {
-        setProduct(nextProduct ?? null);
-        if (nextProduct) {
-          setSelectedImage(
-            (nextProduct.images && nextProduct.images[0]) ?? nextProduct.image,
-          );
-        }
-        setLoading(false);
-      }
     }
-
-    void loadProduct();
-
-    return () => {
-      isCurrent = false;
-    };
-  }, [slug]);
+  }, [product?.id]);
 
   useEffect(() => {
-    let mounted = true;
-    async function loadRelated() {
-      if (!product) return;
-      const all = await getAllProducts();
-      const candidates = all.filter((p) => p.id !== product.id);
-      const sameCategory = candidates.filter(
-        (p) => p.category === product.category,
-      );
-      const picks = (sameCategory.length ? sameCategory : candidates).slice(
-        0,
-        4,
-      );
-      if (mounted) setRelated(picks);
-    }
-
-    void loadRelated();
-
-    return () => {
-      mounted = false;
-    };
-  }, [product]);
-
-  useEffect(() => {
-    if (!added) {
-      return;
-    }
-
+    if (!added) return;
     const timeout = window.setTimeout(() => setAdded(false), 2000);
-
     return () => window.clearTimeout(timeout);
   }, [added]);
 
   function handleAddToCart() {
-    if (!product) {
-      return;
-    }
+    if (!product) return;
 
     if (!isAuthenticated) {
       toast.error("Please login to add items to your cart.");
@@ -231,36 +179,6 @@ export function ProductDetails() {
       ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews
       : 0;
 
-  if (loading) {
-    return (
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20 animate-pulse">
-        <div className="h-4 w-28 bg-nordic-gray/20" />
-        <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <div className="aspect-square w-full bg-nordic-gray/20" />
-            <div className="mt-4 flex gap-3">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-20 w-20 bg-nordic-gray/20" />
-              ))}
-            </div>
-          </div>
-          <div className="space-y-4 lg:pt-4">
-            <div className="h-4 w-32 bg-nordic-gray/20" />
-            <div className="h-10 w-3/4 bg-nordic-gray/20" />
-            <div className="h-6 w-20 bg-nordic-gray/20" />
-            <div className="space-y-2 pt-4">
-              <div className="h-4 w-full bg-nordic-gray/20" />
-              <div className="h-4 w-5/6 bg-nordic-gray/20" />
-              <div className="h-4 w-2/3 bg-nordic-gray/20" />
-            </div>
-            <div className="h-12 w-32 bg-nordic-gray/20 pt-6" />
-            <div className="h-14 w-full bg-nordic-gray/20 pt-4" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   if (!product) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-4 font-sans text-body font-normal text-nordic-sage-dark">
@@ -274,6 +192,11 @@ export function ProductDetails() {
       </div>
     );
   }
+
+  const related = allProducts
+    .filter((p) => p.id !== product.id)
+    .sort((a, b) => (a.category === product.category ? -1 : 1))
+    .slice(0, 4);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
@@ -565,7 +488,7 @@ export function ProductDetails() {
         </div>
       </section>
 
-      {related && related.length > 0 && (
+      {related.length > 0 && (
         <section className="mt-20">
           <h2
             className="font-serif text-h2 font-medium text-nordic-charcoal mb-8"
