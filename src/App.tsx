@@ -22,6 +22,7 @@ import { Login } from "@/pages/Login";
 import { Register } from "@/pages/Register";
 import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
+import { AdminDashboard } from "@/pages/admin/AdminDashboard";
 import { AdminProducts } from "@/pages/admin/AdminProducts";
 import { AdminOrders } from "@/pages/admin/AdminOrders";
 
@@ -74,17 +75,23 @@ export default function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/orders" element={<Orders />} />
-                </Route>
                 <Route path="/order-success" element={<OrderSuccess />} />
                 <Route path="/product/:slug" element={<ProductDetails />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/admin/products" element={<AdminProducts />} />
-                <Route path="/admin/orders" element={<AdminOrders />} />
+
+                {/* Protected Customer Routes */}
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/orders" element={<Orders />} />
+
+                  {/* Protected Admin Routes */}
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/products" element={<AdminProducts />} />
+                  <Route path="/admin/orders" element={<AdminOrders />} />
+                </Route>
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>

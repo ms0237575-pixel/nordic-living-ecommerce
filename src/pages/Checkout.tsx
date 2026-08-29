@@ -1,13 +1,16 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router";
 import { useCartStore } from "@/store/useCartStore";
+import { useOrderStore } from "@/store/useOrderStore";
 import type { CartItem } from "@/types/product";
 import { ShieldCheck, Truck, ArrowLeft, Lock, CreditCard } from "lucide-react";
+import { toast } from "sonner";
 
 interface CheckoutFormState {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
   address: string;
   city: string;
   postalCode: string;
@@ -18,6 +21,7 @@ const initialFormState: CheckoutFormState = {
   firstName: "",
   lastName: "",
   email: "",
+  phone: "",
   address: "",
   city: "",
   postalCode: "",
@@ -27,6 +31,7 @@ const initialFormState: CheckoutFormState = {
 export default function Checkout() {
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
+  const addOrder = useOrderStore((state) => state.addOrder);
   const navigate = useNavigate();
   const [formData, setFormData] = useState<CheckoutFormState>(initialFormState);
 
@@ -48,43 +53,25 @@ export default function Checkout() {
     event.preventDefault();
 
     if (cart.length === 0) {
+      toast.error("Your cart is empty");
       return;
     }
 
-    const generatedOrderId = Math.random()
-      .toString(36)
-      .substring(2, 9)
-      .toUpperCase();
-    const order = {
-      id: generatedOrderId,
-      date: new Date().toISOString(),
+    const orderPayload = {
+      customerName: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+      customerEmail: formData.email.trim(),
+      customerPhone: formData.phone.trim() || undefined,
+      address: formData.address.trim(),
+      city: formData.city.trim(),
       items: cart.map((item) => ({ ...item })) as CartItem[],
-      subtotal,
-      shipping,
-      total,
-      customer: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        address: formData.address,
-        city: formData.city,
-        postalCode: formData.postalCode,
-        paymentMethod: formData.paymentMethod,
-      },
+      totalAmount: total,
     };
 
-    try {
-      const storedOrders = localStorage.getItem("nordic-living-orders");
-      const parsedOrders = storedOrders ? JSON.parse(storedOrders) : [];
-      const nextOrders = Array.isArray(parsedOrders) ? parsedOrders : [];
-      nextOrders.push(order);
-      localStorage.setItem("nordic-living-orders", JSON.stringify(nextOrders));
-    } catch {
-      localStorage.setItem("nordic-living-orders", JSON.stringify([order]));
-    }
+    const newOrderId = addOrder(orderPayload);
 
     clearCart();
-    navigate(`/order-success?orderId=${encodeURIComponent(generatedOrderId)}`, {
+    toast.success(`Order ${newOrderId} placed successfully!`);
+    navigate(`/order-success?orderId=${encodeURIComponent(newOrderId)}`, {
       replace: true,
     });
   };
@@ -130,7 +117,6 @@ export default function Checkout() {
             onSubmit={handlePlaceOrder}
             className="space-y-8"
           >
-            {/* Contact & Shipping Details */}
             <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
               <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[20px] font-semibold text-nordic-charcoal">
                 1. Shipping Address
@@ -169,19 +155,35 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="mb-2 block font-sans text-[13px] uppercase tracking-wider text-nordic-sage-dark">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="henrik@example.com"
-                    className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none transition-colors focus:border-nordic-charcoal"
-                  />
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block font-sans text-[13px] uppercase tracking-wider text-nordic-sage-dark">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="henrik@example.com"
+                      className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none transition-colors focus:border-nordic-charcoal"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block font-sans text-[13px] uppercase tracking-wider text-nordic-sage-dark">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+20 100 000 0000"
+                      className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none transition-colors focus:border-nordic-charcoal"
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -210,7 +212,7 @@ export default function Checkout() {
                       value={formData.city}
                       onChange={handleInputChange}
                       required
-                      placeholder="e.g. Copenhagen"
+                      placeholder="e.g. New Cairo"
                       className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none transition-colors focus:border-nordic-charcoal"
                     />
                   </div>
@@ -225,7 +227,7 @@ export default function Checkout() {
                       value={formData.postalCode}
                       onChange={handleInputChange}
                       required
-                      placeholder="1050"
+                      placeholder="11835"
                       className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none transition-colors focus:border-nordic-charcoal"
                     />
                   </div>
@@ -233,7 +235,6 @@ export default function Checkout() {
               </div>
             </div>
 
-            {/* Payment Method */}
             <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
               <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[20px] font-semibold text-nordic-charcoal">
                 2. Payment Details
@@ -288,7 +289,6 @@ export default function Checkout() {
           </form>
         </section>
 
-        {/* Sticky Summary Sidebar */}
         <aside className="sticky top-28 h-fit border border-nordic-gray/20 bg-white p-6 shadow-sm sm:p-8">
           <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[20px] font-semibold text-nordic-charcoal">
             Order Review
