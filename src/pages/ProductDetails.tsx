@@ -1,50 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import type { FormEvent } from "react";
 import { ArrowLeft, Minus, Plus, Star } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import { useCartStore } from "@/store/useCartStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useProductStore } from "@/store/useProductStore";
+import { useReviewStore } from "@/store/useReviewStore";
 import { toast } from "sonner";
 import { ProductCard } from "@/components/product/ProductCard";
-
-interface Review {
-  name: string;
-  rating: number;
-  date: string;
-  comment: string;
-}
-
-const sampleReviews: Review[] = [
-  {
-    name: "Anna Mikkelsen",
-    rating: 5,
-    date: "2026-03-12",
-    comment:
-      "Beautifully made and even more stunning in person. The craftsmanship is exceptional and the materials feel truly premium.",
-  },
-  {
-    name: "Jonas Berg",
-    rating: 5,
-    date: "2026-01-28",
-    comment:
-      "Exactly what I hoped for — clean lines, warm wood, and it fits perfectly in our home. Shipping was quick and carefully packaged.",
-  },
-  {
-    name: "Freja Lund",
-    rating: 4,
-    date: "2025-11-05",
-    comment:
-      "Lovely design and very comfortable to live with. A small scratch arrived on the base, but customer care resolved it right away.",
-  },
-  {
-    name: "Oscar Lindqvist",
-    rating: 5,
-    date: "2025-09-19",
-    comment:
-      "A timeless piece that elevates the whole room. You can tell it was made with care. I would buy again without hesitation.",
-  },
-];
 
 function StarRating({ value }: { value: number }) {
   return (
@@ -72,10 +35,17 @@ export function ProductDetails() {
   const allProducts = useProductStore((state) => state.products);
   const product = allProducts.find((p) => p.slug === slug) ?? null;
 
+  const allReviews = useReviewStore((state) => state.reviews);
+  const addReview = useReviewStore((state) => state.addReview);
+
+  const productReviews = useMemo(() => {
+    if (!product) return [];
+    return allReviews.filter((r) => r.productId === product.id);
+  }, [allReviews, product?.id]);
+
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-  const [reviews, setReviews] = useState<Review[]>(sampleReviews);
   const [reviewName, setReviewName] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewComment, setReviewComment] = useState("");
@@ -90,7 +60,6 @@ export function ProductDetails() {
       setSelectedImage((product.images && product.images[0]) ?? product.image);
       setQuantity(1);
       setAdded(false);
-      setReviews(sampleReviews);
       setReviewName("");
       setReviewRating(0);
       setReviewComment("");
@@ -151,6 +120,8 @@ export function ProductDetails() {
   function handleReviewSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (!product) return;
+
     const nextErrors: typeof reviewErrors = {};
     if (!reviewName.trim()) nextErrors.name = "Please add your name.";
     if (reviewRating < 1) nextErrors.rating = "Please select a rating.";
@@ -159,25 +130,25 @@ export function ProductDetails() {
 
     if (Object.keys(nextErrors).length > 0) return;
 
-    const newReview: Review = {
+    addReview({
+      productId: product.id,
       name: reviewName.trim(),
       rating: reviewRating,
-      date: new Date().toISOString(),
       comment: reviewComment.trim(),
-    };
+    });
 
-    setReviews((current) => [newReview, ...current]);
     setReviewName("");
     setReviewRating(0);
     setReviewComment("");
-    toast.success("Thanks — your review has been added");
+    toast.success("Thanks — your review has been published!");
   }
 
-  const totalReviews = reviews.length;
+  const totalReviews = productReviews.length;
   const averageRating =
     totalReviews > 0
-      ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews
-      : 0;
+      ? productReviews.reduce((sum, review) => sum + review.rating, 0) /
+        totalReviews
+      : 5;
 
   if (!product) {
     return (
@@ -331,36 +302,42 @@ export function ProductDetails() {
             </div>
 
             <div className="mt-10 space-y-8">
-              {reviews.map((review, index) => (
-                <article
-                  key={`${review.date}-${index}`}
-                  className="border-b border-nordic-gray/20 pb-8"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-10 w-10 items-center justify-center bg-nordic-charcoal font-serif text-subtitle font-medium text-white">
-                        {review.name.charAt(0)}
-                      </span>
-                      <div>
-                        <p className="font-sans text-body font-medium text-nordic-charcoal">
-                          {review.name}
-                        </p>
-                        <p className="font-sans text-[13px] text-nordic-sage-dark">
-                          {new Date(review.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </p>
+              {productReviews.length === 0 ? (
+                <p className="text-nordic-sage-dark font-sans text-[14px] py-4">
+                  No reviews yet. Be the first to review this piece.
+                </p>
+              ) : (
+                productReviews.map((review) => (
+                  <article
+                    key={review.id}
+                    className="border-b border-nordic-gray/20 pb-8"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-10 w-10 items-center justify-center bg-nordic-charcoal font-serif text-subtitle font-medium text-white">
+                          {review.name.charAt(0)}
+                        </span>
+                        <div>
+                          <p className="font-sans text-body font-medium text-nordic-charcoal">
+                            {review.name}
+                          </p>
+                          <p className="font-sans text-[13px] text-nordic-sage-dark">
+                            {new Date(review.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </p>
+                        </div>
                       </div>
+                      <StarRating value={review.rating} />
                     </div>
-                    <StarRating value={review.rating} />
-                  </div>
-                  <p className="mt-4 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
-                    {review.comment}
-                  </p>
-                </article>
-              ))}
+                    <p className="mt-4 font-sans text-body font-normal leading-relaxed text-nordic-sage-dark">
+                      {review.comment}
+                    </p>
+                  </article>
+                ))
+              )}
             </div>
           </div>
 

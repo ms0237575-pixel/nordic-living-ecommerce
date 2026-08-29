@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useOrderStore,
+  playOrderNotificationSound,
   type OrderStatus,
   type AdminOrder,
 } from "@/store/useOrderStore";
@@ -14,6 +15,7 @@ import {
   Trash2,
   Eye,
   X,
+  Volume2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -30,6 +32,27 @@ export function AdminOrders() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<"All" | OrderStatus>("All");
   const [selectedOrder, setSelectedOrder] = useState<AdminOrder | null>(null);
+
+  useEffect(() => {
+    const channel = new BroadcastChannel("nordic_orders_sync");
+
+    channel.onmessage = (event) => {
+      if (event.data?.type === "NEW_ORDER") {
+        const newOrder: AdminOrder = event.data.order;
+        playOrderNotificationSound();
+        toast.info(
+          `🔔 New order received: ${newOrder.id} (${newOrder.customerName} - $${newOrder.totalAmount.toFixed(2)})`,
+          {
+            duration: 6000,
+          },
+        );
+      }
+    };
+
+    return () => {
+      channel.close();
+    };
+  }, []);
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
@@ -107,7 +130,19 @@ export function AdminOrders() {
           </h1>
         </div>
 
-        <div className="flex items-center gap-4 text-nordic-charcoal font-sans text-[13px]">
+        <div className="flex flex-wrap items-center gap-4 text-nordic-charcoal font-sans text-[13px]">
+          <button
+            onClick={() => {
+              playOrderNotificationSound();
+              toast.info("Notification chime audio test");
+            }}
+            className="inline-flex items-center gap-2 border border-nordic-gray/30 bg-white px-3.5 py-2.5 font-sans text-[12px] font-medium text-nordic-charcoal hover:bg-nordic-gray/10 transition-colors shadow-sm"
+            title="Test alert chime"
+          >
+            <Volume2 className="h-4 w-4 text-nordic-terracotta" />
+            Test Chime
+          </button>
+
           <div className="border border-nordic-gray/20 bg-white px-4 py-2.5 shadow-sm">
             <span className="text-nordic-sage-dark block text-[11px] uppercase tracking-wider">
               Total Revenue

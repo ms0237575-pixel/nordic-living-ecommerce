@@ -17,6 +17,47 @@ export interface AdminOrder {
   createdAt: string;
 }
 
+const orderChannel =
+  typeof window !== "undefined"
+    ? new BroadcastChannel("nordic_orders_sync")
+    : null;
+
+export const playOrderNotificationSound = () => {
+  try {
+    const AudioCtx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc1.type = "sine";
+    osc2.type = "sine";
+
+    osc1.frequency.setValueAtTime(587.33, ctx.currentTime);
+    osc1.frequency.setValueAtTime(880, ctx.currentTime + 0.12);
+
+    osc2.frequency.setValueAtTime(440, ctx.currentTime);
+    osc2.frequency.setValueAtTime(659.25, ctx.currentTime + 0.12);
+
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc1.start(ctx.currentTime);
+    osc2.start(ctx.currentTime);
+    osc1.stop(ctx.currentTime + 0.6);
+    osc2.stop(ctx.currentTime + 0.6);
+  } catch {}
+};
+
 interface OrderStore {
   orders: AdminOrder[];
   addOrder: (order: Omit<AdminOrder, "id" | "createdAt" | "status">) => string;
@@ -61,7 +102,13 @@ export const useOrderStore = create<OrderStore>()(
           status: "Processing",
           createdAt: new Date().toISOString(),
         };
+
         set((state) => ({ orders: [newOrder, ...state.orders] }));
+
+        if (orderChannel) {
+          orderChannel.postMessage({ type: "NEW_ORDER", order: newOrder });
+        }
+
         return orderId;
       },
 
