@@ -3,7 +3,15 @@ import { Link, useNavigate } from "react-router";
 import { useCartStore } from "@/store/useCartStore";
 import { useOrderStore } from "@/store/useOrderStore";
 import type { CartItem } from "@/types/product";
-import { ShieldCheck, Truck, ArrowLeft, Lock, CreditCard } from "lucide-react";
+import {
+  ShieldCheck,
+  Truck,
+  ArrowLeft,
+  Lock,
+  CreditCard,
+  Gift,
+  Sparkles,
+} from "lucide-react";
 import { toast } from "sonner";
 
 interface CheckoutFormState {
@@ -15,6 +23,9 @@ interface CheckoutFormState {
   city: string;
   postalCode: string;
   paymentMethod: "card" | "cod";
+  isGift: boolean;
+  recipientName: string;
+  giftMessage: string;
 }
 
 const initialFormState: CheckoutFormState = {
@@ -26,6 +37,9 @@ const initialFormState: CheckoutFormState = {
   city: "",
   postalCode: "",
   paymentMethod: "card",
+  isGift: false,
+  recipientName: "",
+  giftMessage: "",
 };
 
 export default function Checkout() {
@@ -40,13 +54,21 @@ export default function Checkout() {
     0,
   );
   const shipping = subtotal >= 500 || cart.length === 0 ? 0 : 15;
-  const total = subtotal + shipping;
+  const giftWrappingFee = formData.isGift ? 15 : 0;
+  const total = subtotal + shipping + giftWrappingFee;
 
   const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
-    const { name, value } = event.target;
-    setFormData((current) => ({ ...current, [name]: value }));
+    const { name, value, type } = event.target;
+    if (type === "checkbox") {
+      const { checked } = event.target as HTMLInputElement;
+      setFormData((current) => ({ ...current, [name]: checked }));
+    } else {
+      setFormData((current) => ({ ...current, [name]: value }));
+    }
   };
 
   const handlePlaceOrder = (event: FormEvent<HTMLFormElement>) => {
@@ -65,6 +87,13 @@ export default function Checkout() {
       city: formData.city.trim(),
       items: cart.map((item) => ({ ...item })) as CartItem[],
       totalAmount: total,
+      gift: formData.isGift
+        ? {
+            isGift: true,
+            recipientName: formData.recipientName.trim() || undefined,
+            giftMessage: formData.giftMessage.trim() || undefined,
+          }
+        : undefined,
     };
 
     const newOrderId = addOrder(orderPayload);
@@ -236,8 +265,75 @@ export default function Checkout() {
             </div>
 
             <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center justify-between border-b border-nordic-gray/20 pb-4">
+                <div className="flex items-center gap-2">
+                  <Gift className="h-5 w-5 text-nordic-terracotta" />
+                  <h2 className="font-serif text-[20px] font-semibold text-nordic-charcoal">
+                    2. Gift Wrapping & Personalized Note
+                  </h2>
+                </div>
+                <span className="text-[12px] font-sans font-medium text-nordic-terracotta">
+                  +$15
+                </span>
+              </div>
+
+              <div className="mt-6 space-y-4">
+                <label className="flex items-start gap-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    name="isGift"
+                    checked={formData.isGift}
+                    onChange={handleInputChange}
+                    className="mt-1 h-4 w-4 rounded-none text-nordic-terracotta focus:ring-0 border-nordic-gray/40"
+                  />
+                  <div>
+                    <p className="font-sans text-[14px] font-medium text-nordic-charcoal">
+                      Include Signature Nordic Gift Packaging
+                    </p>
+                    <p className="font-sans text-[12px] text-nordic-sage-dark mt-0.5">
+                      Wrapped in sustainably sourced textured matte paper with a
+                      wax-sealed letterpress greeting card.
+                    </p>
+                  </div>
+                </label>
+
+                {formData.isGift && (
+                  <div className="mt-6 pt-4 border-t border-nordic-gray/15 space-y-4">
+                    <div>
+                      <label className="mb-2 block font-sans text-[13px] uppercase tracking-wider text-nordic-sage-dark">
+                        Recipient Name
+                      </label>
+                      <input
+                        type="text"
+                        name="recipientName"
+                        value={formData.recipientName}
+                        onChange={handleInputChange}
+                        placeholder="e.g. Salma"
+                        className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none focus:border-nordic-charcoal"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block font-sans text-[13px] uppercase tracking-wider text-nordic-sage-dark">
+                        Personal Gift Note
+                      </label>
+                      <textarea
+                        name="giftMessage"
+                        value={formData.giftMessage}
+                        onChange={handleInputChange}
+                        rows={3}
+                        placeholder="Write your heartfelt message here..."
+                        className="w-full resize-none border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[14px] text-nordic-charcoal outline-none focus:border-nordic-charcoal"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
               <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[20px] font-semibold text-nordic-charcoal">
-                2. Payment Details
+                3. Payment Details
               </h2>
 
               <div className="mt-6 space-y-4">
@@ -337,6 +433,14 @@ export default function Checkout() {
                 )}
               </span>
             </div>
+            {formData.isGift && (
+              <div className="flex items-center justify-between text-nordic-terracotta">
+                <span className="flex items-center gap-1">
+                  <Sparkles className="h-3.5 w-3.5" /> Gift Packaging
+                </span>
+                <span className="font-medium">+$15.00</span>
+              </div>
+            )}
             <div className="flex items-center justify-between border-t border-nordic-gray/20 pt-3 text-[16px] text-nordic-charcoal">
               <span className="font-semibold">Total Due</span>
               <span className="font-bold text-nordic-terracotta">

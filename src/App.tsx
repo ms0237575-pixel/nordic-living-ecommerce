@@ -28,6 +28,11 @@ import { AdminOrders } from "@/pages/admin/AdminOrders";
 
 export default function App() {
   useEffect(() => {
+    document.documentElement.classList.remove("dark");
+    localStorage.removeItem("nordic-theme-storage");
+  }, []);
+
+  useEffect(() => {
     AOS.init({
       duration: 800,
       once: true,
@@ -75,23 +80,18 @@ export default function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/products" element={<AdminProducts />} />
+                  <Route path="/admin/orders" element={<AdminOrders />} />
+                </Route>
                 <Route path="/order-success" element={<OrderSuccess />} />
                 <Route path="/product/:slug" element={<ProductDetails />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-
-                {/* Protected Customer Routes */}
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/orders" element={<Orders />} />
-
-                  {/* Protected Admin Routes */}
-                  <Route path="/admin" element={<AdminDashboard />} />
-                  <Route path="/admin/products" element={<AdminProducts />} />
-                  <Route path="/admin/orders" element={<AdminOrders />} />
-                </Route>
-
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>

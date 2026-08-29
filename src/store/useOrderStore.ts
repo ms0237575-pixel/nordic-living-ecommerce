@@ -4,6 +4,12 @@ import type { CartItem } from "@/types/product";
 
 export type OrderStatus = "Processing" | "Shipped" | "Delivered" | "Cancelled";
 
+export interface GiftOptions {
+  isGift: boolean;
+  giftMessage?: string;
+  recipientName?: string;
+}
+
 export interface AdminOrder {
   id: string;
   customerName: string;
@@ -15,6 +21,7 @@ export interface AdminOrder {
   totalAmount: number;
   status: OrderStatus;
   createdAt: string;
+  gift?: GiftOptions;
 }
 
 const orderChannel =
@@ -77,9 +84,15 @@ export const useOrderStore = create<OrderStore>()(
           address: "90th Street, Fifth Settlement",
           city: "New Cairo",
           items: [],
-          totalAmount: 1240.0,
+          totalAmount: 1255.0,
           status: "Processing",
           createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+          gift: {
+            isGift: true,
+            recipientName: "Habiba",
+            giftMessage:
+              "Warm wishes for your new home. Hope you love this piece!",
+          },
         },
         {
           id: "ORD-83912",

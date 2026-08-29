@@ -12,8 +12,8 @@ import {
 import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 import { useAuthStore } from "@/store/useAuthStore";
-import SearchOverlay from "@/components/layout/SearchOverlay";
 import { useWishlistStore } from "@/store/useWishlistStore";
+import SearchOverlay from "@/components/layout/SearchOverlay";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -21,6 +21,7 @@ export function Navbar() {
   const location = useLocation();
   const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const logout = useAuthStore((state) => state.logout);
 
@@ -230,17 +231,17 @@ export function Navbar() {
             onClick={() => setOpen(false)}
           />
 
-          <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-white shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6">
+          <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-white text-nordic-charcoal shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6">
             <div>
               <div className="flex items-center justify-between border-b border-nordic-gray/20 pb-4">
-                <span className="font-serif text-[22px] font-semibold text-nordic-charcoal">
+                <span className="font-serif text-[22px] font-semibold text-inherit">
                   Nordic Living
                 </span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  className="h-10 w-10 flex items-center justify-center text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="h-10 w-10 flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   <X className="h-6 w-6 stroke-[1.5]" />
                 </button>
@@ -250,35 +251,35 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
                   onClick={makeNavHandler("/shop", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Collection
                 </Link>
                 <Link
                   to="/about"
                   onClick={makeNavHandler("/about", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Philosophy
                 </Link>
                 <Link
                   to="/orders"
                   onClick={makeNavHandler("/orders", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Orders
                 </Link>
                 <Link
                   to="/wishlist"
                   onClick={makeNavHandler("/wishlist", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Wishlist ({wishlistCount})
                 </Link>
