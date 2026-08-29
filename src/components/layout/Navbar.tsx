@@ -68,25 +68,27 @@ export function Navbar() {
     <>
       <style>{`
         @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
         }
         .animate-marquee {
+          display: inline-flex;
+          width: max-content;
           animation: marquee 25s linear infinite;
         }
       `}</style>
 
-      <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+      <div className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full overflow-x-hidden">
         {isHome && (
-          <div className="relative flex items-center bg-[#F4F0EB] text-nordic-charcoal overflow-hidden h-10 border-b border-nordic-charcoal/5">
-            <div className="flex-1 overflow-hidden whitespace-nowrap flex items-center h-full">
-              <div className="animate-marquee inline-block">
-                {Array(10)
+          <div className="relative flex items-center bg-[#F4F0EB] text-nordic-charcoal overflow-hidden h-10 border-b border-nordic-charcoal/5 w-full">
+            <div className="w-full overflow-hidden whitespace-nowrap flex items-center h-full">
+              <div className="animate-marquee">
+                {Array(6)
                   .fill(null)
                   .map((_, i) => (
                     <span
                       key={i}
-                      className="mx-8 text-[11px] font-medium tracking-widest uppercase"
+                      className="mx-8 text-[11px] font-medium tracking-widest uppercase shrink-0"
                     >
                       Complimentary worldwide shipping on orders over $500 ·
                       Handcrafted in Copenhagen
@@ -108,7 +110,6 @@ export function Navbar() {
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
-              {/* Mobile Menu Button */}
               <div className="flex items-center lg:hidden">
                 <button
                   onClick={() => setOpen(true)}
@@ -119,7 +120,6 @@ export function Navbar() {
                 </button>
               </div>
 
-              {/* Brand Logo */}
               <div className="flex-1 text-center lg:text-left lg:flex-none">
                 <Link
                   to="/"
@@ -130,7 +130,6 @@ export function Navbar() {
                 </Link>
               </div>
 
-              {/* Desktop Nav Links */}
               <div className="hidden lg:flex lg:gap-x-10">
                 <Link
                   to="/"
@@ -162,7 +161,6 @@ export function Navbar() {
                 </Link>
               </div>
 
-              {/* Action Icons */}
               <div className="flex items-center gap-1 sm:gap-2">
                 <button
                   onClick={() => setSearchOverlayOpen(true)}
@@ -225,7 +223,6 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile Drawer */}
       {open && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
           <div

@@ -23,10 +23,16 @@ import { Register } from "@/pages/Register";
 import { OrderSuccess } from "@/pages/OrderSuccess";
 import { NotFound } from "@/pages/NotFound";
 import { AdminProducts } from "@/pages/admin/AdminProducts";
+import { AdminOrders } from "@/pages/admin/AdminOrders";
 
 export default function App() {
   useEffect(() => {
-    AOS.init({ duration: 800, once: true, easing: "ease-out" });
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-out",
+      disable: "mobile",
+    });
   }, []);
 
   return (
@@ -58,11 +64,10 @@ export default function App() {
           }}
         />
 
-        <div className="min-h-screen flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
+        <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
           <Navbar />
 
-          <main className="flex-1 pt-30">
-            {" "}
+          <main className="flex-1 w-full overflow-x-hidden pt-30">
             <ErrorBoundary>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -79,6 +84,7 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin/products" element={<AdminProducts />} />
+                <Route path="/admin/orders" element={<AdminOrders />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>

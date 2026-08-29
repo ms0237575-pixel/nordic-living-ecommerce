@@ -2,11 +2,11 @@ import { Link } from "react-router";
 
 export function HeroSection() {
   return (
-    <section className="relative -mt-30 h-screen w-full overflow-hidden">
+    <section className="relative -mt-30 min-h-svh w-full overflow-hidden bg-nordic-charcoal">
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
+          50% { transform: translateY(-10px); }
           100% { transform: translateY(0px); }
         }
         .floating-content {
@@ -20,11 +20,11 @@ export function HeroSection() {
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/40" />
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white floating-content">
+      <div className="relative z-10 flex min-h-svh flex-col items-center justify-center px-4 pt-24 pb-12 text-center text-white floating-content">
         <h1
-          className="mb-6 font-serif text-5xl font-normal leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg"
+          className="mb-6 font-serif text-4xl font-normal leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -32,7 +32,7 @@ export function HeroSection() {
         </h1>
 
         <p
-          className="mb-10 max-w-lg font-sans text-sm font-medium uppercase tracking-[0.2em] text-white/90 sm:text-base drop-shadow-md"
+          className="mb-10 max-w-lg font-sans text-xs font-medium uppercase tracking-[0.2em] text-white/90 sm:text-sm md:text-base drop-shadow-md"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="200"
@@ -43,7 +43,7 @@ export function HeroSection() {
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
           <Link
             to="/shop"
-            className="inline-block border border-white px-10 py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-nordic-charcoal backdrop-blur-sm bg-white/10"
+            className="inline-block border border-white px-8 py-3.5 sm:px-10 sm:py-4 font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-nordic-charcoal backdrop-blur-sm bg-white/10"
           >
             Explore Collection
           </Link>
@@ -52,3 +52,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+export default HeroSection;
