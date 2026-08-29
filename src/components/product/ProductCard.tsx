@@ -1,4 +1,3 @@
-// src/components/product/ProductCard.tsx
 import { Link, useNavigate } from "react-router";
 import type { Product } from "@/types/product";
 import type { MouseEvent } from "react";
@@ -83,7 +82,7 @@ export function ProductCard({ product }: ProductCardProps) {
     product.images && product.images.length > 1 ? product.images[1] : null;
 
   return (
-    <div className="group relative">
+    <div className="group/card relative">
       <button
         type="button"
         onClick={handleToggleWishlist}
@@ -100,14 +99,14 @@ export function ProductCard({ product }: ProductCardProps) {
       </button>
 
       <Link to={`/product/${product.slug}`} className="block">
-        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative group">
+        <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
             className={`h-full w-full object-cover object-center ${
               hoverImage
-                ? "absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+                ? "absolute inset-0 transition-opacity duration-500 group-hover/card:opacity-0"
                 : ""
             }`}
           />
@@ -116,13 +115,13 @@ export function ProductCard({ product }: ProductCardProps) {
               src={hoverImage}
               alt={product.name}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
             />
           )}
         </div>
 
         <div className="mt-4 space-y-1">
-          <h3 className="font-sans text-body font-normal text-nordic-charcoal transition-colors duration-300 group-hover:text-nordic-terracotta">
+          <h3 className="font-sans text-body font-normal text-nordic-charcoal transition-colors duration-300 group-hover/card:text-nordic-terracotta">
             {product.name}
           </h3>
           <p className="font-sans text-body font-medium text-nordic-terracotta">
@@ -130,6 +129,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </p>
 
           <button
+            type="button"
             onClick={handleAddToCart}
             className="mt-4 w-full border border-nordic-gray/20 py-3 text-center font-sans text-[12px] font-semibold uppercase tracking-widest text-nordic-charcoal transition-colors hover:bg-nordic-charcoal hover:text-white"
           >
@@ -140,3 +140,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </div>
   );
 }
+
+export default ProductCard;

@@ -1,5 +1,4 @@
-// src/components/product/ProductCarousel.tsx
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "./ProductCard";
@@ -41,7 +40,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative group">
+    <div className="relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex -ml-4">
           {products.map((product) => (
@@ -77,3 +76,5 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
     </div>
   );
 }
+
+export default ProductCarousel;
