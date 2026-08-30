@@ -42,7 +42,6 @@ const sections = [
 export function About() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-      {/* Header Section */}
       <header className="mx-auto max-w-3xl text-center">
         <p
           className="font-sans text-caption font-medium uppercase tracking-[0.22em] text-nordic-terracotta"
@@ -72,7 +71,6 @@ export function About() {
         </p>
       </header>
 
-      {/* Brand Stats Grid */}
       <section className="mt-20 border-y border-nordic-gray/20 py-12 lg:mt-24">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {stats.map((stat, i) => {
@@ -100,7 +98,6 @@ export function About() {
         </div>
       </section>
 
-      {/* Story Narrative Sections */}
       <div className="mt-24 space-y-24 lg:mt-32 lg:space-y-32">
         {sections.map((section) => (
           <section
@@ -118,6 +115,7 @@ export function About() {
                 src={section.image}
                 alt={section.alt}
                 loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-2500 ease-out group-hover:scale-105"
               />
             </div>
@@ -153,7 +151,6 @@ export function About() {
         ))}
       </div>
 
-      {/* Final Call to Action */}
       <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32">
         <h2
           className="font-serif text-[32px] font-semibold text-nordic-charcoal sm:text-[40px]"
@@ -174,10 +171,10 @@ export function About() {
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
           <Link
             to="/shop"
-            className="group mt-10 inline-flex items-center gap-3 border border-nordic-charcoal bg-nordic-charcoal px-10 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-md"
+            className="group mt-10 inline-flex items-center gap-3 border border-nordic-charcoal bg-nordic-charcoal px-9 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
           >
             <span>Shop the Collection</span>
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>

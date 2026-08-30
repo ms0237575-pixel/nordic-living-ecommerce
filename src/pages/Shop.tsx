@@ -276,9 +276,9 @@ export function Shop() {
         <div className="lg:hidden" data-aos="fade-left" data-aos-duration="800">
           <button
             onClick={() => setOpen(true)}
-            className="inline-flex h-11 items-center justify-center gap-2 font-sans text-[13px] font-medium uppercase tracking-widest text-nordic-charcoal transition-colors duration-300 hover:text-nordic-terracotta"
+            className="inline-flex h-10 items-center justify-center gap-2 border border-nordic-charcoal/30 px-4 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-charcoal transition-colors hover:border-nordic-charcoal"
           >
-            <Filter className="h-4 w-4 stroke-[1.5]" />
+            <Filter className="h-3.5 w-3.5 stroke-[1.5]" />
             Filters
           </button>
         </div>
@@ -309,7 +309,7 @@ export function Shop() {
             <div className="border-t border-nordic-gray/10 p-6">
               <button
                 onClick={() => setOpen(false)}
-                className="w-full bg-nordic-charcoal py-4 font-sans text-[13px] font-medium uppercase tracking-widest text-white transition-colors hover:bg-nordic-terracotta"
+                className="w-full border border-nordic-charcoal bg-nordic-charcoal py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
               >
                 Show {filteredProducts.length} Results
               </button>

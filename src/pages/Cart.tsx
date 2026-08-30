@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { CartItem } from "@/components/cart/CartItem";
 import { useCartStore } from "@/store/useCartStore";
 import { toast } from "sonner";
-import { Truck, Check, Sparkles } from "lucide-react";
+import { Truck, Check, Sparkles, ArrowRight, ArrowUpRight } from "lucide-react";
 
 const validPromoCodes: Record<string, number> = {
   NORDIC10: 0.1,
@@ -66,9 +66,10 @@ export default function Cart() {
         </p>
         <Link
           to="/shop"
-          className="mt-8 border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:text-nordic-terracotta"
+          className="group mt-8 inline-flex items-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
         >
-          Continue Shopping
+          <span>Continue Shopping</span>
+          <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
     );
@@ -83,7 +84,7 @@ export default function Cart() {
         <button
           type="button"
           onClick={clearCart}
-          className="font-sans text-button font-medium uppercase tracking-widest text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
+          className="font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-nordic-sage-dark transition-colors duration-300 hover:text-nordic-terracotta"
         >
           Clear Cart
         </button>
@@ -178,11 +179,11 @@ export default function Cart() {
                   if (errorMsg) setErrorMsg(null);
                 }}
                 placeholder="NORDIC10"
-                className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2.5 font-sans text-[13px] uppercase text-nordic-charcoal outline-none transition-colors duration-300 placeholder:text-nordic-sage-dark/60 focus:border-nordic-charcoal"
+                className="w-full border border-nordic-gray/30 bg-transparent px-3 py-2 font-sans text-[13px] uppercase text-nordic-charcoal outline-none transition-colors duration-300 placeholder:text-nordic-sage-dark/60 focus:border-nordic-charcoal"
               />
               <button
                 type="submit"
-                className="border border-nordic-charcoal bg-nordic-charcoal px-5 py-2.5 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta"
+                className="border border-nordic-charcoal bg-nordic-charcoal px-5 py-2 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta"
               >
                 Apply
               </button>
@@ -256,9 +257,10 @@ export default function Cart() {
 
           <Link
             to="/checkout"
-            className="mt-6 block border border-nordic-charcoal bg-nordic-charcoal px-6 py-4 text-center font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
+            className="group mt-6 flex w-full items-center justify-center gap-2.5 border border-nordic-charcoal bg-nordic-charcoal px-6 py-3.5 text-center font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
           >
-            Proceed to Checkout
+            <span>Proceed to Checkout</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </aside>
       </div>
