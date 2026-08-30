@@ -8,7 +8,135 @@ import {
   XCircle,
   ShoppingBag,
   Gift,
+  Sparkles,
+  ClipboardCheck,
 } from "lucide-react";
+
+interface StepConfig {
+  label: string;
+  sublabel: string;
+  icon: typeof Package;
+}
+
+const ORDER_STEPS: StepConfig[] = [
+  { label: "Order Placed", sublabel: "Confirmed & Logged", icon: Package },
+  {
+    label: "Quality Check",
+    sublabel: "Nordic Atelier Prep",
+    icon: ClipboardCheck,
+  },
+  { label: "In Transit", sublabel: "Dispatched Courier", icon: Truck },
+  { label: "Delivered", sublabel: "Safely Arrived", icon: CheckCircle2 },
+];
+
+function getStepProgress(status: OrderStatus): {
+  currentStep: number;
+  isCancelled: boolean;
+} {
+  switch (status) {
+    case "Processing":
+      return { currentStep: 1, isCancelled: false };
+    case "Shipped":
+      return { currentStep: 2, isCancelled: false };
+    case "Delivered":
+      return { currentStep: 3, isCancelled: false };
+    case "Cancelled":
+      return { currentStep: -1, isCancelled: true };
+    default:
+      return { currentStep: 0, isCancelled: false };
+  }
+}
+
+function OrderTimeline({ status }: { status: OrderStatus }) {
+  const { currentStep, isCancelled } = getStepProgress(status);
+
+  if (isCancelled) {
+    return (
+      <div className="mt-8 rounded-none border border-rose-200 bg-rose-50/50 p-4 flex items-center gap-3 text-rose-800 font-sans text-[13px]">
+        <XCircle className="h-5 w-5 shrink-0 text-rose-600" />
+        <div>
+          <span className="font-semibold block">Order Cancelled</span>
+          <span className="text-[12px] text-rose-700/80">
+            This shipment has been cancelled. If you have questions, please
+            contact our atelier support.
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  const progressPercent = (currentStep / (ORDER_STEPS.length - 1)) * 100;
+
+  return (
+    <div className="mt-8 border-t border-nordic-gray/15 pt-6">
+      <div className="flex items-center justify-between mb-6">
+        <span className="font-sans text-[11px] font-semibold uppercase tracking-widest text-nordic-sage-dark flex items-center gap-1.5">
+          <Sparkles className="h-3.5 w-3.5 text-nordic-terracotta" />
+          Live Shipment Progress
+        </span>
+        <span className="font-sans text-[12px] font-medium text-nordic-terracotta capitalize">
+          {status === "Processing" ? "Processing & Inspection" : status}
+        </span>
+      </div>
+
+      <div className="relative mx-auto px-2">
+        {/* Background Track */}
+        <div className="absolute top-5 left-6 right-6 h-0.5 bg-nordic-gray/25 -translate-y-1/2 z-0 sm:left-12 sm:right-12" />
+
+        {/* Animated Active Progress Fill */}
+        <div
+          className="absolute top-5 left-6 h-0.5 bg-nordic-charcoal -translate-y-1/2 z-0 transition-all duration-700 ease-out sm:left-12"
+          style={{ width: `calc(${progressPercent}% * 0.82)` }}
+        />
+
+        {/* Steps Nodes */}
+        <div className="relative z-10 flex justify-between items-start">
+          {ORDER_STEPS.map((step, idx) => {
+            const isCompleted = idx < currentStep;
+            const isCurrent = idx === currentStep;
+            const StepIcon = step.icon;
+
+            return (
+              <div
+                key={idx}
+                className="flex flex-col items-center text-center w-20 sm:w-28"
+              >
+                <div
+                  className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-500 ${
+                    isCompleted
+                      ? "bg-nordic-charcoal text-white shadow-sm ring-4 ring-nordic-bg"
+                      : isCurrent
+                        ? "bg-nordic-terracotta text-white shadow-md ring-4 ring-nordic-terracotta/20 scale-110"
+                        : "bg-white text-nordic-gray border border-nordic-gray/40"
+                  }`}
+                >
+                  <StepIcon className="h-4 w-4 stroke-[1.8]" />
+                </div>
+
+                <div className="mt-3">
+                  <span
+                    className={`block font-sans text-[12px] transition-colors leading-tight ${
+                      isCurrent
+                        ? "font-semibold text-nordic-charcoal"
+                        : isCompleted
+                          ? "font-medium text-nordic-charcoal"
+                          : "text-nordic-sage-dark"
+                    }`}
+                  >
+                    {step.label}
+                  </span>
+                  <span className="hidden sm:block font-sans text-[10px] text-nordic-sage-dark mt-0.5">
+                    {step.sublabel}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Orders() {
   const customerOrders = useOrderStore((state) => state.orders);
@@ -79,7 +207,7 @@ export function Orders() {
         </h1>
       </div>
 
-      <div className="mt-10 space-y-8">
+      <div className="mt-10 space-y-10">
         {customerOrders.map((order) => (
           <div
             key={order.id}
@@ -108,7 +236,10 @@ export function Orders() {
               </div>
             </div>
 
-            <div className="mt-6 divide-y divide-nordic-gray/10">
+            {/* Live Interactive Stepper Timeline */}
+            <OrderTimeline status={order.status} />
+
+            <div className="mt-8 divide-y divide-nordic-gray/10 border-t border-nordic-gray/15 pt-6">
               {order.items.length === 0 ? (
                 <p className="py-4 font-sans text-[13px] text-nordic-sage-dark italic">
                   Pre-configured sample order package.
@@ -170,7 +301,7 @@ export function Orders() {
                 </strong>
               </span>
               <span className="capitalize">
-                Status:{" "}
+                Current Status:{" "}
                 <strong className="text-nordic-charcoal font-medium">
                   {order.status}
                 </strong>
