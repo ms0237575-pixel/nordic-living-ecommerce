@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import { useEffect, Suspense, lazy } from "react";
+import { useEffect } from "react";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -10,61 +10,21 @@ import Footer from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
-
-// Lazy-loaded Pages for Maximum Speed & Split Bundling
-const Home = lazy(() =>
-  import("@/pages/Home").then((m) => ({ default: m.Home })),
-);
-const About = lazy(() =>
-  import("@/pages/About").then((m) => ({ default: m.About })),
-);
-const Cart = lazy(() => import("@/pages/Cart"));
-const Checkout = lazy(() => import("@/pages/Checkout"));
-const Orders = lazy(() =>
-  import("@/pages/Orders").then((m) => ({ default: m.Orders })),
-);
-const Shop = lazy(() =>
-  import("@/pages/Shop").then((m) => ({ default: m.Shop })),
-);
-const Wishlist = lazy(() =>
-  import("@/pages/Wishlist").then((m) => ({ default: m.Wishlist })),
-);
-const ProductDetails = lazy(() =>
-  import("@/pages/ProductDetails").then((m) => ({ default: m.ProductDetails })),
-);
-const Login = lazy(() =>
-  import("@/pages/Login").then((m) => ({ default: m.Login })),
-);
-const Register = lazy(() =>
-  import("@/pages/Register").then((m) => ({ default: m.Register })),
-);
-const OrderSuccess = lazy(() =>
-  import("@/pages/OrderSuccess").then((m) => ({ default: m.OrderSuccess })),
-);
-const NotFound = lazy(() =>
-  import("@/pages/NotFound").then((m) => ({ default: m.NotFound })),
-);
-const AdminDashboard = lazy(() =>
-  import("@/pages/admin/AdminDashboard").then((m) => ({
-    default: m.AdminDashboard,
-  })),
-);
-const AdminProducts = lazy(() =>
-  import("@/pages/admin/AdminProducts").then((m) => ({
-    default: m.AdminProducts,
-  })),
-);
-const AdminOrders = lazy(() =>
-  import("@/pages/admin/AdminOrders").then((m) => ({ default: m.AdminOrders })),
-);
-
-function PageLoader() {
-  return (
-    <div className="flex min-h-[60vh] w-full items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-nordic-gray/20 border-t-nordic-terracotta" />
-    </div>
-  );
-}
+import { Home } from "@/pages/Home";
+import { About } from "@/pages/About";
+import Cart from "@/pages/Cart";
+import Checkout from "@/pages/Checkout";
+import Orders from "@/pages/Orders";
+import { Shop } from "@/pages/Shop";
+import { Wishlist } from "@/pages/Wishlist";
+import { ProductDetails } from "@/pages/ProductDetails";
+import { Login } from "@/pages/Login";
+import { Register } from "@/pages/Register";
+import { OrderSuccess } from "@/pages/OrderSuccess";
+import { NotFound } from "@/pages/NotFound";
+import { AdminDashboard } from "@/pages/admin/AdminDashboard";
+import { AdminProducts } from "@/pages/admin/AdminProducts";
+import { AdminOrders } from "@/pages/admin/AdminOrders";
 
 export default function App() {
   useEffect(() => {
@@ -108,29 +68,27 @@ export default function App() {
         <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
           <Navbar />
 
-          <main className="flex-1 w-full overflow-x-hidden pt-30">
+          <main className="flex-1 w-full overflow-x-hidden">
             <ErrorBoundary>
-              <Suspense fallback={<PageLoader />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/shop" element={<Shop />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route element={<ProtectedRoute />}>
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/orders" element={<Orders />} />
-                    <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/admin/products" element={<AdminProducts />} />
-                    <Route path="/admin/orders" element={<AdminOrders />} />
-                  </Route>
-                  <Route path="/order-success" element={<OrderSuccess />} />
-                  <Route path="/product/:slug" element={<ProductDetails />} />
-                  <Route path="/wishlist" element={<Wishlist />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/admin/products" element={<AdminProducts />} />
+                  <Route path="/admin/orders" element={<AdminOrders />} />
+                </Route>
+                <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/product/:slug" element={<ProductDetails />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
             </ErrorBoundary>
           </main>
 

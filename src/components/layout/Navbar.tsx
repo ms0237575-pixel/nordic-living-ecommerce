@@ -17,17 +17,13 @@ import SearchOverlay from "@/components/layout/SearchOverlay";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [isHome, setIsHome] = useState(false);
   const location = useLocation();
   const [searchOverlayOpen, setSearchOverlayOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const isHome = location.pathname === "/";
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const logout = useAuthStore((state) => state.logout);
-
-  useEffect(() => {
-    setIsHome(location.pathname === "/");
-  }, [location.pathname]);
 
   const handleLogout = () => {
     logout();
@@ -81,7 +77,7 @@ export function Navbar() {
 
       <div className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full overflow-x-hidden">
         {isHome && (
-          <div className="relative flex items-center bg-[#F4F0EB] text-nordic-charcoal overflow-hidden h-10 border-b border-nordic-charcoal/5 w-full">
+          <div className="relative flex items-center bg-[#F4F0EB] text-nordic-charcoal overflow-hidden h-9 border-b border-nordic-charcoal/5 w-full">
             <div className="w-full overflow-hidden whitespace-nowrap flex items-center h-full">
               <div className="animate-marquee">
                 {Array(6)
@@ -105,16 +101,16 @@ export function Navbar() {
             isScrolled
               ? "bg-nordic-bg/95 backdrop-blur-md border-b border-nordic-charcoal/10 text-nordic-charcoal shadow-sm py-3"
               : isHome
-                ? "bg-transparent border-b-0 text-white py-5"
-                : "bg-nordic-bg/95 backdrop-blur-md border-b-0 text-nordic-charcoal py-5"
+                ? "bg-transparent border-b-0 text-white py-4"
+                : "bg-nordic-bg/95 backdrop-blur-md border-b border-nordic-charcoal/10 text-nordic-charcoal py-4"
           }`}
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+            <div className="flex h-14 items-center justify-between">
               <div className="flex items-center lg:hidden">
                 <button
                   onClick={() => setOpen(true)}
-                  className="p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="p-2 h-10 w-10 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                   aria-label="Open menu"
                 >
                   <Menu className="h-6 w-6 stroke-[1.5]" />
@@ -125,7 +121,7 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="inline-block font-serif text-[26px] lg:text-[30px] font-semibold text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="inline-block font-serif text-[26px] lg:text-[30px] font-normal text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   Nordic Living
                 </Link>
@@ -162,10 +158,10 @@ export function Navbar() {
                 </Link>
               </div>
 
-              <div className="flex items-center gap-1 sm:gap-2">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <button
                   onClick={() => setSearchOverlayOpen(true)}
-                  className="p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="p-2 h-10 w-10 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                   aria-label="Search"
                 >
                   <Search className="h-5 w-5 stroke-[1.5]" />
@@ -175,11 +171,11 @@ export function Navbar() {
                   to="/wishlist"
                   onClick={makeNavHandler("/wishlist", false)}
                   aria-label="Wishlist"
-                  className="relative p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="relative p-2 h-10 w-10 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   <Heart className="h-5 w-5 stroke-[1.5]" />
                   {wishlistCount > 0 && (
-                    <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
+                    <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
                       {wishlistCount}
                     </span>
                   )}
@@ -189,11 +185,11 @@ export function Navbar() {
                   to="/cart"
                   onClick={makeNavHandler("/cart", false)}
                   aria-label="Shopping bag"
-                  className="relative p-2 h-11 w-11 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="relative p-2 h-10 w-10 inline-flex items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                 >
                   <ShoppingBag className="h-5 w-5 stroke-[1.5]" />
                   {cartCount > 0 && (
-                    <span className="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
+                    <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-nordic-terracotta font-sans text-[10px] font-bold text-white">
                       {cartCount}
                     </span>
                   )}
@@ -204,7 +200,7 @@ export function Navbar() {
                     type="button"
                     onClick={handleLogout}
                     title="Sign Out"
-                    className="hidden lg:inline-flex p-2 h-11 w-11 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                    className="hidden lg:inline-flex p-2 h-10 w-10 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                   >
                     <LogOut className="h-5 w-5 stroke-[1.5]" />
                   </button>
@@ -213,7 +209,7 @@ export function Navbar() {
                     to="/login"
                     onClick={makeNavHandler("/login", false)}
                     title="Account Login"
-                    className="hidden lg:inline-flex p-2 h-11 w-11 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
+                    className="hidden lg:inline-flex p-2 h-10 w-10 items-center justify-center text-inherit hover:text-nordic-terracotta transition-colors"
                   >
                     <User className="h-5 w-5 stroke-[1.5]" />
                   </Link>
@@ -234,7 +230,7 @@ export function Navbar() {
           <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-white text-nordic-charcoal shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6">
             <div>
               <div className="flex items-center justify-between border-b border-nordic-gray/20 pb-4">
-                <span className="font-serif text-[22px] font-semibold text-inherit">
+                <span className="font-serif text-[22px] font-normal text-inherit">
                   Nordic Living
                 </span>
                 <button

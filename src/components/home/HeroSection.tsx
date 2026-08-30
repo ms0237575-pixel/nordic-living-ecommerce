@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export function HeroSection() {
   return (
-    <section className="relative -mt-30 min-h-svh w-full overflow-hidden bg-nordic-charcoal">
+    <section className="relative -mt-30 h-[calc(100vh+120px)] w-full overflow-hidden bg-nordic-charcoal">
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px); }
@@ -15,14 +15,14 @@ export function HeroSection() {
       `}</style>
 
       <img
-        src="/images/products/hero-background.jpg"
         alt="Nordic Living Interior"
         className="absolute inset-0 h-full w-full object-cover object-center"
+        src="/images/products/hero-background.jpg"
       />
 
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/40"></div>
 
-      <div className="relative z-10 flex min-h-svh flex-col items-center justify-center px-4 pt-24 pb-12 text-center text-white floating-content">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pt-30 pb-12 text-center text-white floating-content">
         <h1
           className="mb-6 font-serif text-4xl font-normal leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg"
           data-aos="fade-up"
