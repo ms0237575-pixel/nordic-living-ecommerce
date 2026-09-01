@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router";
+import { useAuthStore } from "@/store/useAuthStore";
 import { useCartStore } from "@/store/useCartStore";
 import { useOrderStore } from "@/store/useOrderStore";
 import type { CartItem } from "@/types/product";
@@ -42,12 +43,17 @@ const initialFormState: CheckoutFormState = {
   giftMessage: "",
 };
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Checkout() {
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
   const addOrder = useOrderStore((state) => state.addOrder);
+  const loggedInUserEmail = useAuthStore((state) => state.userEmail);
+  const loggedInUserId = useAuthStore((state) => state.userId);
   const navigate = useNavigate();
   const [formData, setFormData] = useState<CheckoutFormState>(initialFormState);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const subtotal = cart.reduce(
     (total, item) => total + item.product.price * item.quantity,
@@ -71,6 +77,42 @@ export default function Checkout() {
     }
   };
 
+  const validateCheckoutForm = () => {
+    if (!formData.firstName.trim()) {
+      return "First name is required.";
+    }
+
+    if (!formData.lastName.trim()) {
+      return "Last name is required.";
+    }
+
+    if (!formData.email.trim()) {
+      return "Email address is required.";
+    }
+
+    if (!EMAIL_PATTERN.test(formData.email.trim())) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!formData.address.trim()) {
+      return "Street address is required.";
+    }
+
+    if (!formData.city.trim()) {
+      return "City is required.";
+    }
+
+    if (!formData.postalCode.trim()) {
+      return "Postal code is required.";
+    }
+
+    if (!formData.paymentMethod) {
+      return "Please choose a payment method.";
+    }
+
+    return "";
+  };
+
   const handlePlaceOrder = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -79,9 +121,23 @@ export default function Checkout() {
       return;
     }
 
+    const validationError = validateCheckoutForm();
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
+    setIsProcessing(true);
+
+    const activeCustomerIdentifier = (
+      loggedInUserId ??
+      loggedInUserEmail ??
+      formData.email.trim()
+    ).trim();
+
     const orderPayload = {
       customerName: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
-      customerEmail: formData.email.trim(),
+      customerEmail: activeCustomerIdentifier,
       customerPhone: formData.phone.trim() || undefined,
       address: formData.address.trim(),
       city: formData.city.trim(),
@@ -96,13 +152,13 @@ export default function Checkout() {
         : undefined,
     };
 
-    const newOrderId = addOrder(orderPayload);
-
-    clearCart();
-    toast.success(`Order ${newOrderId} placed successfully!`);
-    navigate(`/order-success?orderId=${encodeURIComponent(newOrderId)}`, {
-      replace: true,
-    });
+    window.setTimeout(() => {
+      const newOrderId = addOrder(orderPayload);
+      clearCart();
+      toast.success(`Order ${newOrderId} placed successfully!`);
+      setIsProcessing(false);
+      navigate("/order-success", { replace: true });
+    }, 1200);
   };
 
   if (cart.length === 0) {
@@ -452,10 +508,13 @@ export default function Checkout() {
           <button
             type="submit"
             form="checkout-form"
-            className="mt-8 flex w-full items-center justify-center gap-2 border border-nordic-charcoal bg-nordic-charcoal px-6 py-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
+            disabled={isProcessing}
+            className="mt-8 flex w-full items-center justify-center gap-2 border border-nordic-charcoal bg-nordic-charcoal px-6 py-4 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm disabled:cursor-not-allowed disabled:opacity-80"
           >
             <Lock className="h-4 w-4" />
-            Complete Order (${total.toFixed(2)})
+            {isProcessing
+              ? "Processing..."
+              : `Complete Order ($${total.toFixed(2)})`}
           </button>
 
           <div className="mt-6 space-y-2 border-t border-nordic-gray/10 pt-4 font-sans text-[12px] text-nordic-sage-dark">
