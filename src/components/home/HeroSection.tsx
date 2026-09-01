@@ -32,7 +32,7 @@ export function HeroSection() {
         </h1>
 
         <p
-          className="mb-10 max-w-lg font-sans text-xs font-medium uppercase tracking-[0.2em] text-white/90 sm:text-sm md:text-base drop-shadow-md"
+          className="mb-10 max-w-lg font-sans text-xs font-medium uppercase tracking-widest text-white/90 sm:text-sm md:text-base drop-shadow-md"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="200"
@@ -43,7 +43,7 @@ export function HeroSection() {
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
           <Link
             to="/shop"
-            className="inline-block border border-white px-8 py-3.5 sm:px-10 sm:py-4 font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-white hover:text-nordic-charcoal backdrop-blur-sm bg-white/10"
+            className="inline-block border border-white bg-white/10 px-8 py-3.5 font-sans text-xs font-medium uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-nordic-charcoal sm:px-10 sm:py-4 sm:text-sm"
           >
             Explore Collection
           </Link>

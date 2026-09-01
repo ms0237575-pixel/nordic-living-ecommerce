@@ -77,15 +77,15 @@ export function Navbar() {
 
       <div className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full overflow-x-hidden">
         {isHome && (
-          <div className="relative flex items-center bg-[#F4F0EB] text-nordic-charcoal overflow-hidden h-9 border-b border-nordic-charcoal/5 w-full">
-            <div className="w-full overflow-hidden whitespace-nowrap flex items-center h-full">
+          <div className="relative flex h-9 w-full items-center overflow-hidden border-b border-nordic-charcoal/5 bg-nordic-bg text-nordic-charcoal">
+            <div className="flex h-full w-full items-center overflow-hidden whitespace-nowrap">
               <div className="animate-marquee">
                 {Array(6)
                   .fill(null)
                   .map((_, i) => (
                     <span
                       key={i}
-                      className="mx-8 text-[11px] font-medium tracking-widest uppercase shrink-0"
+                      className="mx-8 text-caption font-medium uppercase tracking-widest shrink-0"
                     >
                       Complimentary worldwide shipping on orders over $500 ·
                       Handcrafted in Copenhagen
@@ -121,7 +121,7 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="inline-block font-serif text-[26px] lg:text-[30px] font-normal text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="inline-block font-serif text-3xl font-normal text-inherit transition-colors hover:text-nordic-terracotta lg:text-[30px]"
                 >
                   Nordic Living
                 </Link>
@@ -131,28 +131,28 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-xs font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
                   onClick={makeNavHandler("/shop", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-xs font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Collection
                 </Link>
                 <Link
                   to="/about"
                   onClick={makeNavHandler("/about", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-xs font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Philosophy
                 </Link>
                 <Link
                   to="/orders"
                   onClick={makeNavHandler("/orders", false)}
-                  className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="font-sans text-xs font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Orders
                 </Link>
@@ -247,35 +247,35 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-sm font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Home
                 </Link>
                 <Link
                   to="/shop"
                   onClick={makeNavHandler("/shop", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-sm font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Collection
                 </Link>
                 <Link
                   to="/about"
                   onClick={makeNavHandler("/about", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-sm font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Philosophy
                 </Link>
                 <Link
                   to="/orders"
                   onClick={makeNavHandler("/orders", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-sm font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Orders
                 </Link>
                 <Link
                   to="/wishlist"
                   onClick={makeNavHandler("/wishlist", true)}
-                  className="py-3 font-sans text-[13px] font-medium uppercase tracking-widest text-inherit hover:text-nordic-terracotta transition-colors"
+                  className="py-3 font-sans text-sm font-medium uppercase tracking-widest text-inherit transition-colors hover:text-nordic-terracotta"
                 >
                   Wishlist ({wishlistCount})
                 </Link>

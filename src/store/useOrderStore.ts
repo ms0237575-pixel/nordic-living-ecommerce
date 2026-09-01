@@ -21,6 +21,8 @@ export interface AdminOrder {
   totalAmount: number;
   status: OrderStatus;
   createdAt: string;
+  userId?: string;
+  userEmail?: string;
   gift?: GiftOptions;
 }
 
@@ -28,6 +30,32 @@ const orderChannel =
   typeof window !== "undefined"
     ? new BroadcastChannel("nordic_orders_sync")
     : null;
+
+const getCurrentAuthContext = () => {
+  if (typeof window === "undefined") {
+    return {
+      userEmail: null,
+      userId: null,
+      role: null as "admin" | "user" | null,
+    };
+  }
+
+  try {
+    const raw = window.localStorage.getItem("nordic-living-auth");
+    if (!raw) {
+      return { userEmail: null, userId: null, role: null };
+    }
+
+    const parsed = JSON.parse(raw);
+    return {
+      userEmail: parsed?.state?.userEmail ?? null,
+      userId: parsed?.state?.userId ?? null,
+      role: parsed?.state?.role ?? null,
+    };
+  } catch {
+    return { userEmail: null, userId: null, role: null };
+  }
+};
 
 export const playOrderNotificationSound = () => {
   try {
@@ -67,14 +95,21 @@ export const playOrderNotificationSound = () => {
 
 interface OrderStore {
   orders: AdminOrder[];
-  addOrder: (order: Omit<AdminOrder, "id" | "createdAt" | "status">) => string;
+  getOrders: () => AdminOrder[];
+  addOrder: (
+    order: Omit<
+      AdminOrder,
+      "id" | "createdAt" | "status" | "userId" | "userEmail"
+    >,
+  ) => string;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
   deleteOrder: (orderId: string) => void;
+  clearOrders: () => void;
 }
 
 export const useOrderStore = create<OrderStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       orders: [
         {
           id: "ORD-94821",
@@ -87,6 +122,8 @@ export const useOrderStore = create<OrderStore>()(
           totalAmount: 1255.0,
           status: "Processing",
           createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+          userId: "salma@example.com",
+          userEmail: "salma@example.com",
           gift: {
             isGift: true,
             recipientName: "Habiba",
@@ -104,16 +141,46 @@ export const useOrderStore = create<OrderStore>()(
           totalAmount: 480.0,
           status: "Shipped",
           createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+          userId: "karim@example.com",
+          userEmail: "karim@example.com",
         },
       ],
 
+      getOrders: () => {
+        const { userEmail, userId, role } = getCurrentAuthContext();
+
+        if (role === "admin") {
+          return get().orders;
+        }
+
+        const normalizedEmail = userEmail?.toLowerCase() ?? null;
+        const normalizedUserId = userId?.toLowerCase() ?? null;
+
+        return get().orders.filter((order) => {
+          const matchesUserId =
+            normalizedUserId &&
+            (order.userId?.toLowerCase() === normalizedUserId ||
+              order.customerEmail.toLowerCase() === normalizedUserId);
+
+          const matchesUserEmail =
+            normalizedEmail &&
+            (order.userEmail?.toLowerCase() === normalizedEmail ||
+              order.customerEmail.toLowerCase() === normalizedEmail);
+
+          return Boolean(matchesUserId || matchesUserEmail);
+        });
+      },
+
       addOrder: (orderData) => {
+        const { userEmail, userId } = getCurrentAuthContext();
         const orderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
         const newOrder: AdminOrder = {
           ...orderData,
           id: orderId,
           status: "Processing",
           createdAt: new Date().toISOString(),
+          userId: userId ?? orderData.customerEmail,
+          userEmail: userEmail ?? orderData.customerEmail,
         };
 
         set((state) => ({ orders: [newOrder, ...state.orders] }));
@@ -136,6 +203,8 @@ export const useOrderStore = create<OrderStore>()(
         set((state) => ({
           orders: state.orders.filter((o) => o.id !== orderId),
         })),
+
+      clearOrders: () => set({ orders: [] }),
     }),
     {
       name: "nordic-living-orders-storage",

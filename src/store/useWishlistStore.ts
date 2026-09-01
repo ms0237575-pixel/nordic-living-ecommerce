@@ -2,7 +2,25 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { StateStorage } from "zustand/middleware";
 import type { Product } from "@/types/product";
-import { getCurrentUserEmail } from "@/lib/authStorage";
+
+const getScopedStorageKey = (prefix: string) => {
+  if (typeof window === "undefined") return `${prefix}-guest`;
+
+  try {
+    const raw = localStorage.getItem("nordic-living-auth");
+    if (!raw) return `${prefix}-guest`;
+
+    const parsed = JSON.parse(raw);
+    const identifier =
+      parsed?.state?.userId ?? parsed?.state?.userEmail ?? null;
+
+    if (!identifier) return `${prefix}-guest`;
+
+    return `${prefix}-${encodeURIComponent(String(identifier))}`;
+  } catch {
+    return `${prefix}-guest`;
+  }
+};
 
 interface WishlistStore {
   wishlist: Product[];
@@ -46,12 +64,7 @@ export const useWishlistStore = create<WishlistStore>()(
     {
       name: "nordic-living-wishlist",
       storage: createJSONStorage<StateStorage>(() => {
-        const resolveKey = () => {
-          const email = getCurrentUserEmail();
-          return email
-            ? `nordic-living-wishlist-${email}`
-            : "nordic-living-wishlist-guest";
-        };
+        const resolveKey = () => getScopedStorageKey("nordic-living-wishlist");
 
         return {
           getItem: () => localStorage.getItem(resolveKey()),

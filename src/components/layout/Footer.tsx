@@ -1,9 +1,8 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useLocation } from "react-router";
-import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { toast } from "sonner";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   const location = useLocation();
@@ -49,23 +48,26 @@ export default function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
+                onClick={(event) => event.preventDefault()}
                 className="flex h-10 w-10 items-center justify-center border border-nordic-charcoal/20 bg-white/50 text-nordic-charcoal transition-all duration-300 hover:border-nordic-terracotta hover:bg-nordic-terracotta hover:text-white"
               >
-                <FaInstagram className="h-4 w-4" aria-hidden />
+                <Mail className="h-4 w-4" aria-hidden />
               </a>
               <a
                 href="#"
                 aria-label="Twitter"
+                onClick={(event) => event.preventDefault()}
                 className="flex h-10 w-10 items-center justify-center border border-nordic-charcoal/20 bg-white/50 text-nordic-charcoal transition-all duration-300 hover:border-nordic-terracotta hover:bg-nordic-terracotta hover:text-white"
               >
-                <FaXTwitter className="h-4 w-4" aria-hidden />
+                <MapPin className="h-4 w-4" aria-hidden />
               </a>
               <a
                 href="#"
                 aria-label="Facebook"
+                onClick={(event) => event.preventDefault()}
                 className="flex h-10 w-10 items-center justify-center border border-nordic-charcoal/20 bg-white/50 text-nordic-charcoal transition-all duration-300 hover:border-nordic-terracotta hover:bg-nordic-terracotta hover:text-white"
               >
-                <FaFacebookF className="h-4 w-4" aria-hidden />
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
               </a>
             </div>
           </div>
@@ -130,7 +132,8 @@ export default function Footer() {
             <ul className="space-y-3 font-sans text-[14px] text-nordic-sage-dark">
               <li>
                 <a
-                  href="#faq"
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
                   className="transition-colors hover:text-nordic-terracotta"
                 >
                   Shipping & Returns
@@ -138,7 +141,8 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#care"
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
                   className="transition-colors hover:text-nordic-terracotta"
                 >
                   Product Care
@@ -146,7 +150,8 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#terms"
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
                   className="transition-colors hover:text-nordic-terracotta"
                 >
                   Terms & Conditions
@@ -154,7 +159,8 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#privacy"
+                  href="#"
+                  onClick={(event) => event.preventDefault()}
                   className="transition-colors hover:text-nordic-terracotta"
                 >
                   Privacy Policy
@@ -205,12 +211,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-nordic-charcoal/10 bg-[#f4f0eb]">
+      <div className="border-t border-nordic-charcoal/10 bg-nordic-bg">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:px-6 lg:px-8">
-          <div className="font-sans text-[12px] text-nordic-sage-dark">
+          <div className="font-sans text-caption text-nordic-sage-dark">
             © 2026 Nordic Living Copenhagen. All rights reserved.
           </div>
-          <div className="flex items-center gap-6 font-sans text-[12px] uppercase tracking-wider text-nordic-sage-dark">
+          <div className="flex items-center gap-6 font-sans text-caption uppercase tracking-wider text-nordic-sage-dark">
             <span>Sustainable Craft</span>
             <span>·</span>
             <span>Danish Architecture</span>

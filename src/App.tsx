@@ -47,12 +47,17 @@ export default function App() {
         <Toaster
           position="bottom-right"
           icons={{
-            success: <Check className="h-4 w-4" style={{ color: "#A56B57" }} />,
+            success: (
+              <Check
+                className="h-4 w-4"
+                style={{ color: "var(--color-nordic-terracotta)" }}
+              />
+            ),
           }}
           toastOptions={{
             style: {
-              background: "#1E1E1C",
-              color: "#F7F5F0",
+              background: "var(--color-nordic-charcoal)",
+              color: "var(--color-nordic-bg)",
               border: "none",
               borderRadius: "0px",
               fontFamily: "inherit",

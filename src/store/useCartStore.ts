@@ -2,7 +2,25 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { StateStorage } from "zustand/middleware";
 import type { CartItem, Product } from "@/types/product";
-import { getCurrentUserEmail } from "@/lib/authStorage";
+
+const getScopedStorageKey = (prefix: string) => {
+  if (typeof window === "undefined") return `${prefix}-guest`;
+
+  try {
+    const raw = localStorage.getItem("nordic-living-auth");
+    if (!raw) return `${prefix}-guest`;
+
+    const parsed = JSON.parse(raw);
+    const identifier =
+      parsed?.state?.userId ?? parsed?.state?.userEmail ?? null;
+
+    if (!identifier) return `${prefix}-guest`;
+
+    return `${prefix}-${encodeURIComponent(String(identifier))}`;
+  } catch {
+    return `${prefix}-guest`;
+  }
+};
 
 export interface CartStore {
   cart: CartItem[];
@@ -60,12 +78,7 @@ export const useCartStore = create<CartStore>()(
     {
       name: "nordic-living-cart",
       storage: createJSONStorage<StateStorage>(() => {
-        const resolveKey = () => {
-          const email = getCurrentUserEmail();
-          return email
-            ? `nordic-living-cart-${email}`
-            : "nordic-living-cart-guest";
-        };
+        const resolveKey = () => getScopedStorageKey("nordic-living-cart");
 
         return {
           getItem: () => localStorage.getItem(resolveKey()),
