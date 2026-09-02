@@ -39,7 +39,7 @@ export default function Footer() {
             >
               Nordic Living
             </Link>
-            <p className="max-w-sm font-sans text-[14px] leading-relaxed text-nordic-sage-dark">
+            <p className="max-w-sm font-sans text-[14px] leading-relaxed text-nordic-charcoal">
               Crafted with honest materials, quiet forms, and Scandinavian
               clarity. Curated furniture and tactile accents made to endure.
             </p>
@@ -76,7 +76,7 @@ export default function Footer() {
             <h3 className="font-sans text-[12px] font-semibold uppercase tracking-[0.16em] text-nordic-charcoal">
               Explore
             </h3>
-            <ul className="space-y-3 font-sans text-[14px] text-nordic-sage-dark">
+            <ul className="space-y-3 font-sans text-[14px] text-nordic-charcoal">
               <li>
                 <Link
                   to="/"
@@ -129,7 +129,7 @@ export default function Footer() {
             <h3 className="font-sans text-[12px] font-semibold uppercase tracking-[0.16em] text-nordic-charcoal">
               Assistance
             </h3>
-            <ul className="space-y-3 font-sans text-[14px] text-nordic-sage-dark">
+            <ul className="space-y-3 font-sans text-[14px] text-nordic-charcoal">
               <li>
                 <a
                   href="#"
@@ -173,7 +173,7 @@ export default function Footer() {
             <h3 className="font-sans text-[12px] font-semibold uppercase tracking-[0.16em] text-nordic-charcoal">
               The Journal & Offers
             </h3>
-            <p className="font-sans text-[14px] leading-relaxed text-nordic-sage-dark">
+            <p className="font-sans text-[14px] leading-relaxed text-nordic-charcoal">
               Subscribe to receive private preview access, architectural
               stories, and 10% off your initial order.
             </p>
@@ -213,10 +213,10 @@ export default function Footer() {
 
       <div className="border-t border-nordic-charcoal/10 bg-nordic-bg">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:px-6 lg:px-8">
-          <div className="font-sans text-caption text-nordic-sage-dark">
+          <div className="font-sans text-caption text-nordic-charcoal">
             © 2026 Nordic Living Copenhagen. All rights reserved.
           </div>
-          <div className="flex items-center gap-6 font-sans text-caption uppercase tracking-wider text-nordic-sage-dark">
+          <div className="flex items-center gap-6 font-sans text-caption uppercase tracking-wider text-nordic-charcoal">
             <span>Sustainable Craft</span>
             <span>·</span>
             <span>Danish Architecture</span>

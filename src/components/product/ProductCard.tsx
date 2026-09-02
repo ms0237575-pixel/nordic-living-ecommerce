@@ -35,6 +35,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <img
           src={product.image}
           alt={product.name}
+          width={56}
+          height={56}
           className="h-14 w-14 object-cover shrink-0 bg-white/5"
         />
         <div className="flex-1 min-w-0">
@@ -104,6 +106,8 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             loading="lazy"
+            width={400}
+            height={500}
             className={`h-full w-full object-cover object-center ${
               hoverImage
                 ? "absolute inset-0 transition-opacity duration-500 group-hover/card:opacity-0"
@@ -115,6 +119,8 @@ export function ProductCard({ product }: ProductCardProps) {
               src={hoverImage}
               alt={product.name}
               loading="lazy"
+              width={400}
+              height={500}
               className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover/card:opacity-100"
             />
           )}

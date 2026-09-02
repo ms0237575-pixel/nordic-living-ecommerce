@@ -18,6 +18,8 @@ export function HeroSection() {
         alt="Nordic Living Interior"
         className="absolute inset-0 h-full w-full object-cover object-center"
         src="/images/products/hero-background.jpg"
+        width={1920}
+        height={1080}
       />
 
       <div className="absolute inset-0 bg-black/40"></div>
