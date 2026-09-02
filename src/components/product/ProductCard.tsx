@@ -31,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
     addToCart(product);
 
     toast.custom((t) => (
-      <div className="flex w-full min-w-[320px] max-w-95 items-center gap-4 bg-nordic-charcoal p-4 text-nordic-bg shadow-2xl border border-white/10">
+      <div className="flex w-full min-w-60 md:min-w-[320px] max-w-95 items-center gap-4 bg-nordic-charcoal p-4 text-nordic-bg shadow-2xl border border-white/10">
         <img
           src={product.image}
           alt={product.name}

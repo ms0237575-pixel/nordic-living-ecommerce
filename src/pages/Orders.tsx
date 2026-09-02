@@ -176,7 +176,7 @@ export function Orders() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-nordic-gray/10 text-nordic-charcoal">
           <ShoppingBag className="h-8 w-8 stroke-[1.2]" />
         </div>
-        <h1 className="mt-6 font-serif text-[32px] font-semibold text-nordic-charcoal">
+        <h1 className="mt-6 font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal">
           No Orders Placed Yet
         </h1>
         <p className="mt-3 font-sans text-[14px] text-nordic-sage-dark max-w-md mx-auto">
@@ -185,7 +185,7 @@ export function Orders() {
         </p>
         <Link
           to="/shop"
-          className="mt-8 inline-block border border-nordic-charcoal bg-nordic-charcoal px-8 py-3.5 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-all hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
+          className="mt-8 inline-block border border-nordic-charcoal bg-nordic-charcoal px-6 sm:px-8 py-3.5 font-sans text-[12px] font-semibold uppercase tracking-widest text-white transition-all hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
         >
           Explore Collection
         </Link>
@@ -202,7 +202,7 @@ export function Orders() {
             Account Activity
           </span>
         </div>
-        <h1 className="mt-2 font-serif text-[32px] font-semibold text-nordic-charcoal">
+        <h1 className="mt-2 font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal">
           Your Order History
         </h1>
       </div>

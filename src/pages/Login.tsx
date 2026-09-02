@@ -78,7 +78,7 @@ export function Login() {
       <div className="w-full max-w-md rounded-none border border-nordic-charcoal/10 bg-white p-6 shadow-sm sm:p-8">
         <div className="text-center">
           <h1 className="font-serif text-3xl text-nordic-charcoal sm:text-[2rem]">
-            Welcome Back
+            Sign in to your account
           </h1>
           <p className="mt-2 font-sans text-sm text-nordic-sage-dark">
             Enter your credentials to continue.

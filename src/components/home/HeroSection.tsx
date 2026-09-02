@@ -24,7 +24,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 pt-30 pb-12 text-center text-white floating-content">
         <h1
-          className="mb-6 font-serif text-4xl font-normal leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-lg"
+          className="mb-6 font-serif text-2xl font-normal leading-tight tracking-tight sm:text-4xl md:text-7xl lg:text-8xl drop-shadow-lg"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -32,7 +32,7 @@ export function HeroSection() {
         </h1>
 
         <p
-          className="mb-10 max-w-lg font-sans text-xs font-medium uppercase tracking-widest text-white/90 sm:text-sm md:text-base drop-shadow-md"
+          className="mb-10 max-w-lg font-sans text-sm font-medium uppercase tracking-widest text-white/90 sm:text-sm md:text-base drop-shadow-md"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="200"
@@ -43,7 +43,7 @@ export function HeroSection() {
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
           <Link
             to="/shop"
-            className="inline-block border border-white bg-white/10 px-8 py-3.5 font-sans text-xs font-medium uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-nordic-charcoal sm:px-10 sm:py-4 sm:text-sm"
+            className="inline-block border border-white bg-white/10 px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-nordic-charcoal sm:px-10 sm:py-4 sm:text-sm"
           >
             Explore Collection
           </Link>

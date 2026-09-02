@@ -73,7 +73,7 @@ export default function App() {
         <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-nordic-bg font-sans text-nordic-charcoal">
           <Navbar />
 
-          <main className="flex-1 w-full overflow-x-hidden">
+          <main className="flex-1 w-full overflow-x-hidden pt-20 md:pt-0">
             <ErrorBoundary>
               <Routes>
                 <Route path="/" element={<Home />} />

@@ -77,7 +77,7 @@ export function Navbar() {
 
       <div className="fixed top-0 left-0 right-0 z-50 flex flex-col w-full overflow-x-hidden">
         {isHome && (
-          <div className="relative flex h-9 w-full items-center overflow-hidden border-b border-nordic-charcoal/5 bg-nordic-bg text-nordic-charcoal">
+          <div className="hidden sm:relative sm:flex h-9 w-full items-center overflow-hidden border-b border-nordic-charcoal/5 bg-nordic-bg text-nordic-charcoal">
             <div className="flex h-full w-full items-center overflow-hidden whitespace-nowrap">
               <div className="animate-marquee">
                 {Array(6)
@@ -121,7 +121,7 @@ export function Navbar() {
                 <Link
                   to="/"
                   onClick={makeNavHandler("/", false)}
-                  className="inline-block font-serif text-3xl font-normal text-inherit transition-colors hover:text-nordic-terracotta lg:text-[30px]"
+                  className="inline-block font-serif text-xl font-normal text-inherit transition-colors hover:text-nordic-terracotta lg:text-[30px]"
                 >
                   Nordic Living
                 </Link>

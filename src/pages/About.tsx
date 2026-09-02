@@ -42,7 +42,7 @@ const sections = [
 export function About() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-      <header className="mx-auto max-w-3xl text-center">
+      <header className="mx-auto max-w-3xl text-center px-2">
         <p
           className="font-sans text-caption font-medium uppercase tracking-[0.22em] text-nordic-terracotta"
           data-aos="fade-up"
@@ -51,7 +51,7 @@ export function About() {
           Nordic Living Copenhagen
         </p>
         <h1
-          className="mt-4 font-serif text-[42px] font-semibold text-nordic-charcoal sm:text-[54px]"
+          className="mt-4 font-serif text-2xl font-semibold text-nordic-charcoal sm:text-[42px] md:text-[54px]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="100"
@@ -72,7 +72,7 @@ export function About() {
       </header>
 
       <section className="mt-20 border-y border-nordic-gray/20 py-12 lg:mt-24">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -86,7 +86,7 @@ export function About() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nordic-gray/10 text-nordic-charcoal">
                   <Icon className="h-5 w-5 stroke-[1.8]" />
                 </div>
-                <span className="font-serif text-[32px] font-semibold text-nordic-charcoal">
+                <span className="font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal">
                   {stat.value}
                 </span>
                 <span className="mt-2 font-sans text-[13px] text-nordic-sage-dark">
@@ -131,7 +131,7 @@ export function About() {
                 {section.eyebrow}
               </p>
               <h2
-                className="mt-4 font-serif text-[34px] font-medium text-nordic-charcoal"
+                className="mt-4 font-serif text-xl md:text-[34px] font-medium text-nordic-charcoal"
                 data-aos="fade-up"
                 data-aos-duration="1000"
                 data-aos-delay="100"
@@ -153,7 +153,7 @@ export function About() {
 
       <section className="mt-24 border-t border-nordic-gray/20 pt-16 text-center lg:mt-32">
         <h2
-          className="font-serif text-[32px] font-semibold text-nordic-charcoal sm:text-[40px]"
+          className="font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal sm:text-[40px]"
           data-aos="fade-up"
           data-aos-duration="1000"
         >

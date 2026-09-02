@@ -13,7 +13,7 @@ export function NotFound() {
           Error 404
         </p>
 
-        <h1 className="mt-3 font-serif text-[42px] font-semibold text-nordic-charcoal sm:text-[52px]">
+        <h1 className="mt-3 font-serif text-2xl md:text-[42px] font-semibold text-nordic-charcoal sm:text-[52px]">
           Lost in the Calm
         </h1>
 
@@ -25,7 +25,7 @@ export function NotFound() {
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2 border border-nordic-charcoal bg-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
+            className="inline-flex items-center justify-center gap-2 border border-nordic-charcoal bg-nordic-charcoal px-6 sm:px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -33,7 +33,7 @@ export function NotFound() {
 
           <Link
             to="/shop"
-            className="inline-flex items-center justify-center gap-2 border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
+            className="inline-flex items-center justify-center gap-2 border border-nordic-charcoal px-6 sm:px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
           >
             <ShoppingBag className="h-4 w-4" />
             Explore Collection

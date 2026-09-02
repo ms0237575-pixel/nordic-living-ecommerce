@@ -172,7 +172,7 @@ export default function Checkout() {
         </p>
         <Link
           to="/shop"
-          className="mt-8 border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
+          className="mt-8 border border-nordic-charcoal px-6 sm:px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
         >
           Continue Shopping
         </Link>

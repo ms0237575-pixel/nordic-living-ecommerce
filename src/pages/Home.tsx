@@ -67,10 +67,10 @@ export function Home() {
             data-aos="fade-up"
             data-aos-duration="700"
           >
-            <h2 className="font-serif text-[40px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-2xl md:text-[40px] text-nordic-charcoal mb-6">
               Crafted with nature in mind.
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
+            <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
               Our designs embrace Scandinavian simplicity — quiet forms, honest
               materials, and pieces built to last. We focus on sustainable
               sourcing and timeless craftsmanship so every piece becomes part of
@@ -78,7 +78,7 @@ export function Home() {
             </p>
             <Link
               to="/about"
-              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
+              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-6 sm:px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
             >
               <span>Read our story</span>
               <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -111,17 +111,17 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Timeless Comfort
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
               Redefining the Living Space
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
+            <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
               Embrace the art of slow living. Our seating collections combine
               striking organic curves with unmatched comfort, featuring tactile
               fabrics that invite you to sink in and stay a while.
             </p>
             <Link
               to="/shop?category=Furniture"
-              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
+              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-6 sm:px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
             >
               <span>Shop Seating</span>
               <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -140,17 +140,17 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Gather Around
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
               Spaces for Connection
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
+            <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
               Whether it's a quiet morning coffee or a bustling dinner party,
               our dining pieces are crafted from raw, honest materials to ground
               your most meaningful moments.
             </p>
             <Link
               to="/shop?category=Furniture"
-              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
+              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-6 sm:px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
             >
               <span>Shop Dining</span>
               <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -197,17 +197,17 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Everyday Rituals
             </p>
-            <h2 className="font-serif text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
               The Beauty in Details
             </h2>
-            <p className="font-sans text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
+            <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
               Scandinavian design is more than an aesthetic; it's a lifestyle.
               We celebrate the small, intentional choices — from the cup you
               hold to the light that fills your room.
             </p>
             <Link
               to="/shop?category=Accessories"
-              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
+              className="group inline-flex items-center justify-center gap-2.5 border border-nordic-charcoal/30 px-6 sm:px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
             >
               <span>Shop Accessories</span>
               <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

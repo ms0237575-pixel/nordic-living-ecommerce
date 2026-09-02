@@ -83,7 +83,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
               setVisibleCount(8);
             }}
             placeholder="Search products..."
-            className="w-full bg-transparent outline-none font-serif text-[40px] md:text-[64px] text-nordic-charcoal placeholder:text-nordic-gray border-b border-transparent focus:border-nordic-gray/30 pb-4"
+            className="w-full bg-transparent outline-none font-serif text-2xl md:text-[64px] text-nordic-charcoal placeholder:text-nordic-gray border-b border-transparent focus:border-nordic-gray/30 pb-4"
           />
         </form>
 

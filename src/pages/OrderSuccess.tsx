@@ -53,7 +53,7 @@ export function OrderSuccess() {
           Order Placed Successfully
         </div>
 
-        <h1 className="mt-4 font-serif text-[36px] font-semibold text-nordic-charcoal md:text-[44px]">
+        <h1 className="mt-4 font-serif text-xl md:text-[36px] lg:text-[44px] font-semibold text-nordic-charcoal">
           Thank you for your order.
         </h1>
         <p className="mx-auto mt-3 max-w-lg font-sans text-[15px] leading-relaxed text-nordic-sage-dark">
@@ -140,13 +140,13 @@ export function OrderSuccess() {
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             to="/shop"
-            className="border border-nordic-charcoal bg-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
+            className="border border-nordic-charcoal bg-nordic-charcoal px-6 sm:px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-nordic-terracotta hover:border-nordic-terracotta shadow-sm"
           >
             Continue Shopping
           </Link>
           <Link
             to="/orders"
-            className="border border-nordic-charcoal px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
+            className="border border-nordic-charcoal px-6 sm:px-8 py-4 font-sans text-button font-medium uppercase tracking-widest text-nordic-charcoal transition-all duration-300 hover:bg-nordic-charcoal hover:text-white"
           >
             Track in Orders
           </Link>

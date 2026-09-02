@@ -63,7 +63,7 @@ export function AdminDashboard() {
               Control Center
             </span>
           </div>
-          <h1 className="mt-1 font-serif text-[32px] font-semibold text-nordic-charcoal">
+          <h1 className="mt-1 font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal">
             Admin Overview
           </h1>
         </div>

@@ -66,7 +66,7 @@ export default function Cart() {
         </p>
         <Link
           to="/shop"
-          className="group mt-8 inline-flex items-center gap-2.5 border border-nordic-charcoal/30 px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
+          className="group mt-8 inline-flex items-center gap-2.5 border border-nordic-charcoal/30 px-6 sm:px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-nordic-charcoal transition-all duration-300 hover:border-nordic-charcoal hover:bg-nordic-charcoal hover:text-white"
         >
           <span>Continue Shopping</span>
           <ArrowUpRight className="h-3.5 w-3.5 stroke-[1.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

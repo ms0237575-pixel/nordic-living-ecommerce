@@ -35,7 +35,7 @@ export default function Footer() {
             <Link
               to="/"
               onClick={() => handleNavClick("/")}
-              className="inline-block font-serif text-[32px] font-semibold text-nordic-charcoal transition-colors hover:text-nordic-terracotta"
+              className="inline-block font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal transition-colors hover:text-nordic-terracotta"
             >
               Nordic Living
             </Link>

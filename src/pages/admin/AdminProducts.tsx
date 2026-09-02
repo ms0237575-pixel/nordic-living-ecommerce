@@ -116,7 +116,7 @@ export function AdminProducts() {
               Admin Portal
             </span>
           </div>
-          <h1 className="mt-1 font-serif text-[32px] font-semibold text-nordic-charcoal">
+          <h1 className="mt-1 font-serif text-2xl md:text-[32px] font-semibold text-nordic-charcoal">
             Product Management
           </h1>
         </div>
@@ -274,7 +274,7 @@ export function AdminProducts() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block font-medium uppercase tracking-wider text-nordic-sage-dark text-[11px] mb-1">
                     Category
@@ -310,7 +310,7 @@ export function AdminProducts() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block font-medium uppercase tracking-wider text-nordic-sage-dark text-[11px] mb-1">
                     Price (USD $)

@@ -12,8 +12,11 @@ export function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
   const { product, quantity } = item;
 
   return (
-    <article className="grid grid-cols-[96px_1fr] gap-4 border-b border-nordic-gray/20 py-6 sm:grid-cols-[120px_1fr_auto] sm:gap-6">
-      <Link to={`/product/${product.slug}`} className="aspect-square overflow-hidden bg-nordic-gray/10">
+    <article className="grid grid-cols-1 gap-4 border-b border-nordic-gray/20 py-6 sm:grid-cols-[120px_1fr_auto] sm:gap-6">
+      <Link
+        to={`/product/${product.slug}`}
+        className="aspect-square overflow-hidden bg-nordic-gray/10"
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -21,7 +24,7 @@ export function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
         />
       </Link>
 
-      <div className="flex min-w-0 flex-col">
+      <div className="flex min-w-0 flex-col px-1">
         <Link
           to={`/product/${product.slug}`}
           className="font-serif text-[24px] leading-tight text-nordic-charcoal transition-colors duration-300 hover:text-nordic-terracotta"
@@ -36,18 +39,18 @@ export function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
             type="button"
             aria-label={`Decrease quantity of ${product.name}`}
             onClick={() => onUpdateQuantity(product.id, quantity - 1)}
-            className="flex size-10 items-center justify-center text-nordic-charcoal transition-colors duration-300 hover:bg-nordic-gray/10"
+            className="flex h-10 w-10 items-center justify-center text-nordic-charcoal transition-colors duration-300 hover:bg-nordic-gray/10"
           >
             <Minus className="size-4 stroke-[1.5]" />
           </button>
-          <span className="flex size-10 items-center justify-center border-x border-nordic-charcoal font-sans text-body font-normal text-nordic-charcoal">
+          <span className="flex h-10 w-10 items-center justify-center border-x border-nordic-charcoal font-sans text-body font-normal text-nordic-charcoal">
             {quantity}
           </span>
           <button
             type="button"
             aria-label={`Increase quantity of ${product.name}`}
             onClick={() => onUpdateQuantity(product.id, quantity + 1)}
-            className="flex size-10 items-center justify-center text-nordic-charcoal transition-colors duration-300 hover:bg-nordic-gray/10"
+            className="flex h-10 w-10 items-center justify-center text-nordic-charcoal transition-colors duration-300 hover:bg-nordic-gray/10"
           >
             <Plus className="size-4 stroke-[1.5]" />
           </button>
