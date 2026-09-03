@@ -468,14 +468,14 @@ export function ProductDetails() {
       {related.length > 0 && (
         <section className="mt-20">
           <h2
-            className="font-serif text-h2 font-medium text-nordic-charcoal mb-8"
+            className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-nordic-charcoal mb-8"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
             You Might Also Like
           </h2>
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
             {related.map((p, index) => (
               <div
                 key={p.id}

@@ -16,13 +16,13 @@ export function Home() {
     <div className="w-full">
       <HeroSection />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-24">
         <div
           className="mb-12 flex items-end justify-between"
           data-aos="fade-up"
           data-aos-duration="700"
         >
-          <h2 className="font-serif text-h2 font-medium text-nordic-charcoal">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-nordic-charcoal">
             Featured Collection
           </h2>
 
@@ -46,7 +46,7 @@ export function Home() {
         )}
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
@@ -67,7 +67,7 @@ export function Home() {
             data-aos="fade-up"
             data-aos-duration="700"
           >
-            <h2 className="font-serif text-2xl md:text-[40px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-nordic-charcoal mb-6">
               Crafted with nature in mind.
             </h2>
             <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
@@ -87,7 +87,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div
             className="relative w-full h-100 md:h-125 overflow-hidden bg-nordic-light group"
@@ -111,7 +111,7 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Timeless Comfort
             </p>
-            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-nordic-charcoal mb-6">
               Redefining the Living Space
             </h2>
             <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
@@ -130,7 +130,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div
             className="order-2 lg:order-1 px-2 lg:px-12"
@@ -140,7 +140,7 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Gather Around
             </p>
-            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-nordic-charcoal mb-6">
               Spaces for Connection
             </h2>
             <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
@@ -173,7 +173,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <section className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div
             className="relative w-full h-100 md:h-150 overflow-hidden bg-nordic-light group"
@@ -197,7 +197,7 @@ export function Home() {
             <p className="font-sans text-[12px] font-medium uppercase tracking-[0.2em] text-nordic-sage-dark mb-4">
               Everyday Rituals
             </p>
-            <h2 className="font-serif text-xl md:text-[36px] text-nordic-charcoal mb-6">
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-nordic-charcoal mb-6">
               The Beauty in Details
             </h2>
             <p className="font-sans text-sm md:text-[15px] text-nordic-sage-dark leading-relaxed mb-8">
@@ -217,8 +217,8 @@ export function Home() {
       </section>
 
       <section className="w-full bg-nordic-gray/10 py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex flex-1 items-center justify-between max-w-3xl mx-auto">
               <div className="flex items-center gap-4">
                 <Leaf className="h-5 w-5 text-nordic-charcoal" />

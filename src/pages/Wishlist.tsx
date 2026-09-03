@@ -32,10 +32,10 @@ export function Wishlist() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-12 lg:py-20">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-nordic-gray/20 pb-6">
         <div>
-          <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
+          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-nordic-charcoal">
             Your Wishlist
           </h1>
           <p className="mt-2 font-sans text-body text-nordic-sage-dark">
@@ -79,7 +79,7 @@ export function Wishlist() {
           </Link>
         </div>
       ) : (
-        <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {wishlist.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

@@ -84,7 +84,7 @@ export function ProductCard({ product }: ProductCardProps) {
     product.images && product.images.length > 1 ? product.images[1] : null;
 
   return (
-    <div className="group/card relative">
+    <div className="group/card relative min-w-0">
       <button
         type="button"
         onClick={handleToggleWishlist}
@@ -100,7 +100,7 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </button>
 
-      <Link to={`/product/${product.slug}`} className="block">
+      <Link to={`/product/${product.slug}`} className="block min-w-0">
         <div className="aspect-4/5 w-full overflow-hidden bg-nordic-gray/10 relative">
           <img
             src={product.image}
@@ -126,8 +126,8 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <div className="mt-4 space-y-1">
-          <h3 className="font-sans text-body font-normal text-nordic-charcoal transition-colors duration-300 group-hover/card:text-nordic-terracotta">
+        <div className="mt-4 space-y-1 min-w-0">
+          <h3 className="font-sans text-body font-normal text-nordic-charcoal transition-colors duration-300 group-hover/card:text-nordic-terracotta truncate">
             {product.name}
           </h3>
           <p className="font-sans text-body font-medium text-nordic-terracotta">

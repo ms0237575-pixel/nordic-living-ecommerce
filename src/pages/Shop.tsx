@@ -263,10 +263,10 @@ export function Shop() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-16 lg:py-24">
       <div className="mb-10 flex items-center justify-between">
         <h1
-          className="font-serif text-h1 font-semibold text-nordic-charcoal"
+          className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-nordic-charcoal"
           data-aos="fade-right"
           data-aos-duration="800"
         >
@@ -344,7 +344,7 @@ export function Shop() {
 
         <div>
           <div
-            className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-nordic-gray/10 pb-6"
+            className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-nordic-gray/10 pb-6"
             data-aos="fade-up"
             data-aos-duration="800"
           >
@@ -423,7 +423,7 @@ export function Shop() {
               filters.
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
               {sortedProducts.map((product, index) => (
                 <div
                   key={product.id}

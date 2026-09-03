@@ -58,7 +58,7 @@ export default function Cart() {
   if (cart.length === 0) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center px-4 text-center">
-        <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
+        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-nordic-charcoal">
           Your Cart is Empty
         </h1>
         <p className="mt-3 font-sans text-body font-normal text-nordic-sage-dark">
@@ -76,7 +76,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-12 lg:py-20">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-nordic-gray/20 pb-6">
         <h1 className="font-serif text-h1 font-semibold text-nordic-charcoal">
           Your Cart
@@ -133,8 +133,8 @@ export default function Cart() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
-        <section aria-label="Cart items" className="space-y-6">
+      <div className="mt-8 flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <section aria-label="Cart items" className="space-y-6 flex-1">
           {cart.map((item) => (
             <CartItem
               key={item.product.id}
@@ -151,7 +151,7 @@ export default function Cart() {
           ))}
         </section>
 
-        <aside className="sticky top-28 h-fit border border-nordic-gray/20 bg-white p-6 shadow-sm sm:p-8">
+        <aside className="sticky top-28 h-fit border border-nordic-gray/20 bg-white p-6 shadow-sm sm:p-8 lg:w-90 w-full">
           <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[22px] font-semibold text-nordic-charcoal">
             Order Summary
           </h2>

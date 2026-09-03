@@ -181,7 +181,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-12 lg:py-20">
       <div className="mb-8">
         <Link
           to="/cart"
@@ -190,12 +190,12 @@ export default function Checkout() {
           <ArrowLeft className="h-4 w-4" />
           Back to cart
         </Link>
-        <h1 className="mt-4 font-serif text-h1 font-semibold text-nordic-charcoal">
+        <h1 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-nordic-charcoal">
           Checkout
         </h1>
       </div>
 
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] lg:gap-16">
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         <section className="space-y-8">
           <form
             id="checkout-form"
@@ -441,7 +441,7 @@ export default function Checkout() {
           </form>
         </section>
 
-        <aside className="sticky top-28 h-fit border border-nordic-gray/20 bg-white p-6 shadow-sm sm:p-8">
+        <aside className="sticky top-28 h-fit border border-nordic-gray/20 bg-white p-6 shadow-sm sm:p-8 lg:w-90 w-full">
           <h2 className="border-b border-nordic-gray/20 pb-4 font-serif text-[20px] font-semibold text-nordic-charcoal">
             Order Review
           </h2>
