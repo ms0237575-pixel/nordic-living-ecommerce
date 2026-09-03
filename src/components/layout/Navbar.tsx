@@ -52,6 +52,18 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [open]);
 
+  // Lock body scroll only when mobile drawer is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [open]);
+
   const makeNavHandler =
     (path: string, closeDrawer = false) =>
     () => {
@@ -227,7 +239,19 @@ export function Navbar() {
             onClick={() => setOpen(false)}
           />
 
-          <aside className="fixed left-0 top-0 z-50 h-full w-80 bg-white text-nordic-charcoal shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6">
+          <aside
+            className="fixed left-0 top-0 z-50 h-full w-80 bg-white text-nordic-charcoal shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6"
+            onClick={(e: any) => {
+              try {
+                const target = e.target as HTMLElement;
+                if (target && target.closest && target.closest("a")) {
+                  setOpen(false);
+                }
+              } catch (err) {
+                // ignore
+              }
+            }}
+          >
             <div>
               <div className="flex items-center justify-between border-b border-nordic-gray/20 pb-4">
                 <span className="font-serif text-[22px] font-normal text-inherit">
