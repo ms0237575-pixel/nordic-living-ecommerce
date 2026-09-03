@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import type { CartItem } from "@/types/product";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartItem } from "@/types/product";
 
@@ -165,7 +167,7 @@ export const useOrderStore = create<OrderStore>()(
           const matchesUserEmail =
             normalizedEmail &&
             (order.userEmail?.toLowerCase() === normalizedEmail ||
-              order.customerEmail.toLowerCase() === normalizedEmail);
+              order.customerEmail?.toLowerCase() === normalizedEmail);
 
           return Boolean(matchesUserId || matchesUserEmail);
         });
