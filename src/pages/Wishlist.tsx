@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductCard } from "@/components/product/ProductCard";
 import { useWishlistStore } from "@/store/useWishlistStore";
 import { useCartStore } from "@/store/useCartStore";
@@ -23,6 +23,9 @@ export function Wishlist() {
     wishlist.forEach((item) => {
       addToCart(item);
     });
+
+    // After moving all items to cart, clear the wishlist so items don't remain
+    clearWishlist();
 
     toast.success(`Moved ${wishlist.length} item(s) to your cart`);
     navigate("/cart");
