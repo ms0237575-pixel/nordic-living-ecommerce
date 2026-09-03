@@ -29,12 +29,20 @@ const AdminOrders = lazy(() => import("@/pages/admin/AdminOrders"));
 
 export default function App() {
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: "ease-out",
-      disable: "mobile",
-    });
+    if (typeof window === "undefined") return;
+    try {
+      AOS.init({
+        duration: 800,
+        once: true,
+        easing: "ease-out",
+        disable: "mobile",
+      });
+    } catch (err) {
+      // fail safe: don't let AOS initialization crash the app
+      // errors here are non-fatal; keep console info for debugging
+      // eslint-disable-next-line no-console
+      console.warn("AOS init failed:", err);
+    }
   }, []);
 
   return (
