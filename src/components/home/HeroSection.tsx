@@ -17,7 +17,7 @@ export function HeroSection() {
       <img
         alt="Nordic Living Interior"
         className="absolute inset-0 h-full w-full object-cover object-center"
-        src="/images/products/hero-section.webp"
+        src="/images/products/hero-background.webp"
         width={1920}
         height={1080}
       />

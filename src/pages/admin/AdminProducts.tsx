@@ -106,7 +106,7 @@ export function AdminProducts() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 overflow-x-hidden">
+    <div className="min-h-screen pt-24 md:pt-28 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 border-b border-nordic-gray/20 pb-6 md:flex-row md:items-center">
         <div>
