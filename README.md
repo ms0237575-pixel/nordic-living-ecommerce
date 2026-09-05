@@ -1,75 +1,115 @@
-# React + TypeScript + Vite
+# 🛋️ Nordic Living — Minimalist E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist, high-performance e‑commerce storefront inspired by Scandinavian design — built with React, TypeScript, Vite and Tailwind for pixel-perfect responsive UI and production-ready developer ergonomics.
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-18.x-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![Zustand](https://img.shields.io/badge/Zustand-State-black?style=flat-square&logo=zustand)](https://github.com/pmndrs/zustand)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🔗 Links
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Live Demo: https://nordic-living-ecommerce.vercel.app/
+- Repository: https://github.com/ms0237575-pixel/nordic-living-ecommerce
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧭 Overview & Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Nordic Living is a complete sample storefront showcasing a production-minded React app with a polished, accessible UI and an admin area for store management.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Dynamic Cart & Wishlist with persisted state and real-time updates (Zustand + localStorage).
+- Pixel-perfect responsive design: mobile → tablet → desktop layouts tuned for touch and desktop workflows.
+- Lightweight global state management using Zustand for predictable, minimal boilerplate state logic.
+- Fully functional Admin Dashboard for inventory, orders, and store metrics — mobile friendly and responsive.
+- Accessible components and UX decisions focused on high Lighthouse scores and low CLS.
+- Seamless dev experience via Vite, modular UI primitives, embla product carousel, and toast notifications.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## 🚀 Performance (Lighthouse)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 🟢 Accessibility: 100 / 100
+- 🟢 Best Practices: 100 / 100
+- 🟢 SEO: 100 / 100
+- 🟢 Performance: 90+ (optimized LCP, low CLS)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⚙️ Getting Started
 
+Prerequisites: Node.js (LTS recommended) and `pnpm` installed.
+
+Clone, install, and run locally:
+
+```bash
+git clone https://github.com/ms0237575-pixel/nordic-living-ecommerce.git
+cd nordic-living-ecommerce
+pnpm install
+pnpm dev
+# open http://localhost:5173 (or the port printed by Vite)
+
+src/
+├── App.tsx                      # Main app + routes
+├── main.tsx
+├── components/
+│   ├── cart/
+│   │   └── CartItem.tsx
+│   ├── home/
+│   │   └── HeroSection.tsx
+│   ├── layout/
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── SearchOverlay.tsx
+│   │   └── ProtectedRoute.tsx
+│   ├── product/
+│   │   ├── ProductCard.tsx
+│   │   ├── ProductCardSkeleton.tsx
+│   │   └── ProductCarousel.tsx
+│   ├── search/
+│   │   ├── Filters.tsx
+│   │   └── Search.tsx
+│   └── ui/
+│       ├── button.tsx
+│       └── sheet.tsx
+├── pages/
+│   ├── Home.tsx
+│   ├── Shop.tsx
+│   ├── ProductDetails.tsx
+│   ├── Cart.tsx
+│   ├── Checkout.tsx
+│   └── admin/
+│       ├── AdminDashboard.tsx
+│       ├── AdminOrders.tsx
+│       └── AdminProducts.tsx
+├── store/                        # Zustand stores (cart, auth, orders, wishlist, products)
+│   ├── useAuthStore.ts
+│   ├── useCartStore.ts
+│   ├── useOrderStore.ts
+│   └── useProductStore.ts
+├── data/                         # Mock/static product data
+├── hooks/                        # Custom hooks
+├── lib/                          # Utilities (authStorage, utils)
+└── types/                        # TypeScript types
+
+
+🛠Tech Stack
+React 18 + TypeScript
+Vite (development + build)
+Tailwind CSS (utility-first styling)
+Zustand (state management)
+react-router (routing)
+lucide-react (icons), sonner (toasts), Embla (carousel)
+Deployment: Vercel (recommended)
+
+👨‍💻 Developer
+Mohamed Ahmed Ali Ahmed Saif El Deen
+Front‑End Developer | Computer Science, El Shorouk Academy
+New Cairo, Egypt
+
+Repository: https://github.com/ms0237575-pixel/nordic-living-ecommerce
+Live demo: https://nordic-living-ecommerce.vercel.app/
 ```
