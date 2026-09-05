@@ -54,7 +54,7 @@ export function AdminDashboard() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 overflow-x-hidden">
       <div className="flex flex-col justify-between gap-4 border-b border-nordic-gray/20 pb-6 md:flex-row md:items-center">
         <div>
           <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export function AdminDashboard() {
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, idx) => (
           <div
             key={idx}
@@ -106,7 +106,7 @@ export function AdminDashboard() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
+        <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm w-full overflow-hidden">
           <div className="flex items-center justify-between border-b border-nordic-gray/15 pb-4">
             <h2 className="font-serif text-[22px] font-semibold text-nordic-charcoal">
               Quick Portals
@@ -156,7 +156,7 @@ export function AdminDashboard() {
           </div>
         </div>
 
-        <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm">
+        <div className="border border-nordic-gray/20 bg-white p-6 sm:p-8 shadow-sm w-full overflow-hidden">
           <div className="flex items-center justify-between border-b border-nordic-gray/15 pb-4">
             <h2 className="font-serif text-[22px] font-semibold text-nordic-charcoal">
               Recent Order Requests

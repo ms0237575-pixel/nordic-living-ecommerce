@@ -106,7 +106,7 @@ export function AdminProducts() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 overflow-x-hidden">
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 border-b border-nordic-gray/20 pb-6 md:flex-row md:items-center">
         <div>
@@ -168,9 +168,61 @@ export function AdminProducts() {
         </span>
       </div>
 
-      {/* Table */}
-      <div className="mt-6 overflow-x-auto border border-nordic-gray/20 bg-white shadow-sm">
-        <table className="w-full text-left font-sans text-[13px]">
+      {/* Mobile: cards; Desktop: table */}
+      <div className="mt-6 space-y-4 md:hidden">
+        {filteredProducts.length === 0 ? (
+          <div className="border border-nordic-gray/20 bg-white p-4 text-center text-nordic-sage-dark">
+            No products found.
+          </div>
+        ) : (
+          filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="border border-nordic-gray/20 bg-white p-4 shadow-sm rounded-md"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-16 w-16 rounded-sm object-cover bg-nordic-gray/10"
+                />
+                <div className="flex-1">
+                  <div className="font-medium text-nordic-charcoal">
+                    {product.name}
+                  </div>
+                  <div className="text-[12px] text-nordic-sage-dark">
+                    #{product.id} · {product.category}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold text-nordic-charcoal">
+                    ${product.price.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <button
+                  onClick={() => openEditModal(product)}
+                  className="min-h-10 inline-flex items-center gap-2 px-3 py-2 border border-nordic-gray/20 text-nordic-charcoal"
+                  title="Edit"
+                >
+                  <Pencil className="h-4 w-4" /> Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(product.id, product.name)}
+                  className="min-h-10 inline-flex items-center gap-2 px-3 py-2 border border-nordic-gray/20 text-nordic-charcoal"
+                  title="Delete"
+                >
+                  <Trash2 className="h-4 w-4" /> Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="mt-6 w-full overflow-x-auto rounded-lg border border-neutral-200 bg-white shadow-sm hidden md:block">
+        <table className="w-full text-left font-sans text-[13px] whitespace-nowrap">
           <thead className="border-b border-nordic-gray/20 bg-[#fbf9f5] font-semibold uppercase tracking-wider text-nordic-sage-dark text-[11px]">
             <tr>
               <th className="px-6 py-4">Item</th>
@@ -218,14 +270,14 @@ export function AdminProducts() {
                   <div className="flex items-center justify-end gap-2">
                     <button
                       onClick={() => openEditModal(product)}
-                      className="p-1.5 text-nordic-sage-dark hover:text-nordic-charcoal transition-colors"
+                      className="min-h-10 px-3 py-2 text-nordic-sage-dark hover:text-nordic-charcoal transition-colors"
                       title="Edit"
                     >
                       <Pencil className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(product.id, product.name)}
-                      className="p-1.5 text-nordic-sage-dark hover:text-nordic-terracotta transition-colors"
+                      className="min-h-10 px-3 py-2 text-nordic-sage-dark hover:text-nordic-terracotta transition-colors"
                       title="Delete"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -241,7 +293,7 @@ export function AdminProducts() {
       {/* Modal Dialog */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg border border-nordic-gray/20 bg-white p-6 shadow-xl animate-in zoom-in-95 duration-200">
+          <div className="w-full max-w-lg mx-auto p-4 md:p-6 border border-nordic-gray/20 bg-white shadow-xl animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between border-b border-nordic-gray/15 pb-4">
               <h2 className="font-serif text-[22px] font-semibold text-nordic-charcoal">
                 {editingProduct
@@ -274,7 +326,7 @@ export function AdminProducts() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
                   <label className="block font-medium uppercase tracking-wider text-nordic-sage-dark text-[11px] mb-1">
                     Category
@@ -310,7 +362,7 @@ export function AdminProducts() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
                   <label className="block font-medium uppercase tracking-wider text-nordic-sage-dark text-[11px] mb-1">
                     Price (USD $)
@@ -382,13 +434,13 @@ export function AdminProducts() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="border border-nordic-gray/30 px-5 py-2.5 uppercase tracking-wider text-[11px] font-medium text-nordic-charcoal"
+                  className="min-h-10 border border-nordic-gray/30 px-4 py-2 uppercase tracking-wider text-[11px] font-medium text-nordic-charcoal"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="border border-nordic-charcoal bg-nordic-charcoal px-6 py-2.5 uppercase tracking-wider text-[11px] font-semibold text-white hover:bg-nordic-terracotta hover:border-nordic-terracotta transition-colors"
+                  className="min-h-10 border border-nordic-charcoal bg-nordic-charcoal px-5 py-2 uppercase tracking-wider text-[11px] font-semibold text-white hover:bg-nordic-terracotta hover:border-nordic-terracotta transition-colors"
                 >
                   {editingProduct ? "Save Changes" : "Create Product"}
                 </button>

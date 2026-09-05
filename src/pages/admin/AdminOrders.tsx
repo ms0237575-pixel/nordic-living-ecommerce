@@ -117,7 +117,7 @@ export function AdminOrders() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8 overflow-x-hidden">
       <div className="flex flex-col justify-between gap-4 border-b border-nordic-gray/20 pb-6 md:flex-row md:items-center">
         <div>
           <div className="flex items-center gap-2">
@@ -190,8 +190,62 @@ export function AdminOrders() {
         </div>
       </div>
 
-      <div className="mt-6 overflow-x-auto border border-nordic-gray/20 bg-white shadow-sm">
-        <table className="w-full text-left font-sans text-[13px]">
+      {/* Mobile: stacked cards; Desktop: table */}
+      <div className="mt-6 space-y-4 md:hidden">
+        {filteredOrders.length === 0 ? (
+          <div className="border border-nordic-gray/20 bg-white p-4 text-center text-nordic-sage-dark">
+            No orders found.
+          </div>
+        ) : (
+          filteredOrders.map((order) => (
+            <div
+              key={order.id}
+              className="border border-nordic-gray/20 bg-white p-4 shadow-sm rounded-md"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-mono font-medium text-nordic-charcoal">
+                        {order.id}
+                      </div>
+                      <div className="text-[12px] text-nordic-sage-dark">
+                        {order.customerName} · {order.customerEmail}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-semibold text-nordic-charcoal">
+                        ${order.totalAmount.toFixed(2)}
+                      </div>
+                      <div className="mt-1">{getStatusBadge(order.status)}</div>
+                    </div>
+                  </div>
+                  <div className="mt-3 text-[12px] text-nordic-sage-dark">
+                    {new Date(order.createdAt).toLocaleString()}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <button
+                  onClick={() => setSelectedOrder(order)}
+                  className="min-h-10 inline-flex items-center gap-2 px-3 py-2 border border-nordic-gray/20 text-nordic-charcoal"
+                >
+                  <Eye className="h-4 w-4" /> View
+                </button>
+                <button
+                  onClick={() => handleDelete(order.id)}
+                  className="min-h-10 inline-flex items-center gap-2 px-3 py-2 border border-nordic-gray/20 text-nordic-charcoal"
+                >
+                  <Trash2 className="h-4 w-4" /> Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="mt-6 w-full overflow-x-auto rounded-lg border border-neutral-200 bg-white shadow-sm hidden md:block">
+        <table className="w-full text-left font-sans text-[13px] whitespace-nowrap">
           <thead className="border-b border-nordic-gray/20 bg-[#fbf9f5] font-semibold uppercase tracking-wider text-nordic-sage-dark text-[11px]">
             <tr>
               <th className="px-6 py-4">Order ID</th>
@@ -274,14 +328,14 @@ export function AdminOrders() {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => setSelectedOrder(order)}
-                        className="p-1.5 text-nordic-sage-dark hover:text-nordic-charcoal transition-colors"
+                        className="min-h-10 px-3 py-2 text-nordic-sage-dark hover:text-nordic-charcoal transition-colors"
                         title="View Details"
                       >
                         <Eye className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(order.id)}
-                        className="p-1.5 text-nordic-sage-dark hover:text-nordic-terracotta transition-colors"
+                        className="min-h-10 px-3 py-2 text-nordic-sage-dark hover:text-nordic-terracotta transition-colors"
                         title="Delete Order"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -297,7 +351,7 @@ export function AdminOrders() {
 
       {selectedOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg border border-nordic-gray/20 bg-white text-nordic-charcoal p-6 shadow-xl animate-in zoom-in-95 duration-200">
+          <div className="w-full max-w-lg mx-auto p-4 md:p-6 border border-nordic-gray/20 bg-white text-nordic-charcoal shadow-xl animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between border-b border-nordic-gray/15 pb-4">
               <div>
                 <h2 className="font-serif text-[20px] font-semibold text-nordic-charcoal">

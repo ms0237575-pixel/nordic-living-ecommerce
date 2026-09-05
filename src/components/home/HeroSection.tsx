@@ -17,7 +17,7 @@ export function HeroSection() {
       <img
         alt="Nordic Living Interior"
         className="absolute inset-0 h-full w-full object-cover object-center"
-        src="/images/products/hero-background.jpg"
+        src="/images/products/hero-section.webp"
         width={1920}
         height={1080}
       />
@@ -30,7 +30,7 @@ export function HeroSection() {
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          Quiet living.
+          Quiet living
         </h1>
 
         <p
