@@ -27,6 +27,10 @@ import AdminDashboard from "@/pages/admin/AdminDashboard";
 import AdminProducts from "@/pages/admin/AdminProducts";
 import AdminOrders from "@/pages/admin/AdminOrders";
 
+/**
+ * Root application component — sets up global providers, routing, and layout.
+ * Initializes global libraries (AOS for scroll animations) in a safe, non-fatal way.
+ */
 export default function App() {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -38,10 +42,8 @@ export default function App() {
         disable: "mobile",
       });
     } catch (err) {
-      // fail safe: don't let AOS initialization crash the app
-      // errors here are non-fatal; keep console info for debugging
-      // eslint-disable-next-line no-console
-      console.warn("AOS init failed:", err);
+      // AOS failure is non-fatal — avoid surfacing initialization errors to users.
+      // Intentionally not logging here to keep console output clean for production.
     }
   }, []);
 

@@ -4,6 +4,9 @@ import { Link, useLocation } from "react-router";
 import { toast } from "sonner";
 import { ArrowRight, ArrowUpRight, Check, Mail, MapPin } from "lucide-react";
 
+/**
+ * Site footer containing navigation, social links, and newsletter subscription.
+ */
 export default function Footer() {
   const location = useLocation();
   const [email, setEmail] = useState("");

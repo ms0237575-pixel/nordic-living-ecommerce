@@ -14,6 +14,13 @@ const categories = [
   "Kitchen",
 ] as const;
 
+/**
+ * Shop page — renders product listing with client-side filters and sorting.
+ *
+ * Note: URLSearchParams are used to keep filter state in the URL so results
+ * can be shared/bookmarked. Filtering and sorting are performed in-memory
+ * from the product store to preserve a snappy client-side experience.
+ */
 export function Shop() {
   const [open, setOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -56,6 +63,8 @@ export function Shop() {
     );
   };
 
+  // Derive a filtered list from the product catalog based on active UI state.
+  // This is intentionally kept synchronous and in-memory for responsiveness.
   const filteredProducts = allProducts.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
@@ -75,6 +84,8 @@ export function Shop() {
     return matchesSearch && matchesCategory && matchesPrice;
   });
 
+  // Sort the filtered results according to the selected sort option.
+  // We operate on a copy to avoid mutating the original product array in the store.
   const sortedProducts = (() => {
     const copy = [...filteredProducts];
     switch (sortBy) {

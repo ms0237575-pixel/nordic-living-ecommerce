@@ -11,6 +11,10 @@ interface ProductCardProps {
   product: Product;
 }
 
+/**
+ * ProductCard displays a product tile used across collection and search.
+ * Clicking the Add to Cart button will add the product and show a toast.
+ */
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
   const addToCart = useCartStore((s) => s.addToCart);

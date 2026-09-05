@@ -14,6 +14,10 @@ type SheetProps = {
   children: React.ReactNode;
 };
 
+/**
+ * Small Sheet primitive: provides `SheetContext` to children so components
+ * like `SheetTrigger` and `SheetContent` can open/close a side panel.
+ */
 export function Sheet({ open, onOpenChange, children }: SheetProps) {
   return (
     <SheetContext.Provider value={{ open, setOpen: onOpenChange }}>
@@ -22,6 +26,10 @@ export function Sheet({ open, onOpenChange, children }: SheetProps) {
   );
 }
 
+/**
+ * Trigger wrapper that toggles the sheet open state. Renders children
+ * directly when no `Sheet` context is present so it degrades gracefully.
+ */
 export function SheetTrigger({ children }: { children: React.ReactNode }) {
   const ctx = useContext(SheetContext);
   if (!ctx) return <>{children}</>;
@@ -35,6 +43,10 @@ export function SheetTrigger({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * The content area for the Sheet. Handles Escape key to close and renders
+ * a backdrop that closes the sheet when clicked.
+ */
 export function SheetContent({
   children,
   className,

@@ -8,6 +8,10 @@ type Props = {
   onClose: () => void;
 };
 
+/**
+ * Full-screen search overlay for product discovery. Locks body scroll
+ * while open and keyboard-aware (Escape to close).
+ */
 export default function SearchOverlay({ isOpen, onClose }: Props) {
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(8);

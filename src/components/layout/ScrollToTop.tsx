@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
+/**
+ * ScrollToTop helper — resets scroll position when the route pathname changes.
+ * Used to ensure navigation jumps to top for new pages.
+ */
 export function ScrollToTop() {
   const { pathname } = useLocation();
 

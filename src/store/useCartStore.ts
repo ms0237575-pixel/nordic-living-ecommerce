@@ -3,6 +3,12 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import type { StateStorage } from "zustand/middleware";
 import type { CartItem, Product } from "@/types/product";
 
+/**
+ * Builds a storage key scoped to the currently authenticated user when possible.
+ *
+ * Why: persisting cart per-user avoids leaking cart data between different accounts
+ * while still gracefully falling back to a guest key when no auth info exists.
+ */
 const getScopedStorageKey = (prefix: string) => {
   if (typeof window === "undefined") return `${prefix}-guest`;
 
@@ -18,6 +24,7 @@ const getScopedStorageKey = (prefix: string) => {
 
     return `${prefix}-${encodeURIComponent(String(identifier))}`;
   } catch {
+    // If storage parsing fails, fallback to a guest-scoped key to avoid throwing.
     return `${prefix}-guest`;
   }
 };
@@ -30,6 +37,10 @@ export interface CartStore {
   clearCart: () => void;
 }
 
+/**
+ * Zustand store for cart management.
+ * Exposes the cart array and basic mutators used by UI components.
+ */
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({

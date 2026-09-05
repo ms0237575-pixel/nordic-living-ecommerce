@@ -45,6 +45,10 @@ const initialFormState: CheckoutFormState = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Checkout page — collects shipping/payment details and submits an order.
+ * All validation is performed client-side before calling the order store.
+ */
 export default function Checkout() {
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -55,6 +59,8 @@ export default function Checkout() {
   const [formData, setFormData] = useState<CheckoutFormState>(initialFormState);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  // Calculate pricing summary. Kept local here to avoid adding derived state to the store.
+  // Shipping is free for orders >= $500 to simplify promotions.
   const subtotal = cart.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0,
@@ -129,12 +135,15 @@ export default function Checkout() {
 
     setIsProcessing(true);
 
+    // Prefer authenticated identifiers when available, otherwise use the entered email.
     const activeCustomerIdentifier = (
       loggedInUserId ??
       loggedInUserEmail ??
       formData.email.trim()
     ).trim();
 
+    // Build the order payload expected by the order store. We intentionally
+    // shallow-copy cart items so downstream consumers don't accidentally mutate store data.
     const orderPayload = {
       customerName: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
       customerEmail: activeCustomerIdentifier,

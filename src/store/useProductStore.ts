@@ -11,6 +11,10 @@ interface ProductStore {
   resetToDefault: () => void;
 }
 
+/**
+ * Product store — manages the product catalog used across the site.
+ * Supports adding, updating, deleting and resetting to built-in defaults.
+ */
 export const useProductStore = create<ProductStore>()(
   persist(
     (set) => ({

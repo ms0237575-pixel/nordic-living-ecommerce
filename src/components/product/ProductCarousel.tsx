@@ -8,6 +8,10 @@ interface ProductCarouselProps {
   products: Product[];
 }
 
+/**
+ * Horizontal product carousel using Embla. Accepts `products` and
+ * provides prev/next controls when available.
+ */
 export function ProductCarousel({ products }: ProductCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",

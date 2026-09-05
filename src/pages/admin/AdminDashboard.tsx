@@ -12,6 +12,11 @@ import {
   DollarSign,
 } from "lucide-react";
 
+/**
+ * Admin dashboard overview — displays high-level metrics and quick navigation
+ * for administrative tasks. Contains read-only metrics derived from product
+ * and order stores.
+ */
 export function AdminDashboard() {
   const products = useProductStore((state) => state.products);
   const orders = useOrderStore((state) => state.orders);

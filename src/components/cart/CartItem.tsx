@@ -8,6 +8,14 @@ interface CartItemProps {
   onUpdateQuantity: (productId: number, quantity: number) => void;
 }
 
+/**
+ * Cart item row used within the cart sidebar/page.
+ *
+ * Props:
+ * - `item`: cart line item containing `product` and `quantity`.
+ * - `onRemove(productId)`: callback to remove the line item.
+ * - `onUpdateQuantity(productId, quantity)`: callback to change quantity.
+ */
 export function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
   const { product, quantity } = item;
 

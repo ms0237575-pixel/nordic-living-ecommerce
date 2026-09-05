@@ -30,6 +30,11 @@ const removeScopedStorage = (prefix: string, userKey?: string | null) => {
   localStorage.removeItem(`${prefix}-${scope}`);
 };
 
+/**
+ * Authentication store — tracks whether a user is authenticated and basic
+ * profile information (email, id, role). It also coordinates scoped cleanup
+ * of persisted stores when logging out.
+ */
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({

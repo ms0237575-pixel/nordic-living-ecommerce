@@ -17,7 +17,8 @@ const defaultReviews: Review[] = [
     name: "Anna Mikkelsen",
     rating: 5,
     date: "2026-03-12",
-    comment: "Beautifully made and even more stunning in person. The craftsmanship is exceptional and the materials feel truly premium.",
+    comment:
+      "Beautifully made and even more stunning in person. The craftsmanship is exceptional and the materials feel truly premium.",
   },
   {
     id: "rev-2",
@@ -25,7 +26,8 @@ const defaultReviews: Review[] = [
     name: "Jonas Berg",
     rating: 5,
     date: "2026-01-28",
-    comment: "Exactly what I hoped for — clean lines, warm wood, and it fits perfectly in our home. Shipping was quick and carefully packaged.",
+    comment:
+      "Exactly what I hoped for — clean lines, warm wood, and it fits perfectly in our home. Shipping was quick and carefully packaged.",
   },
   {
     id: "rev-3",
@@ -33,7 +35,8 @@ const defaultReviews: Review[] = [
     name: "Freja Lund",
     rating: 4,
     date: "2025-11-05",
-    comment: "Lovely design and very comfortable to live with. Customer care resolved my question right away.",
+    comment:
+      "Lovely design and very comfortable to live with. Customer care resolved my question right away.",
   },
   {
     id: "rev-4",
@@ -41,7 +44,8 @@ const defaultReviews: Review[] = [
     name: "Oscar Lindqvist",
     rating: 5,
     date: "2025-09-19",
-    comment: "A timeless piece that elevates the whole room. You can tell it was made with care.",
+    comment:
+      "A timeless piece that elevates the whole room. You can tell it was made with care.",
   },
 ];
 
@@ -51,6 +55,10 @@ interface ReviewStore {
   getReviewsByProductId: (productId: number) => Review[];
 }
 
+/**
+ * Review store — holds product reviews and offers a simple way to add and
+ * query reviews by `productId`.
+ */
 export const useReviewStore = create<ReviewStore>()(
   persist(
     (set, get) => ({
@@ -71,6 +79,6 @@ export const useReviewStore = create<ReviewStore>()(
     }),
     {
       name: "nordic-living-product-reviews",
-    }
-  )
+    },
+  ),
 );

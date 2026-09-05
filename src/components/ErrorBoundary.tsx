@@ -8,6 +8,11 @@ interface State {
   hasError: boolean;
 }
 
+/**
+ * ErrorBoundary component — catches render-time errors for its subtree and
+ * displays a friendly fallback UI. Use to prevent the entire app from crashing
+ * on unexpected exceptions in children components.
+ */
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);

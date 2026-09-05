@@ -26,6 +26,7 @@ export interface AdminOrder {
   gift?: GiftOptions;
 }
 
+// BroadcastChannel allows multi-tab order sync; if unavailable (SSR) we ignore it.
 const orderChannel =
   typeof window !== "undefined"
     ? new BroadcastChannel("nordic_orders_sync")
@@ -57,6 +58,10 @@ const getCurrentAuthContext = () => {
   }
 };
 
+/**
+ * Play a short notification chime for new orders. Silent-fails in environments
+ * where the Web Audio API is not available or when audio initialization errors occur.
+ */
 export const playOrderNotificationSound = () => {
   try {
     const AudioCtx =
@@ -90,9 +95,16 @@ export const playOrderNotificationSound = () => {
     osc2.start(ctx.currentTime);
     osc1.stop(ctx.currentTime + 0.6);
     osc2.stop(ctx.currentTime + 0.6);
-  } catch {}
+  } catch {
+    // intentionally silent on audio errors to avoid noisy exceptions in the UI
+  }
 };
 
+/**
+ * Order store interface — keeps a list of `AdminOrder` and provides helpers
+ * to add, mutate, and clear orders. `getOrders` scopes results to the
+ * authenticated user unless the current role is `admin`.
+ */
 interface OrderStore {
   orders: AdminOrder[];
   getOrders: () => AdminOrder[];

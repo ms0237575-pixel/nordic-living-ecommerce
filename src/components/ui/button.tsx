@@ -41,6 +41,10 @@ const buttonVariants = cva(
   },
 );
 
+/**
+ * Reusable Button component with variant and size variants powered by CVA.
+ * Props mirror native `button` props plus `variant`, `size`, and `asChild`.
+ */
 function Button({
   className,
   variant = "default",

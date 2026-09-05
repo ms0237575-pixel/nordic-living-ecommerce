@@ -15,6 +15,10 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useWishlistStore } from "@/store/useWishlistStore";
 import SearchOverlay from "@/components/layout/SearchOverlay";
 
+/**
+ * Global application `Navbar` component. Handles responsive navigation,
+ * mobile drawer toggling, search overlay trigger and shows cart/wishlist counts.
+ */
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();

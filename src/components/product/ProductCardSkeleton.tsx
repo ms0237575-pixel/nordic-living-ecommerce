@@ -1,3 +1,6 @@
+/**
+ * Simple loading skeleton for product tiles used during async loads.
+ */
 export function ProductCardSkeleton() {
   return (
     <div className="group relative animate-pulse">

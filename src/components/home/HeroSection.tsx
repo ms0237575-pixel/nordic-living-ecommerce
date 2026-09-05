@@ -1,5 +1,8 @@
 import { Link } from "react-router";
 
+/**
+ * Homepage hero section with background image and primary call-to-action.
+ */
 export function HeroSection() {
   return (
     <section className="relative -mt-30 h-[calc(100vh+120px)] w-full overflow-hidden bg-nordic-charcoal">

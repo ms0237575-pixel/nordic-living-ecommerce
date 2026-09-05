@@ -31,6 +31,10 @@ interface WishlistStore {
   clearWishlist: () => void;
 }
 
+/**
+ * Wishlist store — per-user wishlist persistence with helper actions.
+ * Storage is scoped per-authenticated user via `getScopedStorageKey`.
+ */
 export const useWishlistStore = create<WishlistStore>()(
   persist(
     (set, get) => ({
