@@ -20,6 +20,9 @@ const initialFormState: LoginFormState = {
   password: "",
 };
 
+const DEMO_EMAIL = "demo@nordicliving.com";
+const DEMO_PASSWORD = "password123";
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validateForm(form: LoginFormState): LoginFormErrors {
@@ -71,6 +74,17 @@ export function Login() {
       const state = location.state as { from?: { pathname?: string } } | null;
       navigate(state?.from?.pathname ?? "/");
     }, 600);
+  };
+
+  const handleQuickDemo = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setFormData({ email: DEMO_EMAIL, password: DEMO_PASSWORD });
+      login(DEMO_EMAIL, { userId: "demo", role: "user" });
+      toast.success("Logged in as Demo user.");
+      const state = location.state as { from?: { pathname?: string } } | null;
+      navigate(state?.from?.pathname ?? "/");
+    }, 400);
   };
 
   return (
@@ -167,7 +181,23 @@ export function Login() {
           </button>
         </form>
 
+        <div className="mt-4 flex w-full">
+          <button
+            type="button"
+            onClick={handleQuickDemo}
+            disabled={loading}
+            className="flex w-full items-center justify-center gap-2 rounded-sm border border-nordic-sage-dark/20 bg-nordic-sage-dark/5 py-3 font-sans text-[13px] font-medium text-nordic-charcoal transition-colors hover:bg-nordic-sage-dark/10"
+          >
+            <Sparkles className="h-4 w-4" />
+            Quick Demo Login
+          </button>
+        </div>
+
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-nordic-gray/15 pt-6">
+          <p className="text-[12px] text-nordic-sage-dark">
+            Demo credentials: <strong>{DEMO_EMAIL}</strong> /{" "}
+            <strong>{DEMO_PASSWORD}</strong>
+          </p>
           <p className="font-sans text-[13px] text-nordic-sage-dark">
             New to Nordic Living?{" "}
             <Link

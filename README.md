@@ -112,4 +112,19 @@ New Cairo, Egypt
 
 Repository: https://github.com/ms0237575-pixel/nordic-living-ecommerce
 Live demo: https://nordic-living-ecommerce.vercel.app/
+
+---
+
+## 🔐 Authentication (Default behavior)
+
+- **Default state:** Visitors start as Guest / Logged Out on initial load.
+- The app uses a persisted auth store for convenience, but fresh or cleared sessions will always begin unauthenticated.
+- For evaluation and quick testing, use the Demo account below.
+
+Demo Credentials
+
+- **Email:** demo@nordicliving.com
+- **Password:** password123
+
+You can sign in using the standard login form or click the "Quick Demo Login" button on the login page to authenticate instantly.
 ```

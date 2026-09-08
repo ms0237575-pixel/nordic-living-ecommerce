@@ -83,7 +83,39 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: "nordic-living-auth",
+      version: 1,
       storage: createJSONStorage(() => localStorage),
+      // Ensure we don't accidentally start a fresh/cleared session pre-authenticated
+      // If persisted data claims `isAuthenticated` but lacks identifying info,
+      // treat the session as logged out to avoid phantom pre-authenticated sessions.
+      onRehydrateStorage: () => (persistedState) => {
+        if (!persistedState) return;
+
+        const invalidAuth =
+          persistedState.isAuthenticated &&
+          (!persistedState.userEmail || !persistedState.userId);
+        if (invalidAuth) {
+          // Force logged-out state on rehydrate when persisted auth is invalid.
+          // We cannot call `set` directly here, so use the store's setter after rehydration.
+          // Use a small timeout to defer until store is available.
+          setTimeout(() => {
+            try {
+              // eslint-disable-next-line @typescript-eslint/no-var-requires
+              const { useAuthStore: auth } = require("./useAuthStore");
+              if (auth && typeof auth.getState === "function") {
+                auth.setState({
+                  isAuthenticated: false,
+                  userEmail: null,
+                  userId: null,
+                  role: null,
+                });
+              }
+            } catch (err) {
+              // ignore — best effort cleanup
+            }
+          }, 0);
+        }
+      },
     },
   ),
 );
