@@ -94,26 +94,21 @@ export const useAuthStore = create<AuthStore>()(
         const invalidAuth =
           persistedState.isAuthenticated &&
           (!persistedState.userEmail || !persistedState.userId);
+
         if (invalidAuth) {
           // Force logged-out state on rehydrate when persisted auth is invalid.
-          // We cannot call `set` directly here, so use the store's setter after rehydration.
-          // Use a small timeout to defer until store is available.
-          setTimeout(() => {
-            try {
-              // eslint-disable-next-line @typescript-eslint/no-var-requires
-              const { useAuthStore: auth } = require("./useAuthStore");
-              if (auth && typeof auth.getState === "function") {
-                auth.setState({
-                  isAuthenticated: false,
-                  userEmail: null,
-                  userId: null,
-                  role: null,
-                });
-              }
-            } catch (err) {
-              // ignore — best effort cleanup
-            }
-          }, 0);
+          try {
+            // useAuthStore is available by the time rehydration runs — update state directly
+            // cast to any to satisfy TypeScript of the hook's extra API
+            (useAuthStore as any).setState({
+              isAuthenticated: false,
+              userEmail: null,
+              userId: null,
+              role: null,
+            });
+          } catch (err) {
+            // best-effort — ignore errors
+          }
         }
       },
     },
