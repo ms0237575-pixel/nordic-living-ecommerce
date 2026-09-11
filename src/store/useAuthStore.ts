@@ -44,9 +44,14 @@ export const useAuthStore = create<AuthStore>()(
       role: null,
 
       login: (email: string, profile: AuthUserProfile = {}) => {
-        const normalizedEmail = email.trim();
+        const normalizedEmail = email.trim().toLowerCase();
         const nextUserId = profile.userId ?? normalizedEmail;
-        const nextRole = profile.role ?? "user";
+
+        // Auto-assign admin role for demo credentials or respect explicit profile override
+        const isAdminEmail =
+          normalizedEmail === "admin@nordicliving.com" ||
+          normalizedEmail === "admin@demo.com";
+        const nextRole = profile.role ?? (isAdminEmail ? "admin" : "user");
 
         set({
           isAuthenticated: true,
@@ -55,6 +60,7 @@ export const useAuthStore = create<AuthStore>()(
           role: nextRole,
         });
 
+        // Trigger store rehydration after updating auth context
         void useCartStore.persist.rehydrate();
         void useWishlistStore.persist.rehydrate();
       },
@@ -85,7 +91,7 @@ export const useAuthStore = create<AuthStore>()(
       name: "nordic-living-auth",
       version: 1,
       storage: createJSONStorage(() => localStorage),
-      // Ensure we don't accidentally start a fresh/cleared session pre-authenticated
+      // Ensure we don't accidentally start a fresh/cleared session pre-authenticated.
       // If persisted data claims `isAuthenticated` but lacks identifying info,
       // treat the session as logged out to avoid phantom pre-authenticated sessions.
       onRehydrateStorage: () => (persistedState) => {
@@ -105,7 +111,7 @@ export const useAuthStore = create<AuthStore>()(
               role: null,
             });
           } catch {
-            // best-effort — ignore errors
+            // best-effort — ignore errors during rehydration initialization
           }
         }
       },
