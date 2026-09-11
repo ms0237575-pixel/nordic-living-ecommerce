@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Check,
   Copy,
@@ -26,16 +26,22 @@ export function OrderSuccess() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const orderIdFromUrl = params.get("orderId");
-  const orderId = orderIdFromUrl
-    ? orderIdFromUrl.startsWith("#")
+
+  const orderId = useMemo(() => {
+    if (!orderIdFromUrl) {
+      return `#NC-${Math.floor(100000 + Math.random() * 900000)}`;
+    }
+
+    return orderIdFromUrl.startsWith("#")
       ? orderIdFromUrl
-      : `#${orderIdFromUrl}`
-    : `#NC-${Math.floor(100000 + Math.random() * 900000)}`;
+      : `#${orderIdFromUrl}`;
+  }, [orderIdFromUrl]);
+
   const estimatedDelivery = formatDeliveryDate(4);
   const [copied, setCopied] = useState(false);
 
   const handleCopyOrderId = () => {
-    navigator.clipboard.writeText(orderId.replace("#", ""));
+    void navigator.clipboard.writeText(orderId.replace("#", ""));
     setCopied(true);
     toast.success("Order ID copied to clipboard");
     setTimeout(() => setCopied(false), 2000);
@@ -74,7 +80,8 @@ export function OrderSuccess() {
                 <button
                   type="button"
                   onClick={handleCopyOrderId}
-                  aria-label="Copy Order ID"
+                  aria-label={copied ? "Order ID copied" : "Copy Order ID"}
+                  title={copied ? "Order ID copied" : "Copy Order ID"}
                   className="p-1 text-nordic-sage-dark transition-colors hover:text-nordic-terracotta"
                 >
                   <Copy className="h-4 w-4" />

@@ -26,41 +26,40 @@ export function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const allProducts = useProductStore((state) => state.products);
 
-  const initialSearch = searchParams.get("search") ?? "";
-  const initialSort = searchParams.get("sort") ?? "default";
-  const initialPrice = (searchParams.get("price") as PriceFilterValue) ?? "all";
-  const initialCategories = searchParams.get("categories")
+  const searchQuery = searchParams.get("search") ?? "";
+  const selectedCategories = searchParams.get("categories")
     ? searchParams.get("categories")!.split(",").filter(Boolean)
     : searchParams.get("category")
       ? [searchParams.get("category")!]
       : [];
-
-  const [searchQuery, setSearchQuery] = useState(initialSearch);
-  const [selectedCategories, setSelectedCategories] =
-    useState<string[]>(initialCategories);
-  const [selectedPrice, setSelectedPrice] =
-    useState<PriceFilterValue>(initialPrice);
-  const [sortBy, setSortBy] = useState(initialSort);
+  const selectedPrice =
+    (searchParams.get("price") as PriceFilterValue) ?? "all";
+  const sortBy = searchParams.get("sort") ?? "default";
   const selectRef = useRef<HTMLSelectElement | null>(null);
 
-  useEffect(() => {
-    const q = searchParams.get("search");
-    if (q !== null) setSearchQuery(q);
+  const updateParams = (updates: Record<string, string | null>) => {
+    const nextParams = new URLSearchParams(searchParams);
 
-    const cats = searchParams.get("categories")
-      ? searchParams.get("categories")!.split(",").filter(Boolean)
-      : searchParams.get("category")
-        ? [searchParams.get("category")!]
-        : [];
-    setSelectedCategories(cats);
-  }, [searchParams]);
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null || value === "") {
+        nextParams.delete(key);
+        return;
+      }
+
+      nextParams.set(key, value);
+    });
+
+    setSearchParams(nextParams, { replace: true });
+  };
 
   const toggleCategory = (category: string) => {
-    setSelectedCategories((current) =>
-      current.includes(category)
-        ? current.filter((item) => item !== category)
-        : [...current, category],
-    );
+    const nextCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((item) => item !== category)
+      : [...selectedCategories, category];
+
+    updateParams({
+      categories: nextCategories.length > 0 ? nextCategories.join(",") : null,
+    });
   };
 
   // Derive a filtered list from the product catalog based on active UI state.
@@ -123,10 +122,16 @@ export function Shop() {
     ...selectedCategories.map((category) => ({
       key: `category:${category}`,
       label: `Category: ${category}`,
-      onRemove: () =>
-        setSelectedCategories((current) =>
-          current.filter((item) => item !== category),
-        ),
+      onRemove: () => {
+        const filteredCategories = selectedCategories.filter(
+          (item) => item !== category,
+        );
+
+        updateParams({
+          categories:
+            filteredCategories.length > 0 ? filteredCategories.join(",") : null,
+        });
+      },
     })),
     ...(selectedPrice !== "all"
       ? [
@@ -138,7 +143,7 @@ export function Shop() {
                 : selectedPrice === "500to1000"
                   ? "Price: $500 - $1000"
                   : "Price: $1000+",
-            onRemove: () => setSelectedPrice("all"),
+            onRemove: () => updateParams({ price: null }),
           },
         ]
       : []),
@@ -147,28 +152,15 @@ export function Shop() {
           {
             key: `search:${searchQuery.trim()}`,
             label: `Search: '${searchQuery.trim()}'`,
-            onRemove: () => setSearchQuery(""),
+            onRemove: () => updateParams({ search: null }),
           },
         ]
       : []),
   ];
 
   const clearAllFilters = () => {
-    setSelectedCategories([]);
-    setSelectedPrice("all");
-    setSearchQuery("");
+    setSearchParams(new URLSearchParams(), { replace: true });
   };
-
-  useEffect(() => {
-    const params = new URLSearchParams();
-    if (searchQuery.trim() !== "") params.set("search", searchQuery);
-    if (selectedCategories.length > 0)
-      params.set("categories", selectedCategories.join(","));
-    if (selectedPrice !== "all") params.set("price", selectedPrice);
-    if (sortBy && sortBy !== "default") params.set("sort", sortBy);
-
-    setSearchParams(params, { replace: true });
-  }, [searchQuery, selectedCategories, selectedPrice, sortBy, setSearchParams]);
 
   useEffect(() => {
     if (open) {
@@ -188,7 +180,11 @@ export function Shop() {
         <input
           type="search"
           value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
+          onChange={(event) =>
+            updateParams({
+              search: event.target.value.trim() ? event.target.value : null,
+            })
+          }
           placeholder="Search products..."
           aria-label="Search products"
           className="w-full border-b border-nordic-gray/30 bg-transparent py-3 pl-8 pr-3 font-sans text-[14px] font-normal text-nordic-charcoal placeholder:text-nordic-sage-dark transition-colors focus:border-nordic-charcoal focus:outline-none"
@@ -257,7 +253,12 @@ export function Shop() {
                   value={option.value}
                   checked={selectedPrice === option.value}
                   onChange={() =>
-                    setSelectedPrice(option.value as PriceFilterValue)
+                    updateParams({
+                      price:
+                        option.value === "all"
+                          ? null
+                          : (option.value as PriceFilterValue),
+                    })
                   }
                   className="peer sr-only"
                 />
@@ -374,7 +375,11 @@ export function Shop() {
               <select
                 ref={selectRef}
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={(e) =>
+                  updateParams({
+                    sort: e.target.value === "default" ? null : e.target.value,
+                  })
+                }
                 className="bg-transparent pb-1 pr-6 font-sans text-[14px] font-medium text-nordic-charcoal focus:outline-none cursor-pointer appearance-none group-hover:text-nordic-terracotta transition-colors border-b border-transparent hover:border-nordic-terracotta"
                 aria-label="Sort products"
               >

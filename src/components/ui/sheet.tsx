@@ -31,12 +31,13 @@ export function Sheet({ open, onOpenChange, children }: SheetProps) {
  * directly when no `Sheet` context is present so it degrades gracefully.
  */
 export function SheetTrigger({ children }: { children: React.ReactNode }) {
+  const triggerId = useId();
   const ctx = useContext(SheetContext);
   if (!ctx) return <>{children}</>;
   return (
     <div
       onClick={() => ctx.setOpen(true)}
-      aria-controls={"sheet-content-" + useId()}
+      aria-controls={"sheet-content-" + triggerId}
     >
       {children}
     </div>

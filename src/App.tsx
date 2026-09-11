@@ -10,6 +10,7 @@ import Footer from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
+import { AdminRoute } from "@/components/auth/AdminRoute";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -41,7 +42,7 @@ export default function App() {
         easing: "ease-out",
         disable: "mobile",
       });
-    } catch (err) {
+    } catch {
       // AOS failure is non-fatal — avoid surfacing initialization errors to users.
       // Intentionally not logging here to keep console output clean for production.
     }
@@ -94,10 +95,14 @@ export default function App() {
                 <Route element={<ProtectedRoute />}>
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/orders" element={<Orders />} />
+                </Route>
+
+                <Route element={<AdminRoute />}>
                   <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/admin/products" element={<AdminProducts />} />
                   <Route path="/admin/orders" element={<AdminOrders />} />
                 </Route>
+
                 <Route path="/order-success" element={<OrderSuccess />} />
                 <Route path="/product/:slug" element={<ProductDetails />} />
                 <Route path="/wishlist" element={<Wishlist />} />

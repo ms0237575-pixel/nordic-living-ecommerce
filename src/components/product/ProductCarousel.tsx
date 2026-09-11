@@ -30,18 +30,26 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setPrevBtnEnabled(emblaApi.canScrollPrev());
-    setNextBtnEnabled(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
   useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-  }, [emblaApi, onSelect]);
+    if (!emblaApi) return undefined;
+
+    const updateSelection = () => {
+      window.requestAnimationFrame(() => {
+        if (!emblaApi) return;
+        setPrevBtnEnabled(emblaApi.canScrollPrev());
+        setNextBtnEnabled(emblaApi.canScrollNext());
+      });
+    };
+
+    updateSelection();
+    emblaApi.on("select", updateSelection);
+    emblaApi.on("reInit", updateSelection);
+
+    return () => {
+      emblaApi.off("select", updateSelection);
+      emblaApi.off("reInit", updateSelection);
+    };
+  }, [emblaApi]);
 
   return (
     <div className="relative">

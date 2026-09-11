@@ -5,7 +5,6 @@ import {
   Package,
   ShoppingBag,
   TrendingUp,
-  Users,
   ArrowRight,
   Plus,
   Sparkles,

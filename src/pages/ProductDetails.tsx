@@ -38,10 +38,12 @@ export function ProductDetails() {
   const allReviews = useReviewStore((state) => state.reviews);
   const addReview = useReviewStore((state) => state.addReview);
 
+  const productId = product?.id;
+
   const productReviews = useMemo(() => {
-    if (!product) return [];
-    return allReviews.filter((r) => r.productId === product.id);
-  }, [allReviews, product?.id]);
+    if (!productId) return [];
+    return allReviews.filter((r) => r.productId === productId);
+  }, [allReviews, productId]);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -55,17 +57,20 @@ export function ProductDetails() {
     comment?: string;
   }>({});
 
-  useEffect(() => {
-    if (product) {
-      setSelectedImage((product.images && product.images[0]) ?? product.image);
-      setQuantity(1);
-      setAdded(false);
-      setReviewName("");
-      setReviewRating(0);
-      setReviewComment("");
-      setReviewErrors({});
-    }
-  }, [product?.id]);
+  const galleryImages = useMemo(
+    () =>
+      product && product.images && product.images.length > 0
+        ? product.images
+        : product
+          ? [product.image]
+          : [],
+    [product],
+  );
+
+  const activeImage =
+    selectedImage && galleryImages.includes(selectedImage)
+      ? selectedImage
+      : (galleryImages[0] ?? product?.image ?? null);
 
   useEffect(() => {
     if (!added) return;
@@ -91,7 +96,7 @@ export function ProductDetails() {
     toast.custom((t) => (
       <div className="flex w-full min-w-[320px] max-w-95 items-center gap-4 bg-nordic-charcoal p-4 text-nordic-bg shadow-2xl border border-white/10">
         <img
-          src={selectedImage ?? product.image}
+          src={activeImage ?? product.image}
           alt={product.name}
           className="h-14 w-14 object-cover shrink-0 bg-white/5"
         />
@@ -166,7 +171,13 @@ export function ProductDetails() {
 
   const related = allProducts
     .filter((p) => p.id !== product.id)
-    .sort((a, b) => (a.category === product.category ? -1 : 1))
+    .sort((a, b) =>
+      a.category === product.category
+        ? -1
+        : b.category === product.category
+          ? 1
+          : 0,
+    )
     .slice(0, 4);
 
   return (
@@ -185,7 +196,7 @@ export function ProductDetails() {
         <div data-aos="fade-up" data-aos-duration="1200">
           <div className="aspect-square overflow-hidden bg-nordic-gray/10">
             <img
-              src={selectedImage ?? product.image}
+              src={activeImage ?? product.image}
               alt={product.name}
               loading="lazy"
               className="h-full w-full object-cover object-center transition-transform duration-2000 hover:scale-105"
@@ -193,13 +204,13 @@ export function ProductDetails() {
           </div>
 
           <div className="mt-4 flex gap-3">
-            {(product.images ?? [product.image]).slice(0, 4).map((img) => (
+            {galleryImages.slice(0, 4).map((img) => (
               <button
                 key={img}
                 type="button"
                 onClick={() => setSelectedImage(img)}
                 className={`h-20 w-20 overflow-hidden bg-nordic-gray/10 border transition-all duration-300 ${
-                  selectedImage === img
+                  activeImage === img
                     ? "border-nordic-charcoal opacity-100"
                     : "border-transparent opacity-70 hover:opacity-100"
                 }`}

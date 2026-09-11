@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
+import { useSearchParams } from "react-router";
 import { products as allProducts } from "@/data/products";
 import { ProductCard } from "@/components/product/ProductCard";
 
@@ -13,11 +14,36 @@ type Props = {
  * while open and keyboard-aware (Escape to close).
  */
 export default function SearchOverlay({ isOpen, onClose }: Props) {
-  const [query, setQuery] = useState("");
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") ?? "";
+  const visibleCount = Number(searchParams.get("limit") ?? "8");
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [mounted, setMounted] = useState(isOpen);
   const prevBodyOverflow = useRef<string>("");
+
+  const updateSearchQuery = (nextQuery: string) => {
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (!nextQuery.trim()) {
+      nextParams.delete("q");
+    } else {
+      nextParams.set("q", nextQuery);
+    }
+
+    nextParams.delete("limit");
+    setSearchParams(nextParams, { replace: true });
+  };
+
+  const updateVisibleCount = (nextCount: number) => {
+    const nextParams = new URLSearchParams(searchParams);
+
+    if (nextCount <= 8) {
+      nextParams.delete("limit");
+    } else {
+      nextParams.set("limit", String(nextCount));
+    }
+
+    setSearchParams(nextParams, { replace: true });
+  };
 
   const matches = query.trim()
     ? allProducts.filter((p) =>
@@ -28,36 +54,30 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
   const displayedProducts = matches.slice(0, visibleCount);
 
   useEffect(() => {
-    if (isOpen) {
-      setMounted(true);
-      setQuery("");
-      setVisibleCount(8);
-      prevBodyOverflow.current = document.body.style.overflow || "";
-      document.body.style.overflow = "hidden";
-
-      setTimeout(() => inputRef.current?.focus(), 50);
-
-      const onKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
-      };
-      document.addEventListener("keydown", onKey);
-      return () => {
-        document.removeEventListener("keydown", onKey);
-      };
+    if (!isOpen) {
+      document.body.style.overflow = prevBodyOverflow.current;
+      return undefined;
     }
 
-    document.body.style.overflow = prevBodyOverflow.current;
-    const t = setTimeout(() => setMounted(false), 300);
-    return () => clearTimeout(t);
-  }, [isOpen, onClose]);
+    prevBodyOverflow.current = document.body.style.overflow || "";
+    document.body.style.overflow = "hidden";
 
-  useEffect(() => {
+    const focusTimeout = window.setTimeout(() => inputRef.current?.focus(), 50);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", onKey);
+
     return () => {
+      window.clearTimeout(focusTimeout);
+      document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevBodyOverflow.current;
     };
-  }, []);
+  }, [isOpen, onClose]);
 
-  if (!mounted) return null;
+  if (!isOpen) return null;
 
   return (
     <div
@@ -82,10 +102,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setVisibleCount(8);
-            }}
+            onChange={(e) => updateSearchQuery(e.target.value)}
             placeholder="Search products..."
             className="w-full bg-transparent outline-none font-serif text-2xl md:text-[64px] text-nordic-charcoal placeholder:text-nordic-gray border-b border-transparent focus:border-nordic-gray/30 pb-4"
           />
@@ -118,7 +135,7 @@ export default function SearchOverlay({ isOpen, onClose }: Props) {
               <div className="mt-12 text-center">
                 <button
                   type="button"
-                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                  onClick={() => updateVisibleCount(visibleCount + 8)}
                   className="font-sans text-[14px] font-semibold text-nordic-charcoal underline underline-offset-4 hover:text-nordic-terracotta transition-colors"
                 >
                   View more results

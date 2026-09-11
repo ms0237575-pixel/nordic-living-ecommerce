@@ -245,14 +245,10 @@ export function Navbar() {
 
           <aside
             className="fixed left-0 top-0 z-50 h-full w-80 bg-white text-nordic-charcoal shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col justify-between p-6"
-            onClick={(e: any) => {
-              try {
-                const target = e.target as HTMLElement;
-                if (target && target.closest && target.closest("a")) {
-                  setOpen(false);
-                }
-              } catch (err) {
-                // ignore
+            onClick={(e: React.MouseEvent<HTMLElement>) => {
+              const target = e.target as HTMLElement;
+              if (target && target.closest && target.closest("a")) {
+                setOpen(false);
               }
             }}
           >

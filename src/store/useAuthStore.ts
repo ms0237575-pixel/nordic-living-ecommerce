@@ -98,15 +98,13 @@ export const useAuthStore = create<AuthStore>()(
         if (invalidAuth) {
           // Force logged-out state on rehydrate when persisted auth is invalid.
           try {
-            // useAuthStore is available by the time rehydration runs — update state directly
-            // cast to any to satisfy TypeScript of the hook's extra API
-            (useAuthStore as any).setState({
+            useAuthStore.setState({
               isAuthenticated: false,
               userEmail: null,
               userId: null,
               role: null,
             });
-          } catch (err) {
+          } catch {
             // best-effort — ignore errors
           }
         }
