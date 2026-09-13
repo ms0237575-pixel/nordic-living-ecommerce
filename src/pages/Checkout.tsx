@@ -190,7 +190,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-12 py-12 lg:py-20">
+    <div className="mx-auto max-w-7xl px-4 pt-32 pb-12 md:px-8 lg:px-12 lg:pt-36 lg:pb-20">
       <div className="mb-8">
         <Link
           to="/cart"
